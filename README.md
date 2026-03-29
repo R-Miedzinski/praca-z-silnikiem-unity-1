@@ -107,7 +107,7 @@ Keep the following branching strategy:
 
 - `main` branch: This is the main branch where the final, working version of the project is stored. DO NOT commit directly to this branch. All changes will be pulled from working and approved version of `dev` branch.
 - `dev` branch: This is the development branch where all the work is done. This should be viable working state of the project. DO NOT commit directly to this branch. All changes will be pulled from individual `feature` branches. Whe starting work on new `feature` branch out from the latest version of `dev` branch.
-- `feature` branches: These are work in progress branches for developmennt tasks. Name the branches accordingly, for example: `feat/player-movement`, `feat/enemy-spawning` etc. Once the work is completed, open a PR to `dev`. If possible, `feature` branches should be reviewed by at least one other person before merging.
+- `feature` branches: These are work in progress branches for developmennt tasks. Name the branches accordingly, for example: `feat/gh-{Issue_ID}/player-movement`, `feat/gh-{Issue_ID}/enemy-spawning` etc. Once the work is completed, open a PR to `dev`. If possible, `feature` branches should be reviewed by at least one other person before merging.
 
 ## Version control best practices
 - Try to relatively small, self-contained commits with short but descriptive messages. This will leave clean commit history and make it easier to understand how the project evolved over time.
