@@ -1,0 +1,219 @@
+{
+    "version": 1,
+    "name": "PlayerCharacterInput",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "9b48c267-9da4-4dbc-8348-1e76624395d7",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "393a7f49-1427-4a00-b6fb-4bd2c8b71b0a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseItem1",
+                    "type": "Button",
+                    "id": "025dd23c-3e14-4c65-b5cd-f2cb0a61919f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseItem2",
+                    "type": "Button",
+                    "id": "306a8763-ba3d-4d77-9e69-4b48a8e5cba7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseItem3",
+                    "type": "Button",
+                    "id": "512bddb8-d156-4db4-86c1-0a3b09911481",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseAltHandRight",
+                    "type": "Button",
+                    "id": "0fd1e426-1a23-45a8-a279-6fcea2930e47",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "SlowTap(duration=0.2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseAltHandLeft",
+                    "type": "Button",
+                    "id": "78ff08da-f9c0-439f-8d2b-05af75590a90",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "SlowTap(duration=0.2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseHandRight",
+                    "type": "Button",
+                    "id": "8b6a31e5-59ac-43f5-afe9-3136d0dde0d1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseHandLeft",
+                    "type": "Button",
+                    "id": "b48897ea-bb96-4152-ba0a-04664519aac8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "8c82683b-af76-4e7c-a11c-e25ebaaeea4f",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "390cc0ce-bc0e-4f0f-a07f-57c5b1c11645",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "20607b70-fee5-4aba-b87d-91f4f65af51f",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "0c3fc080-d4a6-4df6-93be-ea8a301a8ad3",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "acdcf2b9-aef0-4269-b364-1689aced2b6f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "5fec2dce-1ddd-41ef-9505-0b553d385b67",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "615a2eb1-2fd0-4c25-b734-9aadb4882c2a",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76b5eac3-6d5d-4e4d-9f18-a1f973e433b8",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87d6e4f9-720f-4d66-b7ed-51ad12e67c86",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseHandRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32d81dc3-e6e8-4c15-959d-3b0a5d27d89f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseHandLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dac4e8ae-3f9f-49ac-8935-2ac2fb55c0dc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseAltHandRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80305a7c-b9c5-4d6a-bb14-17274b735c29",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseAltHandLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
