@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemEffect : MonoBehaviour
+public class ItemEffect : ScriptableObject
 {
     public int id;
     public string description;
@@ -21,11 +21,10 @@ public class ItemEffect : MonoBehaviour
     public void ActivateEffect(object context)
     {
         float cooldownRemaining = lastUsedTime + cooldown - Time.time;
-        
+
         if (cooldownRemaining <= 0f)
         {
-            // Handle effect activation based on type and context
-            Debug.Log($"Activating effect: {description} of type {type}");
+            Debug.Log($"Activating effect: {description} with context: {context}");
             lastUsedTime = Time.time;
         }
         else

@@ -13,6 +13,7 @@ public class PlayerCharacter : MonoBehaviour
     private float moveSpeed = 5f;
     private float cooldownReduction = 0f;
 
+    public static PlayerCharacter Instance { get; private set; }
     public string PlayerName { get => playerName; set => playerName = value; }
     public int Health { get => health; set => health = value; }
     public int Armor { get => armor; set => armor = value; }
@@ -22,6 +23,15 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         PlayerControls.OnMove += HandleMove;
         PlayerControls.OnUseItem += HandleUseItem;
     }
@@ -40,10 +50,9 @@ public class PlayerCharacter : MonoBehaviour
     private void HandleMove(Vector2 movementInput)
     {
         gameObject.transform.Translate(movementInput * moveSpeed * Time.deltaTime);
-        // TODO: rework trigger to work on events.
         if (movementInput != Vector2.zero)
         {
-            equipment.TriggerPassiveEffects(EPassiveTrigger.OnMove);
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(EPassiveTrigger.OnMove, null);
         }
     }
 
@@ -54,36 +63,44 @@ public class PlayerCharacter : MonoBehaviour
 
     private void AddDebugItems()
     {     // Add some debug items to the equipment for testing
-        Item debugItem1 = new GameObject("Debug Item 1").AddComponent<Item>();
+        Item debugItem1 = ScriptableObject.CreateInstance<Item>();
         debugItem1.id = 1;
         debugItem1.itemName = "Test Sword";
         debugItem1.description = "For testing purposes.";
 
-        ItemEffect dealDamageEffect = new ItemEffect(1, "Deals damage.", EItemUsageType.Default, 0.2f);
+        ItemEffect dealDamageEffect = ScriptableObject.CreateInstance<ItemEffect>();
+        dealDamageEffect.id = 1;
+        dealDamageEffect.description = "Deals damage.";
+        dealDamageEffect.type = EItemUsageType.Default;
+        dealDamageEffect.cooldown = 0.2f;
 
-        ItemEffect altDealDamageEffect = new ItemEffect(2, "Deals alternative damage.", EItemUsageType.Alternative, 2f);
+        ItemEffect altDealDamageEffect = ScriptableObject.CreateInstance<ItemEffect>();
+        altDealDamageEffect.id = 2;
+        altDealDamageEffect.description = "Deals alternative damage.";
+        altDealDamageEffect.type = EItemUsageType.Alternative;
+        altDealDamageEffect.cooldown = 2f;
 
-        debugItem1.effects = new Dictionary<EItemUsageType, ItemEffect[]>
+        debugItem1.effects = new Dictionary<EItemUsageType, List<ItemEffect>>
         {
-            { EItemUsageType.Default, new ItemEffect[] { dealDamageEffect } },
-            { EItemUsageType.Alternative, new ItemEffect[] { altDealDamageEffect } }
+            { EItemUsageType.Default, new List<ItemEffect> { dealDamageEffect } },
+            { EItemUsageType.Alternative, new List<ItemEffect> { altDealDamageEffect } }
         };
 
-        Item debugItem2 = new GameObject("Debug Item 2").AddComponent<Item>();
+        Item debugItem2 = ScriptableObject.CreateInstance<Item>();
         debugItem2.id = 2;
         debugItem2.itemName = "Test Shoes";
         debugItem2.description = "For testing purposes.";
-        
-        ItemEffect onMoveEffect = new GameObject("OnMove effect").AddComponent<ItemEffect>();
+
+        ItemEffect onMoveEffect = ScriptableObject.CreateInstance<ItemEffect>();
         onMoveEffect.id = 3;
         onMoveEffect.description = "Does something when the player moves.";
         onMoveEffect.type = EItemUsageType.Passive;
         onMoveEffect.passiveTrigger = EPassiveTrigger.OnMove;
         onMoveEffect.cooldown = 5f;
 
-        debugItem2.effects = new Dictionary<EItemUsageType, ItemEffect[]>
+        debugItem2.effects = new Dictionary<EItemUsageType, List<ItemEffect>>
         {
-            { EItemUsageType.Passive, new ItemEffect[] { onMoveEffect } }
+            { EItemUsageType.Passive, new List<ItemEffect> { onMoveEffect } }
         };
 
         equipment.EquipItem(EEquipmentSlot.RightHand, debugItem1);
