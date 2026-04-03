@@ -2,14 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class Item : MonoBehaviour
+public class Item : ScriptableObject
 {
     public int id;
     public string itemName;
     public string description;
-    public Dictionary<EItemUsageType, ItemEffect[]> effects = new Dictionary<EItemUsageType, ItemEffect[]>();
+    public Dictionary<EItemUsageType, List<ItemEffect>> effects = new Dictionary<EItemUsageType, List<ItemEffect>>();
 
-   // TODO: Create a proper constructor.
     public Item(int id, string itemName, string description, ItemEffect[] effects)
     {
         this.id = id;
@@ -19,13 +18,66 @@ public class Item : MonoBehaviour
         {
             if (!this.effects.ContainsKey(effect.type))
             {
-                this.effects[effect.type] = new ItemEffect[] { effect };
+                this.effects[effect.type] = new List<ItemEffect> { effect };
             }
             else
             {
-                this.effects[effect.type] = this.effects[effect.type] + new ItemEffect[] { effect };
+                this.effects[effect.type].Add(effect);
             }
         }));
     }
 
+    public void Equip()
+    {
+        Debug.Log($"Equipping item: {itemName}");
+
+        if (!effects.ContainsKey(EItemUsageType.Passive))
+            return;
+
+        foreach (var itemEffect in effects[EItemUsageType.Passive])
+        {
+            Debug.Log($"Subscribing to passive trigger: {itemEffect.passiveTrigger} for item: {itemName}");
+            switch (itemEffect.passiveTrigger)
+            {
+                case EPassiveTrigger.OnMove:
+                    ItemTriggerEventSystem.Instance.MoveTriggerEvent += itemEffect.ActivateEffect;
+                    break;
+                case EPassiveTrigger.OnHit:
+                    ItemTriggerEventSystem.Instance.HitTriggerEvent += itemEffect.ActivateEffect;
+                    break;
+                case EPassiveTrigger.OnDamageTaken:
+                    ItemTriggerEventSystem.Instance.DamageTakenTriggerEvent += itemEffect.ActivateEffect;
+                    break;
+                case EPassiveTrigger.OnRoomEnter:
+                    ItemTriggerEventSystem.Instance.RoomEnterTriggerEvent += itemEffect.ActivateEffect;
+                    break;
+            }
+        }
+    }
+
+    public void Unequip()
+    {
+        if (!effects.ContainsKey(EItemUsageType.Passive))
+            return;
+
+        foreach (var itemEffect in effects[EItemUsageType.Passive])
+        {
+            switch (itemEffect.passiveTrigger)
+            {
+                case EPassiveTrigger.OnMove:
+                    ItemTriggerEventSystem.Instance.MoveTriggerEvent -= itemEffect.ActivateEffect;
+                    break;
+                case EPassiveTrigger.OnHit:
+                    ItemTriggerEventSystem.Instance.HitTriggerEvent -= itemEffect.ActivateEffect;
+                    break;
+                case EPassiveTrigger.OnDamageTaken:
+                    ItemTriggerEventSystem.Instance.DamageTakenTriggerEvent -= itemEffect.ActivateEffect;
+                    break;
+                case EPassiveTrigger.OnRoomEnter:
+                    ItemTriggerEventSystem.Instance.RoomEnterTriggerEvent -= itemEffect.ActivateEffect;
+                    break;
+            }
+        }
+
+    }
 }
