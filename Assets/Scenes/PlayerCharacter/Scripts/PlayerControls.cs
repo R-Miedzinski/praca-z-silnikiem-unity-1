@@ -5,7 +5,7 @@ public class PlayerControls : MonoBehaviour
     public delegate void Move(Vector2 movementInput);
     public static event Move OnMove;
 
-    public delegate void UseItem(EEquipmentSlot itemSlot, EItemUsageType usageType);
+    public delegate void UseItem(ESlotsInEquipment itemSlot, EItemUsageType usageType);
     public static event UseItem OnUseItem;
 
     private PlayerCharacterInput playerInput;
@@ -25,6 +25,8 @@ public class PlayerControls : MonoBehaviour
         playerInput.Player.UseHandRight.performed += HandleUseHandRight;
         playerInput.Player.UseAltHandLeft.performed += HandleUseAltHandLeft;
         playerInput.Player.UseHandLeft.performed += HandleUseHandLeft;
+
+        playerInput.Player.DebugKey.performed += HandleDebugKey;
     }
 
     private void OnDisable()
@@ -37,6 +39,8 @@ public class PlayerControls : MonoBehaviour
         playerInput.Player.UseHandRight.performed -= HandleUseHandRight;
         playerInput.Player.UseAltHandLeft.performed -= HandleUseAltHandLeft;
         playerInput.Player.UseHandLeft.performed -= HandleUseHandLeft;
+
+        playerInput.Player.DebugKey.performed -= HandleDebugKey;
     }
 
     private void Update()
@@ -52,43 +56,63 @@ public class PlayerControls : MonoBehaviour
 
     private void HandleUseItem1(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        EEquipmentSlot itemSlot = EEquipmentSlot.Slot1;
+        ESlotsInEquipment itemSlot = ESlotsInEquipment.Slot1;
         OnUseItem?.Invoke(itemSlot, EItemUsageType.Default);
     }
 
     private void HandleUseItem2(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        EEquipmentSlot itemSlot = EEquipmentSlot.Slot2;
+        ESlotsInEquipment itemSlot = ESlotsInEquipment.Slot2;
         OnUseItem?.Invoke(itemSlot, EItemUsageType.Default);
     }
 
     private void HandleUseItem3(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        EEquipmentSlot itemSlot = EEquipmentSlot.Slot3;
+        ESlotsInEquipment itemSlot = ESlotsInEquipment.Slot3;
         OnUseItem?.Invoke(itemSlot, EItemUsageType.Default);
     }
 
     private void HandleUseAltHandRight(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        EEquipmentSlot itemSlot = EEquipmentSlot.RightHand;
+        ESlotsInEquipment itemSlot = ESlotsInEquipment.RightHand;
         OnUseItem?.Invoke(itemSlot, EItemUsageType.Alternative);
     }
 
     private void HandleUseHandRight(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        EEquipmentSlot itemSlot = EEquipmentSlot.RightHand;
+        ESlotsInEquipment itemSlot = ESlotsInEquipment.RightHand;
         OnUseItem?.Invoke(itemSlot, EItemUsageType.Default);
     }
 
     private void HandleUseAltHandLeft(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        EEquipmentSlot itemSlot = EEquipmentSlot.LeftHand;
+        ESlotsInEquipment itemSlot = ESlotsInEquipment.LeftHand;
         OnUseItem?.Invoke(itemSlot, EItemUsageType.Alternative);
     }
 
     private void HandleUseHandLeft(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        EEquipmentSlot itemSlot = EEquipmentSlot.LeftHand;
+        ESlotsInEquipment itemSlot = ESlotsInEquipment.LeftHand;
         OnUseItem?.Invoke(itemSlot, EItemUsageType.Default);
+    }
+
+    private void HandleDebugKey(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("Debug key pressed!");
+            Item debugItem = ItemsDatabase.Instance.GetItemById("debug_item");
+            if (debugItem != null)
+            {
+                Debug.Log("Debug item found in database.");
+                Debug.Log($"Using debug item: {debugItem.ItemName}");
+            }
+            else
+            {
+                Debug.LogWarning("Debug item not found in the database.");
+            }
+        }
+
+        Debug.Log(context);
     }
 }
