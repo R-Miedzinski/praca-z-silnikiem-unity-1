@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemEffect : ScriptableObject
+public class ItemEffectOld : ScriptableObject
 {
     public int id;
     public string description;
@@ -9,7 +9,7 @@ public class ItemEffect : ScriptableObject
     public EPassiveTrigger? passiveTrigger;
     private float lastUsedTime = -Mathf.Infinity;
 
-    public ItemEffect(int id, string description, EItemUsageType type, float cooldown = 0f, EPassiveTrigger? passiveTrigger = null)
+    public ItemEffectOld(int id, string description, EItemUsageType type, float cooldown = 0f, EPassiveTrigger? passiveTrigger = null)
     {
         this.id = id;
         this.description = description;

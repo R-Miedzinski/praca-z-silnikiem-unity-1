@@ -77,6 +77,15 @@
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DebugKey",
+                    "type": "Button",
+                    "id": "9742020b-d4b8-4f54-8481-c10c0ca2b72b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -209,6 +218,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "UseAltHandLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "42a028c3-b72c-47f9-88b1-065593ce0417",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

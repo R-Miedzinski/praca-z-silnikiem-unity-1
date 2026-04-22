@@ -163,6 +163,15 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""9742020b-d4b8-4f54-8481-c10c0ca2b72b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -297,6 +306,17 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""UseAltHandLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42a028c3-b72c-47f9-88b1-065593ce0417"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -313,6 +333,7 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         m_Player_UseAltHandLeft = m_Player.FindAction("UseAltHandLeft", throwIfNotFound: true);
         m_Player_UseHandRight = m_Player.FindAction("UseHandRight", throwIfNotFound: true);
         m_Player_UseHandLeft = m_Player.FindAction("UseHandLeft", throwIfNotFound: true);
+        m_Player_DebugKey = m_Player.FindAction("DebugKey", throwIfNotFound: true);
     }
 
     ~@PlayerCharacterInput()
@@ -401,6 +422,7 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_UseAltHandLeft;
     private readonly InputAction m_Player_UseHandRight;
     private readonly InputAction m_Player_UseHandLeft;
+    private readonly InputAction m_Player_DebugKey;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -444,6 +466,10 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/UseHandLeft".
         /// </summary>
         public InputAction @UseHandLeft => m_Wrapper.m_Player_UseHandLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/DebugKey".
+        /// </summary>
+        public InputAction @DebugKey => m_Wrapper.m_Player_DebugKey;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -494,6 +520,9 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
             @UseHandLeft.started += instance.OnUseHandLeft;
             @UseHandLeft.performed += instance.OnUseHandLeft;
             @UseHandLeft.canceled += instance.OnUseHandLeft;
+            @DebugKey.started += instance.OnDebugKey;
+            @DebugKey.performed += instance.OnDebugKey;
+            @DebugKey.canceled += instance.OnDebugKey;
         }
 
         /// <summary>
@@ -529,6 +558,9 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
             @UseHandLeft.started -= instance.OnUseHandLeft;
             @UseHandLeft.performed -= instance.OnUseHandLeft;
             @UseHandLeft.canceled -= instance.OnUseHandLeft;
+            @DebugKey.started -= instance.OnDebugKey;
+            @DebugKey.performed -= instance.OnDebugKey;
+            @DebugKey.canceled -= instance.OnDebugKey;
         }
 
         /// <summary>
@@ -625,5 +657,12 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseHandLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DebugKey" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDebugKey(InputAction.CallbackContext context);
     }
 }

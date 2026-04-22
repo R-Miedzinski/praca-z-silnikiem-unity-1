@@ -2,23 +2,23 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class Item : ScriptableObject
+public class ItemOld : ScriptableObject
 {
     public int id;
     public string itemName;
     public string description;
-    public Dictionary<EItemUsageType, List<ItemEffect>> effects = new Dictionary<EItemUsageType, List<ItemEffect>>();
+    public Dictionary<EItemUsageType, List<ItemEffectOld>> effects = new Dictionary<EItemUsageType, List<ItemEffectOld>>();
 
-    public Item(int id, string itemName, string description, ItemEffect[] effects)
+    public ItemOld(int id, string itemName, string description, ItemEffectOld[] effects)
     {
         this.id = id;
         this.itemName = itemName;
         this.description = description;
-        Array.ForEach(effects, new Action<ItemEffect>(effect =>
+        Array.ForEach(effects, new Action<ItemEffectOld>(effect =>
         {
             if (!this.effects.ContainsKey(effect.type))
             {
-                this.effects[effect.type] = new List<ItemEffect> { effect };
+                this.effects[effect.type] = new List<ItemEffectOld> { effect };
             }
             else
             {

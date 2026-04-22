@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 public class Equipment : MonoBehaviour
 {
-    private List<Item> backpackItems = new List<Item>();
+    private List<ItemOld> backpackItems = new List<ItemOld>();
     private int maxBackpackSize = 2;
-    private Dictionary<EEquipmentSlot, Item> equippedItems = new Dictionary<EEquipmentSlot, Item>();
+    private Dictionary<ESlotsInEquipment, ItemOld> equippedItems = new Dictionary<ESlotsInEquipment, ItemOld>();
 
-    public void EquipItem(EEquipmentSlot slot, Item item)
+    public void EquipItem(ESlotsInEquipment slot, ItemOld item)
     {
         if (!equippedItems.ContainsKey(slot))
         {
@@ -16,17 +16,17 @@ public class Equipment : MonoBehaviour
         }
     }
 
-    public void UnequipItem(EEquipmentSlot slot)
+    public void UnequipItem(ESlotsInEquipment slot)
     {
         if (equippedItems.ContainsKey(slot))
         {
-            Item item = equippedItems[slot];
+            ItemOld item = equippedItems[slot];
             item.Unequip();
             equippedItems.Remove(slot);
         }
     }
 
-    public void AddItemToBackpack(Item item)
+    public void AddItemToBackpack(ItemOld item)
     {
         if (backpackItems.Count < maxBackpackSize)
         {
@@ -34,26 +34,26 @@ public class Equipment : MonoBehaviour
         }
     }
 
-    public void RemoveItemFromBackpack(Item item)
+    public void RemoveItemFromBackpack(ItemOld item)
     {
         backpackItems.Remove(item);
     }
 
-    public void UseItem(EEquipmentSlot slot, EItemUsageType usageType, object context = null)
+    public void UseItem(ESlotsInEquipment slot, EItemUsageType usageType, object context = null)
     {
         if (equippedItems.ContainsKey(slot))
         {
-            Item item = equippedItems[slot];
+            ItemOld item = equippedItems[slot];
             if (item.effects.ContainsKey(usageType))
             {
-                foreach (ItemEffect effect in item.effects[usageType])
+                foreach (ItemEffectOld effect in item.effects[usageType])
                 {
                     effect.ActivateEffect(context); // Pass context if needed
                 }
             }
             else
             {
-                Debug.Log($"Item {item.itemName} does not have effects for usage type {usageType}");
+                Debug.Log($"ItemOld {item.itemName} does not have effects for usage type {usageType}");
             }
         }
         else
