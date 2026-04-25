@@ -16,30 +16,93 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "UseItem1",
+                    "name": "UseHoldItem1",
                     "type": "Button",
                     "id": "025dd23c-3e14-4c65-b5cd-f2cb0a61919f",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseAltItem1",
+                    "type": "Button",
+                    "id": "66cad817-6a91-4c50-a07d-d9044d845e73",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "SlowTap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseItem1",
+                    "type": "Button",
+                    "id": "8724d1b7-e241-4dac-95c5-b4fe50037197",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseHoldItem2",
+                    "type": "Button",
+                    "id": "306a8763-ba3d-4d77-9e69-4b48a8e5cba7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseAltItem2",
+                    "type": "Button",
+                    "id": "0612ff60-280c-4f54-9ce3-270ad2421a9a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "SlowTap",
                     "initialStateCheck": false
                 },
                 {
                     "name": "UseItem2",
                     "type": "Button",
-                    "id": "306a8763-ba3d-4d77-9e69-4b48a8e5cba7",
+                    "id": "0dd8754f-a355-4204-b81d-de7caa0a2559",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseHoldItem3",
+                    "type": "Button",
+                    "id": "512bddb8-d156-4db4-86c1-0a3b09911481",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseAltItem3",
+                    "type": "Button",
+                    "id": "e97a737b-cae2-4913-965d-ec2d94003a86",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "SlowTap",
                     "initialStateCheck": false
                 },
                 {
                     "name": "UseItem3",
                     "type": "Button",
-                    "id": "512bddb8-d156-4db4-86c1-0a3b09911481",
+                    "id": "c7789635-dd5b-47e8-a783-0920ef0736a9",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseHoldHandRight",
+                    "type": "Button",
+                    "id": "d5ad794e-0b43-4cb7-b6ca-313f12a0cfa4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -48,16 +111,7 @@
                     "id": "0fd1e426-1a23-45a8-a279-6fcea2930e47",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "SlowTap(duration=0.2)",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "UseAltHandLeft",
-                    "type": "Button",
-                    "id": "78ff08da-f9c0-439f-8d2b-05af75590a90",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "SlowTap(duration=0.2)",
+                    "interactions": "SlowTap",
                     "initialStateCheck": false
                 },
                 {
@@ -67,6 +121,24 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseHoldHandLeft",
+                    "type": "Button",
+                    "id": "0447e6b0-1ffc-4b3c-9723-00bda5c1756f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseAltHandLeft",
+                    "type": "Button",
+                    "id": "78ff08da-f9c0-439f-8d2b-05af75590a90",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "SlowTap",
                     "initialStateCheck": false
                 },
                 {
@@ -151,6 +223,28 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "UseHoldItem1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cc86ddc-24b5-4268-8279-1486679fcd52",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseAltItem1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4aa5149-a48f-4daa-9d93-19f95f92626e",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "UseItem1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -162,6 +256,28 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "UseHoldItem2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40bc8e2e-dc3f-47bb-8645-d143caee9bfe",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseAltItem2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b150ab98-f303-4043-aefa-b4ccf5856e5e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "UseItem2",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -169,6 +285,28 @@
                 {
                     "name": "",
                     "id": "76b5eac3-6d5d-4e4d-9f18-a1f973e433b8",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseHoldItem3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6bafd47-ac51-450c-befc-b0fb3c291d71",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseAltItem3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6e6e55a-bc70-439b-b248-480d7fbf42c0",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
@@ -229,6 +367,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "DebugKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd7b1718-c3cd-4a9c-b392-fa87abccab81",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseHoldHandRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1b47f59-3fc0-4687-ac51-d2d9f29fab48",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseHoldHandLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

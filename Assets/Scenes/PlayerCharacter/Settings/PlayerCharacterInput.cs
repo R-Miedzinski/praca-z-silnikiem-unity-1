@@ -102,30 +102,93 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""UseItem1"",
+                    ""name"": ""UseHoldItem1"",
                     ""type"": ""Button"",
                     ""id"": ""025dd23c-3e14-4c65-b5cd-f2cb0a61919f"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseAltItem1"",
+                    ""type"": ""Button"",
+                    ""id"": ""66cad817-6a91-4c50-a07d-d9044d845e73"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""SlowTap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem1"",
+                    ""type"": ""Button"",
+                    ""id"": ""8724d1b7-e241-4dac-95c5-b4fe50037197"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseHoldItem2"",
+                    ""type"": ""Button"",
+                    ""id"": ""306a8763-ba3d-4d77-9e69-4b48a8e5cba7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseAltItem2"",
+                    ""type"": ""Button"",
+                    ""id"": ""0612ff60-280c-4f54-9ce3-270ad2421a9a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""SlowTap"",
                     ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""UseItem2"",
                     ""type"": ""Button"",
-                    ""id"": ""306a8763-ba3d-4d77-9e69-4b48a8e5cba7"",
+                    ""id"": ""0dd8754f-a355-4204-b81d-de7caa0a2559"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseHoldItem3"",
+                    ""type"": ""Button"",
+                    ""id"": ""512bddb8-d156-4db4-86c1-0a3b09911481"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseAltItem3"",
+                    ""type"": ""Button"",
+                    ""id"": ""e97a737b-cae2-4913-965d-ec2d94003a86"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""SlowTap"",
                     ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""UseItem3"",
                     ""type"": ""Button"",
-                    ""id"": ""512bddb8-d156-4db4-86c1-0a3b09911481"",
+                    ""id"": ""c7789635-dd5b-47e8-a783-0920ef0736a9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseHoldHandRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""d5ad794e-0b43-4cb7-b6ca-313f12a0cfa4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -134,16 +197,7 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""id"": ""0fd1e426-1a23-45a8-a279-6fcea2930e47"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""SlowTap(duration=0.2)"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""UseAltHandLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""78ff08da-f9c0-439f-8d2b-05af75590a90"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""SlowTap(duration=0.2)"",
+                    ""interactions"": ""SlowTap"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -153,6 +207,24 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseHoldHandLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""0447e6b0-1ffc-4b3c-9723-00bda5c1756f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseAltHandLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""78ff08da-f9c0-439f-8d2b-05af75590a90"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""SlowTap"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -237,6 +309,28 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""UseHoldItem1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cc86ddc-24b5-4268-8279-1486679fcd52"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseAltItem1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4aa5149-a48f-4daa-9d93-19f95f92626e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""UseItem1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -248,6 +342,28 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""UseHoldItem2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40bc8e2e-dc3f-47bb-8645-d143caee9bfe"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseAltItem2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b150ab98-f303-4043-aefa-b4ccf5856e5e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""UseItem2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -255,6 +371,28 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""76b5eac3-6d5d-4e4d-9f18-a1f973e433b8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseHoldItem3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6bafd47-ac51-450c-befc-b0fb3c291d71"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseAltItem3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6e6e55a-bc70-439b-b248-480d7fbf42c0"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -317,6 +455,28 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""DebugKey"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd7b1718-c3cd-4a9c-b392-fa87abccab81"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseHoldHandRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1b47f59-3fc0-4687-ac51-d2d9f29fab48"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseHoldHandLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -326,12 +486,20 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_UseHoldItem1 = m_Player.FindAction("UseHoldItem1", throwIfNotFound: true);
+        m_Player_UseAltItem1 = m_Player.FindAction("UseAltItem1", throwIfNotFound: true);
         m_Player_UseItem1 = m_Player.FindAction("UseItem1", throwIfNotFound: true);
+        m_Player_UseHoldItem2 = m_Player.FindAction("UseHoldItem2", throwIfNotFound: true);
+        m_Player_UseAltItem2 = m_Player.FindAction("UseAltItem2", throwIfNotFound: true);
         m_Player_UseItem2 = m_Player.FindAction("UseItem2", throwIfNotFound: true);
+        m_Player_UseHoldItem3 = m_Player.FindAction("UseHoldItem3", throwIfNotFound: true);
+        m_Player_UseAltItem3 = m_Player.FindAction("UseAltItem3", throwIfNotFound: true);
         m_Player_UseItem3 = m_Player.FindAction("UseItem3", throwIfNotFound: true);
+        m_Player_UseHoldHandRight = m_Player.FindAction("UseHoldHandRight", throwIfNotFound: true);
         m_Player_UseAltHandRight = m_Player.FindAction("UseAltHandRight", throwIfNotFound: true);
-        m_Player_UseAltHandLeft = m_Player.FindAction("UseAltHandLeft", throwIfNotFound: true);
         m_Player_UseHandRight = m_Player.FindAction("UseHandRight", throwIfNotFound: true);
+        m_Player_UseHoldHandLeft = m_Player.FindAction("UseHoldHandLeft", throwIfNotFound: true);
+        m_Player_UseAltHandLeft = m_Player.FindAction("UseAltHandLeft", throwIfNotFound: true);
         m_Player_UseHandLeft = m_Player.FindAction("UseHandLeft", throwIfNotFound: true);
         m_Player_DebugKey = m_Player.FindAction("DebugKey", throwIfNotFound: true);
     }
@@ -415,12 +583,20 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_UseHoldItem1;
+    private readonly InputAction m_Player_UseAltItem1;
     private readonly InputAction m_Player_UseItem1;
+    private readonly InputAction m_Player_UseHoldItem2;
+    private readonly InputAction m_Player_UseAltItem2;
     private readonly InputAction m_Player_UseItem2;
+    private readonly InputAction m_Player_UseHoldItem3;
+    private readonly InputAction m_Player_UseAltItem3;
     private readonly InputAction m_Player_UseItem3;
+    private readonly InputAction m_Player_UseHoldHandRight;
     private readonly InputAction m_Player_UseAltHandRight;
-    private readonly InputAction m_Player_UseAltHandLeft;
     private readonly InputAction m_Player_UseHandRight;
+    private readonly InputAction m_Player_UseHoldHandLeft;
+    private readonly InputAction m_Player_UseAltHandLeft;
     private readonly InputAction m_Player_UseHandLeft;
     private readonly InputAction m_Player_DebugKey;
     /// <summary>
@@ -439,29 +615,61 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Move => m_Wrapper.m_Player_Move;
         /// <summary>
+        /// Provides access to the underlying input action "Player/UseHoldItem1".
+        /// </summary>
+        public InputAction @UseHoldItem1 => m_Wrapper.m_Player_UseHoldItem1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/UseAltItem1".
+        /// </summary>
+        public InputAction @UseAltItem1 => m_Wrapper.m_Player_UseAltItem1;
+        /// <summary>
         /// Provides access to the underlying input action "Player/UseItem1".
         /// </summary>
         public InputAction @UseItem1 => m_Wrapper.m_Player_UseItem1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/UseHoldItem2".
+        /// </summary>
+        public InputAction @UseHoldItem2 => m_Wrapper.m_Player_UseHoldItem2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/UseAltItem2".
+        /// </summary>
+        public InputAction @UseAltItem2 => m_Wrapper.m_Player_UseAltItem2;
         /// <summary>
         /// Provides access to the underlying input action "Player/UseItem2".
         /// </summary>
         public InputAction @UseItem2 => m_Wrapper.m_Player_UseItem2;
         /// <summary>
+        /// Provides access to the underlying input action "Player/UseHoldItem3".
+        /// </summary>
+        public InputAction @UseHoldItem3 => m_Wrapper.m_Player_UseHoldItem3;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/UseAltItem3".
+        /// </summary>
+        public InputAction @UseAltItem3 => m_Wrapper.m_Player_UseAltItem3;
+        /// <summary>
         /// Provides access to the underlying input action "Player/UseItem3".
         /// </summary>
         public InputAction @UseItem3 => m_Wrapper.m_Player_UseItem3;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/UseHoldHandRight".
+        /// </summary>
+        public InputAction @UseHoldHandRight => m_Wrapper.m_Player_UseHoldHandRight;
         /// <summary>
         /// Provides access to the underlying input action "Player/UseAltHandRight".
         /// </summary>
         public InputAction @UseAltHandRight => m_Wrapper.m_Player_UseAltHandRight;
         /// <summary>
-        /// Provides access to the underlying input action "Player/UseAltHandLeft".
-        /// </summary>
-        public InputAction @UseAltHandLeft => m_Wrapper.m_Player_UseAltHandLeft;
-        /// <summary>
         /// Provides access to the underlying input action "Player/UseHandRight".
         /// </summary>
         public InputAction @UseHandRight => m_Wrapper.m_Player_UseHandRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/UseHoldHandLeft".
+        /// </summary>
+        public InputAction @UseHoldHandLeft => m_Wrapper.m_Player_UseHoldHandLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/UseAltHandLeft".
+        /// </summary>
+        public InputAction @UseAltHandLeft => m_Wrapper.m_Player_UseAltHandLeft;
         /// <summary>
         /// Provides access to the underlying input action "Player/UseHandLeft".
         /// </summary>
@@ -499,24 +707,48 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @UseHoldItem1.started += instance.OnUseHoldItem1;
+            @UseHoldItem1.performed += instance.OnUseHoldItem1;
+            @UseHoldItem1.canceled += instance.OnUseHoldItem1;
+            @UseAltItem1.started += instance.OnUseAltItem1;
+            @UseAltItem1.performed += instance.OnUseAltItem1;
+            @UseAltItem1.canceled += instance.OnUseAltItem1;
             @UseItem1.started += instance.OnUseItem1;
             @UseItem1.performed += instance.OnUseItem1;
             @UseItem1.canceled += instance.OnUseItem1;
+            @UseHoldItem2.started += instance.OnUseHoldItem2;
+            @UseHoldItem2.performed += instance.OnUseHoldItem2;
+            @UseHoldItem2.canceled += instance.OnUseHoldItem2;
+            @UseAltItem2.started += instance.OnUseAltItem2;
+            @UseAltItem2.performed += instance.OnUseAltItem2;
+            @UseAltItem2.canceled += instance.OnUseAltItem2;
             @UseItem2.started += instance.OnUseItem2;
             @UseItem2.performed += instance.OnUseItem2;
             @UseItem2.canceled += instance.OnUseItem2;
+            @UseHoldItem3.started += instance.OnUseHoldItem3;
+            @UseHoldItem3.performed += instance.OnUseHoldItem3;
+            @UseHoldItem3.canceled += instance.OnUseHoldItem3;
+            @UseAltItem3.started += instance.OnUseAltItem3;
+            @UseAltItem3.performed += instance.OnUseAltItem3;
+            @UseAltItem3.canceled += instance.OnUseAltItem3;
             @UseItem3.started += instance.OnUseItem3;
             @UseItem3.performed += instance.OnUseItem3;
             @UseItem3.canceled += instance.OnUseItem3;
+            @UseHoldHandRight.started += instance.OnUseHoldHandRight;
+            @UseHoldHandRight.performed += instance.OnUseHoldHandRight;
+            @UseHoldHandRight.canceled += instance.OnUseHoldHandRight;
             @UseAltHandRight.started += instance.OnUseAltHandRight;
             @UseAltHandRight.performed += instance.OnUseAltHandRight;
             @UseAltHandRight.canceled += instance.OnUseAltHandRight;
-            @UseAltHandLeft.started += instance.OnUseAltHandLeft;
-            @UseAltHandLeft.performed += instance.OnUseAltHandLeft;
-            @UseAltHandLeft.canceled += instance.OnUseAltHandLeft;
             @UseHandRight.started += instance.OnUseHandRight;
             @UseHandRight.performed += instance.OnUseHandRight;
             @UseHandRight.canceled += instance.OnUseHandRight;
+            @UseHoldHandLeft.started += instance.OnUseHoldHandLeft;
+            @UseHoldHandLeft.performed += instance.OnUseHoldHandLeft;
+            @UseHoldHandLeft.canceled += instance.OnUseHoldHandLeft;
+            @UseAltHandLeft.started += instance.OnUseAltHandLeft;
+            @UseAltHandLeft.performed += instance.OnUseAltHandLeft;
+            @UseAltHandLeft.canceled += instance.OnUseAltHandLeft;
             @UseHandLeft.started += instance.OnUseHandLeft;
             @UseHandLeft.performed += instance.OnUseHandLeft;
             @UseHandLeft.canceled += instance.OnUseHandLeft;
@@ -537,24 +769,48 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @UseHoldItem1.started -= instance.OnUseHoldItem1;
+            @UseHoldItem1.performed -= instance.OnUseHoldItem1;
+            @UseHoldItem1.canceled -= instance.OnUseHoldItem1;
+            @UseAltItem1.started -= instance.OnUseAltItem1;
+            @UseAltItem1.performed -= instance.OnUseAltItem1;
+            @UseAltItem1.canceled -= instance.OnUseAltItem1;
             @UseItem1.started -= instance.OnUseItem1;
             @UseItem1.performed -= instance.OnUseItem1;
             @UseItem1.canceled -= instance.OnUseItem1;
+            @UseHoldItem2.started -= instance.OnUseHoldItem2;
+            @UseHoldItem2.performed -= instance.OnUseHoldItem2;
+            @UseHoldItem2.canceled -= instance.OnUseHoldItem2;
+            @UseAltItem2.started -= instance.OnUseAltItem2;
+            @UseAltItem2.performed -= instance.OnUseAltItem2;
+            @UseAltItem2.canceled -= instance.OnUseAltItem2;
             @UseItem2.started -= instance.OnUseItem2;
             @UseItem2.performed -= instance.OnUseItem2;
             @UseItem2.canceled -= instance.OnUseItem2;
+            @UseHoldItem3.started -= instance.OnUseHoldItem3;
+            @UseHoldItem3.performed -= instance.OnUseHoldItem3;
+            @UseHoldItem3.canceled -= instance.OnUseHoldItem3;
+            @UseAltItem3.started -= instance.OnUseAltItem3;
+            @UseAltItem3.performed -= instance.OnUseAltItem3;
+            @UseAltItem3.canceled -= instance.OnUseAltItem3;
             @UseItem3.started -= instance.OnUseItem3;
             @UseItem3.performed -= instance.OnUseItem3;
             @UseItem3.canceled -= instance.OnUseItem3;
+            @UseHoldHandRight.started -= instance.OnUseHoldHandRight;
+            @UseHoldHandRight.performed -= instance.OnUseHoldHandRight;
+            @UseHoldHandRight.canceled -= instance.OnUseHoldHandRight;
             @UseAltHandRight.started -= instance.OnUseAltHandRight;
             @UseAltHandRight.performed -= instance.OnUseAltHandRight;
             @UseAltHandRight.canceled -= instance.OnUseAltHandRight;
-            @UseAltHandLeft.started -= instance.OnUseAltHandLeft;
-            @UseAltHandLeft.performed -= instance.OnUseAltHandLeft;
-            @UseAltHandLeft.canceled -= instance.OnUseAltHandLeft;
             @UseHandRight.started -= instance.OnUseHandRight;
             @UseHandRight.performed -= instance.OnUseHandRight;
             @UseHandRight.canceled -= instance.OnUseHandRight;
+            @UseHoldHandLeft.started -= instance.OnUseHoldHandLeft;
+            @UseHoldHandLeft.performed -= instance.OnUseHoldHandLeft;
+            @UseHoldHandLeft.canceled -= instance.OnUseHoldHandLeft;
+            @UseAltHandLeft.started -= instance.OnUseAltHandLeft;
+            @UseAltHandLeft.performed -= instance.OnUseAltHandLeft;
+            @UseAltHandLeft.canceled -= instance.OnUseAltHandLeft;
             @UseHandLeft.started -= instance.OnUseHandLeft;
             @UseHandLeft.performed -= instance.OnUseHandLeft;
             @UseHandLeft.canceled -= instance.OnUseHandLeft;
@@ -609,12 +865,40 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "UseHoldItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseHoldItem1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseAltItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseAltItem1(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "UseItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseItem1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseHoldItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseHoldItem2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseAltItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseAltItem2(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "UseItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -623,12 +907,33 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseItem2(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "UseHoldItem3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseHoldItem3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseAltItem3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseAltItem3(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "UseItem3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseItem3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseHoldHandRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseHoldHandRight(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "UseAltHandRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -637,19 +942,26 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseAltHandRight(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "UseAltHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnUseAltHandLeft(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "UseHandRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseHandRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseHoldHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseHoldHandLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseAltHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseAltHandLeft(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "UseHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

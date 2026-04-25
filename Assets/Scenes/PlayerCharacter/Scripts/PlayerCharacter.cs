@@ -1,25 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerCharacter : MonoBehaviour
+public class PlayerCharacter : Unit
 {
     [SerializeField] private PlayerControls playerControls;
     [SerializeField] private Equipment equipment;
 
-    private string playerName = "Hero";
-    private int health = 100;
-    private int armor = 0;
-    private int baseDamage = 10;
-    private float moveSpeed = 5f;
-    private float cooldownReduction = 0f;
-
     public static PlayerCharacter Instance { get; private set; }
-    public string PlayerName { get => playerName; set => playerName = value; }
-    public int Health { get => health; set => health = value; }
-    public int Armor { get => armor; set => armor = value; }
-    public int BaseDamage { get => baseDamage; set => baseDamage = value; }
-    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-    public float CooldownReduction { get => cooldownReduction; set => cooldownReduction = value; }
 
     private void Awake()
     {
@@ -38,6 +25,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Start()
     {
+        CurrentHealth = maxHealth;
     }
 
     private void OnDestroy()
@@ -46,9 +34,29 @@ public class PlayerCharacter : MonoBehaviour
         PlayerControls.OnUseItem -= HandleUseItem;
     }
 
+    public override void TakeDamage(float amount)
+    {
+        CurrentHealth -= amount;
+
+        if (CurrentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public override void Heal(float amount)
+    {
+        CurrentHealth += amount;
+    }
+
+    public override void Die()
+    {
+        Debug.Log($"{UnitName} has died.");
+    }
+
     private void HandleMove(Vector2 movementInput)
     {
-        gameObject.transform.Translate(movementInput * moveSpeed * Time.deltaTime);
+        gameObject.transform.Translate(movementInput * movementSpeed * Time.deltaTime);
         if (movementInput != Vector2.zero)
         {
             ItemTriggerEventSystem.Instance.SendTriggerEvent(EPassiveTrigger.OnMove, null);
@@ -57,6 +65,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void HandleUseItem(ESlotsInEquipment itemSlot, EItemUsageType usageType)
     {
-        equipment.UseItem(itemSlot, usageType);
+        Debug.Log($"Use item in slot {itemSlot} with usage type {usageType}");
+        // equipment.UseItem(itemSlot, usageType);
     }
 }
