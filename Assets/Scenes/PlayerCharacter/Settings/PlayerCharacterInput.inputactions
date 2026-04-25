@@ -393,6 +393,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MouseTracker",
+            "id": "7e0dbab4-e5ae-4392-8852-5b876d1eaab8",
+            "actions": [
+                {
+                    "name": "MousePosition",
+                    "type": "PassThrough",
+                    "id": "1b1c0802-c561-4ca5-bbeb-6c2850f501f5",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c252dba6-49f0-4cc4-808d-8f28382dd22a",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
