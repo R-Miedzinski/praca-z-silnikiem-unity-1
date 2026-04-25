@@ -5,6 +5,7 @@ public class PlayerCharacter : Unit
 {
     [SerializeField] private PlayerControls playerControls;
     [SerializeField] private Equipment equipment;
+    [SerializeField] private TargettingWidget targettingWidget;
 
     public static PlayerCharacter Instance { get; private set; }
 
@@ -26,6 +27,7 @@ public class PlayerCharacter : Unit
     private void Start()
     {
         CurrentHealth = maxHealth;
+        EquipDebugItem();
     }
 
     private void OnDestroy()
@@ -59,13 +61,20 @@ public class PlayerCharacter : Unit
         gameObject.transform.Translate(movementInput * movementSpeed * Time.deltaTime);
         if (movementInput != Vector2.zero)
         {
-            ItemTriggerEventSystem.Instance.SendTriggerEvent(EPassiveTrigger.OnMove, null);
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnMove, null);
         }
     }
 
     private void HandleUseItem(ESlotsInEquipment itemSlot, EItemUsageType usageType)
     {
-        Debug.Log($"Use item in slot {itemSlot} with usage type {usageType}");
-        // equipment.UseItem(itemSlot, usageType);
+        Vector3 targettedPosition = targettingWidget.transform.position;
+        equipment.UseItem(itemSlot, usageType, targettedPosition);
+    }
+
+    private void EquipDebugItem()
+    {
+        Item debugItem = ItemsDatabase.Instance.GetItemById("debug_item");
+
+        equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem);
     }
 }

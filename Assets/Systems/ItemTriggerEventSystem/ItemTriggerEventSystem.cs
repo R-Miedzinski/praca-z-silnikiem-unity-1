@@ -10,8 +10,8 @@ public class ItemTriggerEventSystem : MonoBehaviour
   public event OnHitTrigger HitTriggerEvent;
   public delegate void OnDamageTakenTrigger(object context);
   public event OnDamageTakenTrigger DamageTakenTriggerEvent;
-  public delegate void OnRoomEnterTrigger(object context);
-  public event OnRoomEnterTrigger RoomEnterTriggerEvent;
+  public delegate void OnHeatGainTrigger(object context);
+  public event OnHeatGainTrigger HeatGainTriggerEvent;
 
   private void Awake()
   {
@@ -25,21 +25,21 @@ public class ItemTriggerEventSystem : MonoBehaviour
     }
   }
 
-  public void SendTriggerEvent(EPassiveTrigger triggerType, object context = null)
+  public void SendTriggerEvent(ETriggerType triggerType, object context = null)
   {
     switch (triggerType)
     {
-      case EPassiveTrigger.OnMove:
+      case ETriggerType.OnMove:
         TriggerMove(context);
         break;
-      case EPassiveTrigger.OnHit:
+      case ETriggerType.OnHit:
         TriggerHit(context);
         break;
-      case EPassiveTrigger.OnDamageTaken:
+      case ETriggerType.OnDamageTaken:
         TriggerDamageTaken(context);
         break;
-      case EPassiveTrigger.OnRoomEnter:
-        TriggerRoomEnter(context);
+      case ETriggerType.OnHeatGain:
+        TriggerHeatGain(context);
         break;
     }
   }
@@ -58,8 +58,8 @@ public class ItemTriggerEventSystem : MonoBehaviour
     DamageTakenTriggerEvent?.Invoke(context);
   }
 
-  private void TriggerRoomEnter(object context)
+  private void TriggerHeatGain(object context)
   {
-    RoomEnterTriggerEvent?.Invoke(context);
+    HeatGainTriggerEvent?.Invoke(context);
   }
 }

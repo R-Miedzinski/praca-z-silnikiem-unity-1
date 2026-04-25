@@ -5,34 +5,43 @@ public class Item
   public string Id { get { return id; } }
   public string ItemName { get { return itemName; } }
   public EEquipmentSlot EquipmentSlot { get { return equipmentSlot; } }
+  public Dictionary<ETriggerType, List<ItemEffect>> Effects { get { return effects; } }
   private string id;
   private string itemName;
   private EEquipmentSlot equipmentSlot;
-  private List<ItemEffect> effects;
+  private Dictionary<ETriggerType, List<ItemEffect>> effects;
 
-  public Item(string id, string name, EEquipmentSlot equipmentSlot, ItemEffect[] effects)
+  public Item(string _id, string _name, EEquipmentSlot _equipmentSlot, ItemEffect[] _effects)
   {
-    this.id = id;
-    this.itemName = name;
-    this.equipmentSlot = equipmentSlot;
-    this.effects = new List<ItemEffect>();
-    foreach (var effectData in effects)
+    id = _id;
+    itemName = _name;
+    equipmentSlot = _equipmentSlot;
+    effects = new Dictionary<ETriggerType, List<ItemEffect>>();
+    foreach (var effectData in _effects)
     {
-      this.effects.Add(new ItemEffect(effectData.Effect, effectData.TriggerType, effectData.Cooldown, effectData.TargettingMode));
+      if (!effects.ContainsKey(effectData.TriggerType))
+      {
+        effects[effectData.TriggerType] = new List<ItemEffect>();
+      }
+      effects[effectData.TriggerType].Add(new ItemEffect(effectData.Effect, effectData.TriggerType, effectData.Cooldown, effectData.TargettingMode));
     }
   }
 
   public Item(ItemData itemData)
   {
-    this.id = itemData.Id;
-    this.itemName = itemData.ItemName;
-    this.equipmentSlot = itemData.EquipmentSlot;
-    this.effects = new List<ItemEffect>();
+    id = itemData.Id;
+    itemName = itemData.ItemName;
+    equipmentSlot = itemData.EquipmentSlot;
+    effects = new Dictionary<ETriggerType, List<ItemEffect>>();
     foreach (var effectData in itemData.Effects)
     {
       Effect newEffect = IdToEffectMap.GetEffectById(effectData.EffectId, effectData.EffectParams);
       TargettingMode targettingMode = new TargettingMode(effectData.TargettingMode);
-      this.effects.Add(new ItemEffect(newEffect, effectData.TriggerType, effectData.Cooldown, targettingMode));
+      if (!effects.ContainsKey(effectData.TriggerType))
+      {
+        effects[effectData.TriggerType] = new List<ItemEffect>();
+      }
+      effects[effectData.TriggerType].Add(new ItemEffect(newEffect, effectData.TriggerType, effectData.Cooldown, targettingMode));
     }
   }
 }

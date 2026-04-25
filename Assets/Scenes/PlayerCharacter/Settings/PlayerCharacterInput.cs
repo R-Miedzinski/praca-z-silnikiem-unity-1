@@ -479,6 +479,34 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MouseTracker"",
+            ""id"": ""7e0dbab4-e5ae-4392-8852-5b876d1eaab8"",
+            ""actions"": [
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""1b1c0802-c561-4ca5-bbeb-6c2850f501f5"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c252dba6-49f0-4cc4-808d-8f28382dd22a"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -502,11 +530,15 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         m_Player_UseAltHandLeft = m_Player.FindAction("UseAltHandLeft", throwIfNotFound: true);
         m_Player_UseHandLeft = m_Player.FindAction("UseHandLeft", throwIfNotFound: true);
         m_Player_DebugKey = m_Player.FindAction("DebugKey", throwIfNotFound: true);
+        // MouseTracker
+        m_MouseTracker = asset.FindActionMap("MouseTracker", throwIfNotFound: true);
+        m_MouseTracker_MousePosition = m_MouseTracker.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     ~@PlayerCharacterInput()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerCharacterInput.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MouseTracker.enabled, "This will cause a leak and performance issues, PlayerCharacterInput.MouseTracker.Disable() has not been called.");
     }
 
     /// <summary>
@@ -850,6 +882,102 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
     /// </summary>
     public PlayerActions @Player => new PlayerActions(this);
+
+    // MouseTracker
+    private readonly InputActionMap m_MouseTracker;
+    private List<IMouseTrackerActions> m_MouseTrackerActionsCallbackInterfaces = new List<IMouseTrackerActions>();
+    private readonly InputAction m_MouseTracker_MousePosition;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "MouseTracker".
+    /// </summary>
+    public struct MouseTrackerActions
+    {
+        private @PlayerCharacterInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public MouseTrackerActions(@PlayerCharacterInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "MouseTracker/MousePosition".
+        /// </summary>
+        public InputAction @MousePosition => m_Wrapper.m_MouseTracker_MousePosition;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_MouseTracker; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="MouseTrackerActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(MouseTrackerActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="MouseTrackerActions" />
+        public void AddCallbacks(IMouseTrackerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Add(instance);
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="MouseTrackerActions" />
+        private void UnregisterCallbacks(IMouseTrackerActions instance)
+        {
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MouseTrackerActions.UnregisterCallbacks(IMouseTrackerActions)" />.
+        /// </summary>
+        /// <seealso cref="MouseTrackerActions.UnregisterCallbacks(IMouseTrackerActions)" />
+        public void RemoveCallbacks(IMouseTrackerActions instance)
+        {
+            if (m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="MouseTrackerActions.AddCallbacks(IMouseTrackerActions)" />
+        /// <seealso cref="MouseTrackerActions.RemoveCallbacks(IMouseTrackerActions)" />
+        /// <seealso cref="MouseTrackerActions.UnregisterCallbacks(IMouseTrackerActions)" />
+        public void SetCallbacks(IMouseTrackerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MouseTrackerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="MouseTrackerActions" /> instance referencing this action map.
+    /// </summary>
+    public MouseTrackerActions @MouseTracker => new MouseTrackerActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -976,5 +1104,20 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDebugKey(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MouseTracker" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MouseTrackerActions.AddCallbacks(IMouseTrackerActions)" />
+    /// <seealso cref="MouseTrackerActions.RemoveCallbacks(IMouseTrackerActions)" />
+    public interface IMouseTrackerActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "MousePosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }
