@@ -10,17 +10,17 @@ abstract public class Unit : MonoBehaviour
   public float CooldownReduction { get { return cooldownReduction; } }
   public float Armor { get { return armor * armorModifier; } }
 
-  private string unitName;
-  private float health;
-  private float maxHealth;
-  private float movementSpeed;
-  private float movementSpeedModifier;
-  private float baseDamage;
-  private float damageModifier;
-  private float cooldownReduction;
-  private float armor;
-  private float armorModifier;
-  private List<Effect> activeEffects; // placeholder for effect instance
+  [SerializeField] protected string unitName;
+  protected float health;
+  [SerializeField] protected float maxHealth;
+  [SerializeField] protected float movementSpeed;
+  [SerializeField] protected float movementSpeedModifier = 1f;
+  [SerializeField] protected float baseDamage;
+  [SerializeField] protected float damageModifier = 1f;
+  [SerializeField] protected float cooldownReduction;
+  [SerializeField] protected float armor;
+  [SerializeField] protected float armorModifier = 1f;
+  protected List<Effect> activeEffects; // placeholder for effect instance
 
   abstract public void TakeDamage(float amount);
   abstract public void Heal(float amount);

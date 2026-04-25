@@ -102,6 +102,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d8b0df952510f48ad67ea9d4f010b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitName: Player Character
+  maxHealth: 100
+  movementSpeed: 5
+  movementSpeedModifier: 1
+  baseDamage: 10
+  damageModifier: 1
+  cooldownReduction: 0
+  armor: 0
+  armorModifier: 1
   playerControls: {fileID: 1324519941461058897}
   equipment: {fileID: 3768041942426097107}
 --- !u!114 &1324519941461058897
