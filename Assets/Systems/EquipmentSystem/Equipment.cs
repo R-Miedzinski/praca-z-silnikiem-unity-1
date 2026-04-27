@@ -56,8 +56,18 @@ public class Equipment : MonoBehaviour
                 {
                     foreach (var effect in effectsToApply)
                     {
+                        if (!effect.CanUse())
+                            continue;
+
                         TargettingMode targettingMode = effect.TargettingMode;
-                        Debug.Log($"Using item {item.ItemName} in slot {slot} with usage type {usageType} targeting position {targettedPostion} with targetting mode {targettingMode.TargettingType}");
+                        TargettingStrategy strategy = TargettingStrategyUtils.GetTargettingStrategy(targettingMode.TargettingType);
+                        Unit[] targets = strategy.Target(targettingMode, targettedPostion, transform.position);
+
+                        foreach (var target in targets)
+                        {
+                            effect.Effect.ApplyEffect(PlayerCharacter.Instance, target);
+                        }
+                        effect.StartCooldown();
                     }
                 }
             }

@@ -8,17 +8,17 @@ public class TargettingMode
   private float range;
   private bool allowMultipleTargets;
 
-  public TargettingMode(ETargettingType targettingType, float range, bool allowMultipleTargets)
+  public TargettingMode(ETargettingType _targettingType, float _range, bool _allowMultipleTargets)
   {
-    this.targettingType = targettingType;
-    this.range = range;
-    this.allowMultipleTargets = allowMultipleTargets;
+    targettingType = _targettingType;
+    range = _range;
+    allowMultipleTargets = _allowMultipleTargets;
   }
 
   public TargettingMode(TargettingModeData data)
   {
-    this.targettingType = data.TargettingType;
-    this.range = data.Range;
-    this.allowMultipleTargets = data.AllowMultipleTargets;
+    targettingType = data.TargettingType;
+    range = data.Range;
+    allowMultipleTargets = data.AllowMultipleTargets;
   }
 }
