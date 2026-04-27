@@ -25,5 +25,6 @@ public class DebugUnit : Unit
     public override void Die()
     {
         Debug.Log($"{UnitName} has died.");
+        Destroy(gameObject);
     }
 }
