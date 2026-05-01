@@ -6,6 +6,7 @@ public static class IdToEffectMap
   static private Dictionary<string, System.Func<Effect>> map = new Dictionary<string, System.Func<Effect>>
   {
     { "deal_damage", () => new DealDamageEffect() },
+    { "debug_effect", () => new DebugEffect() },
     // { "heal", () => new HealEffect() },
   };
 

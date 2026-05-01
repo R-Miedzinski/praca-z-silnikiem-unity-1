@@ -20,7 +20,9 @@ abstract public class Unit : MonoBehaviour
   [SerializeField] protected float cooldownReduction;
   [SerializeField] protected float armor;
   [SerializeField] protected float armorModifier = 1f;
-  protected List<Effect> activeEffects; // placeholder for effect instance
+  protected bool canMove = true;
+  protected bool canTakeDamage = true;
+  protected List<Effect> activeEffects; // placeholder for effect instances, DoT and debuffs
 
   abstract public void TakeDamage(float amount);
   abstract public void Heal(float amount);

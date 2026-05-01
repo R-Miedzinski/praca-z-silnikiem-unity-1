@@ -14,6 +14,15 @@
       "EffectParams": {
         "Value": 1.5
       }
+    },
+    {
+      "EffectId": "debug_effect",
+      "TriggerType": 8,
+      "Cooldown": 5.0,
+      "TargettingMode": {
+        "TargettingType": 1,
+        "Range": 10.0
+      }
     }
   ],
   "EquipmentSlot": 0
