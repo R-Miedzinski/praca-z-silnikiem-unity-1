@@ -75,10 +75,10 @@ public class PlayerCharacter : Unit
 
     private void HandleMove(Vector2 movementInput)
     {
-        gameObject.transform.Translate(movementInput * movementSpeed * Time.deltaTime);
+        gameObject.transform.Translate(movementInput * MovementSpeed * Time.deltaTime);
         if (movementInput != Vector2.zero)
         {
-            float movementMagnitude = movementInput.magnitude * movementSpeed * Time.deltaTime;
+            float movementMagnitude = movementInput.magnitude * MovementSpeed * Time.deltaTime;
             ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnMove, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: movementMagnitude));
         }
     }

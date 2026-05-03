@@ -7,6 +7,8 @@ public static class IdToEffectMap
   {
     { "deal_damage", () => new DealDamageEffect() },
     { "debug_effect", () => new DebugEffect() },
+    { "damage_over_time", () => new DamageOverTimeEffect() },
+    { "slow", () => new SlowEffect() },
     // { "heal", () => new HealEffect() },
   };
 
