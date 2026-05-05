@@ -14,6 +14,41 @@
       "EffectParams": {
         "Value": 1.5
       }
+    },
+    {
+      "EffectId": "debug_effect",
+      "TriggerType": 8,
+      "Cooldown": 5.0,
+      "TargettingMode": {
+        "TargettingType": 1,
+        "Range": 10.0
+      }
+    },
+    {
+      "EffectId": "damage_over_time",
+      "TriggerType": 0,
+      "Cooldown": 1.0,
+      "TargettingMode": {
+        "TargettingType": 1,
+        "Range": 10.0
+      },
+      "EffectParams": {
+        "Value": 0.5,
+        "Duration": 5.0
+      }
+    },
+    {
+      "EffectId": "slow",
+      "TriggerType": 8,
+      "Cooldown": 1.0,
+      "TargettingMode": {
+        "TargettingType": 1,
+        "Range": 10.0
+      },
+      "EffectParams": {
+        "Value": 50,
+        "Duration": 5.0
+      }
     }
   ],
   "EquipmentSlot": 0

@@ -5,6 +5,7 @@ public enum ETriggerType
   Active3,
   OnMove,
   OnHit,
+  OnHeal,
   OnDamageTaken,
   OnHeatGain,
   OnSelfActive1,

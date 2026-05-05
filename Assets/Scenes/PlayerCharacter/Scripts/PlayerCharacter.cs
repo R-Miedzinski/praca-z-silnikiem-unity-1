@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public class PlayerCharacter : Unit
 {
+    public float Heat { get { return heat; } set { heat = Mathf.Clamp(value, 0, maxHeat); } }
+    private float heat;
+    [SerializeField] private float maxHeat;
     [SerializeField] private PlayerControls playerControls;
     [SerializeField] private Equipment equipment;
     [SerializeField] private TargettingWidget targettingWidget;
@@ -38,6 +41,7 @@ public class PlayerCharacter : Unit
 
     public override void TakeDamage(float amount)
     {
+        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnDamageTaken, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: amount));
         CurrentHealth -= amount;
 
         if (CurrentHealth <= 0)
@@ -48,6 +52,7 @@ public class PlayerCharacter : Unit
 
     public override void Heal(float amount)
     {
+        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeal, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: amount));
         CurrentHealth += amount;
     }
 
@@ -56,12 +61,23 @@ public class PlayerCharacter : Unit
         Debug.Log($"{UnitName} has died.");
     }
 
+    public void ChangeHeat(float heatDelta)
+    {
+        if (heatDelta > 0)
+        {
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeatGain, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: heatDelta));
+        }
+
+        Heat += heatDelta;
+    }
+
     private void HandleMove(Vector2 movementInput)
     {
-        gameObject.transform.Translate(movementInput * movementSpeed * Time.deltaTime);
+        gameObject.transform.Translate(movementInput * MovementSpeed * Time.deltaTime);
         if (movementInput != Vector2.zero)
         {
-            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnMove, null);
+            float movementMagnitude = movementInput.magnitude * MovementSpeed * Time.deltaTime;
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnMove, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: movementMagnitude));
         }
     }
 

@@ -18,7 +18,7 @@ public class Equipment : MonoBehaviour
         if (!equippedItems.ContainsKey(slot))
         {
             equippedItems[slot] = item;
-            // item.Equip();
+            item.Equip();
         }
     }
 
@@ -27,7 +27,7 @@ public class Equipment : MonoBehaviour
         if (equippedItems.ContainsKey(slot))
         {
             Item item = equippedItems[slot];
-            // item.Unequip();
+            item.Unequip();
             equippedItems.Remove(slot);
         }
     }
@@ -45,31 +45,13 @@ public class Equipment : MonoBehaviour
         backpackItems.Remove(item);
     }
 
-    public void UseItem(ESlotsInEquipment slot, EItemUsageType usageType, Vector3 targettedPostion, object context = null)
+    public void UseItem(ESlotsInEquipment slot, EItemUsageType usageType, Vector3 targettedPostion)
     {
         if (equippedItems.TryGetValue(slot, out Item item))
         {
             if (usageTypeToTriggerTypeMap.TryGetValue(usageType, out ETriggerType triggerType))
             {
-                item.Effects.TryGetValue(triggerType, out List<ItemEffect> effectsToApply);
-                if (effectsToApply != null)
-                {
-                    foreach (var effect in effectsToApply)
-                    {
-                        if (!effect.CanUse())
-                            continue;
-
-                        TargettingMode targettingMode = effect.TargettingMode;
-                        TargettingStrategy strategy = TargettingStrategyUtils.GetTargettingStrategy(targettingMode.TargettingType);
-                        Unit[] targets = strategy.Target(targettingMode, targettedPostion, transform.position);
-
-                        foreach (var target in targets)
-                        {
-                            effect.Effect.ApplyEffect(PlayerCharacter.Instance, target);
-                        }
-                        effect.StartCooldown();
-                    }
-                }
+                ItemTriggerEventSystem.Instance.SendTriggerEvent(triggerType, new ItemTriggerEventContext(targettedPosition: targettedPostion, itemActivated: item.Id));
             }
             else
             {
