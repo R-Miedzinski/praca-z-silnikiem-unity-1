@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class PlayerCharacter : Unit
 {
     public float Heat { get { return heat; } set { heat = Mathf.Clamp(value, 0, maxHeat); } }
-
     private float heat;
     [SerializeField] private float maxHeat;
     [SerializeField] private PlayerControls playerControls;
@@ -43,7 +42,6 @@ public class PlayerCharacter : Unit
     public override void TakeDamage(float amount)
     {
         ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnDamageTaken, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: amount));
-
         CurrentHealth -= amount;
 
         if (CurrentHealth <= 0)

@@ -12,7 +12,7 @@ abstract public class Unit : MonoBehaviour
   public float MovementSpeedModifier { get { return movementSpeedModifier; } set { movementSpeedModifier = value; } }
   public float DamageModifier { get { return damageModifier; } set { damageModifier = value; } }
   public float ArmorModifier { get { return armorModifier; } set { armorModifier = value; } }
-  public List<EffectInstance> ActiveEffects { get; } = new List<EffectInstance>(); // placeholder for effect instances, DoT and debuffs
+  public List<EffectInstance> ActiveEffects { get; } = new List<EffectInstance>();
 
   [SerializeField] protected string unitName;
   protected float health;
