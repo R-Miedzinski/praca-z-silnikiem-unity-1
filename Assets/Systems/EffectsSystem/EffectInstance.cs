@@ -20,7 +20,7 @@ public class EffectInstance : MonoBehaviour
   {
     if (Effect is ITimedEffect timedEffect)
     {
-      // TODO: add correction for going over duration by partian deltaTime
+      // TODO: add correction for going over duration by partial deltaTime
       timedEffect.Tick(Target, Time.deltaTime);
       elapsedTime += Time.deltaTime;
 

@@ -10,8 +10,25 @@ public class Equipment : MonoBehaviour
     {
         { EItemUsageType.Default, ETriggerType.Active1 },
         { EItemUsageType.Alternative, ETriggerType.Active2 },
-        { EItemUsageType.Hold, ETriggerType.Active3 }
+        { EItemUsageType.Hold, ETriggerType.Active3 },
+        { EItemUsageType.Release, ETriggerType.Active3Release },
     };
+
+    private Dictionary<ESlotsInEquipment, Item> activeHoldItems = new Dictionary<ESlotsInEquipment, Item>();
+
+    private void Update()
+    {
+        foreach (var kvp in activeHoldItems)
+        {
+            ESlotsInEquipment slot = kvp.Key;
+            Item item = kvp.Value;
+
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(
+                ETriggerType.Active3,
+                new ItemTriggerEventContext(targettedPosition: PlayerCharacter.Instance.TargettingWidget.transform.position, itemActivated: item.Id)
+            );
+        }
+    }
 
     public void EquipItem(ESlotsInEquipment slot, Item item)
     {
@@ -51,7 +68,18 @@ public class Equipment : MonoBehaviour
         {
             if (usageTypeToTriggerTypeMap.TryGetValue(usageType, out ETriggerType triggerType))
             {
-                ItemTriggerEventSystem.Instance.SendTriggerEvent(triggerType, new ItemTriggerEventContext(targettedPosition: targettedPostion, itemActivated: item.Id));
+                if (triggerType == ETriggerType.Active1 || triggerType == ETriggerType.Active2)
+                {
+                    ItemTriggerEventSystem.Instance.SendTriggerEvent(triggerType, new ItemTriggerEventContext(targettedPosition: targettedPostion, itemActivated: item.Id));
+                }
+                else if (triggerType == ETriggerType.Active3)
+                {
+                    StartHoldItem(slot);
+                }
+                else if (triggerType == ETriggerType.Active3Release)
+                {
+                    ReleaseHoldItem(slot);
+                }
             }
             else
             {
@@ -61,6 +89,27 @@ public class Equipment : MonoBehaviour
         else
         {
             Debug.Log($"No item equipped in {slot} to use.");
+        }
+    }
+
+    private void StartHoldItem(ESlotsInEquipment slot)
+    {
+        if (equippedItems.TryGetValue(slot, out Item item))
+        {
+            activeHoldItems[slot] = item;
+        }
+    }
+
+    private void ReleaseHoldItem(ESlotsInEquipment slot)
+    {
+        if (equippedItems.TryGetValue(slot, out Item item))
+        {
+            activeHoldItems.Remove(slot);
+
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(
+                ETriggerType.Active3Release,
+                new ItemTriggerEventContext(targettedPosition: PlayerCharacter.Instance.TargettingWidget.transform.position, itemActivated: item.Id)
+            );
         }
     }
 }

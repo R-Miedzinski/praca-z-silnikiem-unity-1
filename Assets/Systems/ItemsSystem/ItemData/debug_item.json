@@ -5,6 +5,23 @@
   "Effects": [
     {
       "EffectIds": [
+        "deal_damage"
+      ],
+      "TriggerType": 2,
+      "Cooldown": 0.1,
+      "TargettingMode": {
+        "TargettingType": 1,
+        "Range": 5.0,
+        "AllowMultipleTargets": false
+      },
+      "EffectParams": [
+        {
+          "Value": 0.5
+        }
+      ]
+    },
+    {
+      "EffectIds": [
         "deal_damage",
         "damage_over_time"
       ],

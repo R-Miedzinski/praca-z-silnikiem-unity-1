@@ -18,6 +18,8 @@ public class ItemTriggerEventSystem : MonoBehaviour
   public event OnActive2Trigger Active2TriggerEvent;
   public delegate void OnActive3Trigger(ItemTriggerEventContext context);
   public event OnActive3Trigger Active3TriggerEvent;
+  public delegate void OnActive3ReleaseTrigger(ItemTriggerEventContext context);
+  public event OnActive3ReleaseTrigger Active3ReleaseTriggerEvent;
 
   private void Awake()
   {
@@ -56,6 +58,9 @@ public class ItemTriggerEventSystem : MonoBehaviour
       case ETriggerType.Active3:
         TriggerActive3(context);
         break;
+      case ETriggerType.Active3Release:
+        TriggerActive3Release(context);
+        break;
     }
   }
   private void TriggerMove(ItemTriggerEventContext context)
@@ -91,5 +96,10 @@ public class ItemTriggerEventSystem : MonoBehaviour
   private void TriggerActive3(ItemTriggerEventContext context)
   {
     Active3TriggerEvent?.Invoke(context);
+  }
+
+  private void TriggerActive3Release(ItemTriggerEventContext context)
+  {
+    Active3ReleaseTriggerEvent?.Invoke(context);
   }
 }

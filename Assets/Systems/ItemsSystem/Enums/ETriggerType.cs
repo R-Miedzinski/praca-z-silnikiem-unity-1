@@ -11,4 +11,5 @@ public enum ETriggerType
   OnSelfActive1,
   OnSelfActive2,
   OnSelfActive3,
+  Active3Release,
 }

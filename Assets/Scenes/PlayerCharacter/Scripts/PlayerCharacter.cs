@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class PlayerCharacter : Unit
 {
     public float Heat { get { return heat; } set { heat = Mathf.Clamp(value, 0, maxHeat); } }
+    public TargettingWidget TargettingWidget { get { return targettingWidget; } }
     [SerializeField] private float maxHeat;
     [SerializeField] private TargettingWidget targettingWidget;
     private PlayerControls playerControls;
