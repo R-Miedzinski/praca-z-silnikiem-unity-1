@@ -6,4 +6,5 @@ public struct TargettingModeData
   public ETargettingType TargettingType;
   public float Range;
   public bool AllowMultipleTargets;
+  public bool TargetCaster;
 }

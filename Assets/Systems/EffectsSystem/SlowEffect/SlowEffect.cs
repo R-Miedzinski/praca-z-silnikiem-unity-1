@@ -11,11 +11,11 @@ public class SlowEffect : Effect, IParametrizedEffect, ITimedEffect
 
   public override void ApplyEffect(Unit caster, Unit target)
   {
-    caster.MovementSpeedModifier += SlowValue;
+    target.MovementSpeedModifier += SlowValue;
 
-    EffectInstance effectInstance = caster.gameObject.AddComponent<EffectInstance>();
-    effectInstance.Initialize(this, caster, caster);
-    caster.ActiveEffects.Add(effectInstance);
+    EffectInstance effectInstance = target.gameObject.AddComponent<EffectInstance>();
+    effectInstance.Initialize(this, caster, target);
+    target.ActiveEffects.Add(effectInstance);
   }
 
   public void Lift(Unit target)

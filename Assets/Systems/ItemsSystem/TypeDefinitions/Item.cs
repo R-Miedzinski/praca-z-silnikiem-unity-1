@@ -24,7 +24,7 @@ public class Item
       {
         effects[effectData.TriggerType] = new List<ItemEffect>();
       }
-      effects[effectData.TriggerType].Add(new ItemEffect(effectData.Effect, effectData.TriggerType, effectData.Cooldown, effectData.TargettingMode));
+      effects[effectData.TriggerType].Add(new ItemEffect(effectData.Effects, effectData.TriggerType, effectData.Cooldown, effectData.TargettingMode));
     }
   }
 
@@ -36,13 +36,18 @@ public class Item
     effects = new Dictionary<ETriggerType, List<ItemEffect>>();
     foreach (var effectData in itemData.Effects)
     {
-      Effect newEffect = IdToEffectMap.GetEffectById(effectData.EffectId, effectData.EffectParams);
+      List<Effect> newEffects = new List<Effect>();
+      for (int i = 0; i < effectData.EffectIds.Length; i++)
+      {
+        newEffects.Add(IdToEffectMap.GetEffectById(effectData.EffectIds[i], effectData.EffectParams[i]));
+      }
+      
       TargettingMode targettingMode = new TargettingMode(effectData.TargettingMode);
       if (!effects.ContainsKey(effectData.TriggerType))
       {
         effects[effectData.TriggerType] = new List<ItemEffect>();
       }
-      effects[effectData.TriggerType].Add(new ItemEffect(newEffect, effectData.TriggerType, effectData.Cooldown, targettingMode));
+      effects[effectData.TriggerType].Add(new ItemEffect(newEffects.ToArray(), effectData.TriggerType, effectData.Cooldown, targettingMode));
     }
   }
 
@@ -69,20 +74,23 @@ public class Item
     effects.TryGetValue(triggerType, out List<ItemEffect> effectsToApply);
     if (effectsToApply != null)
     {
-      foreach (var effect in effectsToApply)
+      foreach (var itemEffects in effectsToApply)
       {
-        if (!effect.CanUse())
+        if (!itemEffects.CanUse())
           continue;
+        itemEffects.StartCooldown();
 
-        TargettingMode targettingMode = effect.TargettingMode;
+        TargettingMode targettingMode = itemEffects.TargettingMode;
         TargettingStrategy strategy = TargettingStrategyUtils.GetTargettingStrategy(targettingMode.TargettingType);
-        Unit[] targets = strategy.Target(targettingMode, targettedPosition, PlayerCharacter.Instance.transform.position);
+        Unit[] targets = strategy.Target(targettingMode, targettedPosition, PlayerCharacter.Instance);
 
         foreach (var target in targets)
         {
-          effect.Effect.ApplyEffect(PlayerCharacter.Instance, target);
+          foreach (var effect in itemEffects.Effects)
+          {
+            effect.ApplyEffect(PlayerCharacter.Instance, target);
+          }
         }
-        effect.StartCooldown();
       }
     }
   }
@@ -92,13 +100,16 @@ public class Item
     effects.TryGetValue(triggerType, out List<ItemEffect> effectsToApply);
     if (effectsToApply != null)
     {
-      foreach (var effect in effectsToApply)
+      foreach (var itemEffects in effectsToApply)
       {
-        if (!effect.CanUse())
+        if (!itemEffects.CanUse())
           continue;
+        itemEffects.StartCooldown();
 
-        effect.Effect.ApplyEffect(PlayerCharacter.Instance, target);
-        effect.StartCooldown();
+        foreach (var effect in itemEffects.Effects)
+        {
+          effect.ApplyEffect(PlayerCharacter.Instance, target);
+        }
       }
     }
   }

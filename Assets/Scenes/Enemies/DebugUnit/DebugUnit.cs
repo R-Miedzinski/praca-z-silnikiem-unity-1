@@ -7,16 +7,6 @@ public class DebugUnit : Unit
         CurrentHealth = maxHealth;
     }
 
-    public override void TakeDamage(float amount)
-    {
-        CurrentHealth -= amount;
-
-        if (CurrentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
     public override void Heal(float amount)
     {
         CurrentHealth += amount;

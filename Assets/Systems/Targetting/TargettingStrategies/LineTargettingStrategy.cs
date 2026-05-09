@@ -3,20 +3,11 @@ using System.Collections.Generic;
 
 public class LineTargettingStrategy : TargettingStrategy
 {
-  public override Unit[] Target(TargettingMode targettingMode, Vector3 target, Vector3 origin)
+  public override Unit[] Target(TargettingMode targettingMode, Vector3 target, Unit caster)
   {
+    Vector3 origin = caster.transform.position;
     var direction = (target - origin).normalized;
-    RaycastHit2D[] hits;
-
-    if (targettingMode.AllowMultipleTargets)
-    {
-      hits = Physics2D.RaycastAll(origin, direction, targettingMode.Range);
-    }
-    else
-    {
-      var hit = Physics2D.Raycast(origin, direction, targettingMode.Range);
-      hits = hit.collider != null ? new RaycastHit2D[] { hit } : new RaycastHit2D[] { };
-    }
+    RaycastHit2D[] hits = hits = Physics2D.RaycastAll(origin, direction, targettingMode.Range);;
 
     // draw debug line
     Debug.DrawLine(origin, origin + direction * targettingMode.Range, Color.red, 1f);
@@ -27,6 +18,12 @@ public class LineTargettingStrategy : TargettingStrategy
       Unit unit = hit.collider.GetComponent<Unit>();
       if (unit != null)
       {
+        if (!targettingMode.TargetCaster && unit == caster)
+          continue;
+
+        if (!targettingMode.AllowMultipleTargets && units.Count > 0)
+          continue;
+
         units.Add(unit);
       }
     }
