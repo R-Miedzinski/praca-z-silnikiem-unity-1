@@ -3,14 +3,14 @@ using UnityEngine.InputSystem;
 
 public class TargettingWidget : MonoBehaviour
 {
-    [SerializeField] Color color = Color.red;
+    [SerializeField] private Color color = Color.red;
     private SpriteRenderer spriteRenderer;
     InputAction mouseTracker;
 
     void Awake()
     {
         mouseTracker = new InputAction("MouseTracker", binding: "<Mouse>/position");
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer = GameObject.Find("Target").GetComponent<SpriteRenderer>();
         spriteRenderer.color = color;
     }
 

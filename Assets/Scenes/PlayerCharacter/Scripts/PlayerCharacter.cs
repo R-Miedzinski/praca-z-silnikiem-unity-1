@@ -4,11 +4,11 @@ using System.Collections.Generic;
 public class PlayerCharacter : Unit
 {
     public float Heat { get { return heat; } set { heat = Mathf.Clamp(value, 0, maxHeat); } }
-    private float heat;
     [SerializeField] private float maxHeat;
-    [SerializeField] private PlayerControls playerControls;
-    [SerializeField] private Equipment equipment;
     [SerializeField] private TargettingWidget targettingWidget;
+    private PlayerControls playerControls;
+    private Equipment equipment;
+    private float heat;
 
     public static PlayerCharacter Instance { get; private set; }
 
@@ -25,6 +25,9 @@ public class PlayerCharacter : Unit
 
         PlayerControls.OnMove += HandleMove;
         PlayerControls.OnUseItem += HandleUseItem;
+
+        equipment = GetComponent<Equipment>();
+        playerControls = GetComponent<PlayerControls>();
     }
 
     private void Start()
