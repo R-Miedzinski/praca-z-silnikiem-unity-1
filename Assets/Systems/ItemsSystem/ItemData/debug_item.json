@@ -4,51 +4,44 @@
   "Description": "This is a debug item used for testing purposes.",
   "Effects": [
     {
-      "EffectId": "deal_damage",
+      "EffectIds": [
+        "deal_damage",
+        "damage_over_time"
+      ],
       "TriggerType": 0,
       "Cooldown": 5.0,
       "TargettingMode": {
         "TargettingType": 1,
         "Range": 10.0
       },
-      "EffectParams": {
-        "Value": 1.5
-      }
+      "EffectParams": [
+        {
+          "Value": 1.5
+        },
+        {
+          "Value": 0.5,
+          "Duration": 5.0
+        }
+      ]
     },
     {
-      "EffectId": "debug_effect",
+      "EffectIds": [
+        "debug_effect",
+        "slow"
+      ],
       "TriggerType": 8,
       "Cooldown": 5.0,
       "TargettingMode": {
         "TargettingType": 1,
         "Range": 10.0
-      }
-    },
-    {
-      "EffectId": "damage_over_time",
-      "TriggerType": 0,
-      "Cooldown": 1.0,
-      "TargettingMode": {
-        "TargettingType": 1,
-        "Range": 10.0
       },
-      "EffectParams": {
-        "Value": 0.5,
-        "Duration": 5.0
-      }
-    },
-    {
-      "EffectId": "slow",
-      "TriggerType": 8,
-      "Cooldown": 1.0,
-      "TargettingMode": {
-        "TargettingType": 1,
-        "Range": 10.0
-      },
-      "EffectParams": {
-        "Value": 50,
-        "Duration": 5.0
-      }
+      "EffectParams": [
+        {},
+        {
+          "Value": 50,
+          "Duration": 5.0
+        }
+      ]
     }
   ],
   "EquipmentSlot": 0

@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class ItemEffect
 {
-  public Effect Effect { get { return effect; } }
+  public Effect[] Effects { get { return effects; } }
   public ETriggerType TriggerType { get { return triggerType; } }
   public float Cooldown { get { return cooldown; } }
   public TargettingMode TargettingMode { get { return targettingMode; } }
 
-  private Effect effect;
+  private Effect[] effects;
   private ETriggerType triggerType;
   private float cooldown;
   private float lastUsedTime;
   private TargettingMode targettingMode;
 
-  public ItemEffect(Effect _effect, ETriggerType _triggerType, float _cooldown, TargettingMode _targettingMode)
+  public ItemEffect(Effect[] _effects, ETriggerType _triggerType, float _cooldown, TargettingMode _targettingMode)
   {
-    effect = _effect;
+    effects = _effects;
     triggerType = _triggerType;
     cooldown = _cooldown;
     lastUsedTime = Time.time - cooldown;

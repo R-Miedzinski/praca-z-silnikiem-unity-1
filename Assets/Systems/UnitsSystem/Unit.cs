@@ -27,7 +27,24 @@ abstract public class Unit : MonoBehaviour
   protected bool canMove = true;
   protected bool canTakeDamage = true;
 
-  abstract public void TakeDamage(float amount);
-  abstract public void Heal(float amount);
-  abstract public void Die();
+  private void OnDisable()
+  {
+    canMove = false;
+    canTakeDamage = false;
+  }
+
+  public virtual void TakeDamage(float amount)
+  {
+    if (!canTakeDamage)
+      return;
+
+    CurrentHealth -= amount;
+
+    if (CurrentHealth <= 0)
+    {
+      Die();
+    }
+  }
+  public abstract void Heal(float amount);
+  public abstract void Die();
 }

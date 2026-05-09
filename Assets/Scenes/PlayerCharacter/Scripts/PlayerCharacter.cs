@@ -42,12 +42,7 @@ public class PlayerCharacter : Unit
     public override void TakeDamage(float amount)
     {
         ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnDamageTaken, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: amount));
-        CurrentHealth -= amount;
-
-        if (CurrentHealth <= 0)
-        {
-            Die();
-        }
+        base.TakeDamage(amount);
     }
 
     public override void Heal(float amount)
