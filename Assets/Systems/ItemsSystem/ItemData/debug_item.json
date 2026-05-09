@@ -52,12 +52,27 @@
       "Cooldown": 5.0,
       "TargettingMode": {
         "TargettingType": 2,
-        "Range": 5.0,
+        "Range": 2.0,
         "AllowMultipleTargets": true
       },
       "EffectParams": [
         {
-          "StringValue": "Self Targetted Debug Effect"
+          "StringValue": "Cursor Area Targetted Debug Effect"
+        }
+      ]
+    },
+    {
+      "EffectIds": [
+        "debug_effect"
+      ],
+      "TriggerType": 0,
+      "Cooldown": 5.0,
+      "TargettingMode": {
+        "TargettingType": 4
+      },
+      "EffectParams": [
+        {
+          "StringValue": "Point Targetted Debug Effect"
         }
       ]
     }

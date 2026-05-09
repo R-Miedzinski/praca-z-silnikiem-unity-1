@@ -6,7 +6,9 @@ public class TargettingStrategyUtils
   {
     { ETargettingType.Self, new SelfTargettingStrategy() },
     { ETargettingType.Line, new LineTargettingStrategy() },
-    { ETargettingType.Area, new AreaTargettingStrategy() }
+    { ETargettingType.Area, new AreaTargettingStrategy() },
+    // { ETargettingType.Projectile, new ProjectileTargettingStrategy() },
+    { ETargettingType.Point, new PointTargettingStrategy() },
   };
 
   public static TargettingStrategy GetTargettingStrategy(ETargettingType targettingType)
