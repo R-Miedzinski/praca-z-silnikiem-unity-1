@@ -41,7 +41,7 @@ public class Item
       {
         newEffects.Add(IdToEffectMap.GetEffectById(effectData.EffectIds[i], effectData.EffectParams[i]));
       }
-      
+
       TargettingMode targettingMode = new TargettingMode(effectData.TargettingMode);
       if (!effects.ContainsKey(effectData.TriggerType))
       {
@@ -139,6 +139,9 @@ public class Item
       case ETriggerType.Active3:
         ItemTriggerEventSystem.Instance.Active3TriggerEvent += UseOnActive3;
         break;
+      case ETriggerType.Active3Release:
+        ItemTriggerEventSystem.Instance.Active3ReleaseTriggerEvent += UseOnActive3Release;
+        break;
     }
   }
 
@@ -166,6 +169,9 @@ public class Item
         break;
       case ETriggerType.Active3:
         ItemTriggerEventSystem.Instance.Active3TriggerEvent -= UseOnActive3;
+        break;
+      case ETriggerType.Active3Release:
+        ItemTriggerEventSystem.Instance.Active3ReleaseTriggerEvent -= UseOnActive3Release;
         break;
     }
   }
@@ -218,5 +224,13 @@ public class Item
 
     Use(ETriggerType.Active3, context.TargettedPosition, context);
     Use(ETriggerType.OnSelfActive3, context.TargettedPosition, context);
+  }
+
+  private void UseOnActive3Release(ItemTriggerEventContext context)
+  {
+    if (context.ItemActivated != Id)
+      return;
+
+    Use(ETriggerType.Active3Release, context.TargettedPosition, context);
   }
 }
