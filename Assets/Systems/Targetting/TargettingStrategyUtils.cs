@@ -4,9 +4,9 @@ public class TargettingStrategyUtils
 {
   private static Dictionary<ETargettingType, TargettingStrategy> targettingStrategyMap = new Dictionary<ETargettingType, TargettingStrategy>()
   {
-    // { ETargettingType.Self, new SelfTargettingStrategy() },
+    { ETargettingType.Self, new SelfTargettingStrategy() },
     { ETargettingType.Line, new LineTargettingStrategy() },
-    // { ETargettingType.Area, new AreaTargettingStrategy() }
+    { ETargettingType.Area, new AreaTargettingStrategy() }
   };
 
   public static TargettingStrategy GetTargettingStrategy(ETargettingType targettingType)

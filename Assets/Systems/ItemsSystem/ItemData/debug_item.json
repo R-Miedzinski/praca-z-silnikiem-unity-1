@@ -12,7 +12,8 @@
       "Cooldown": 5.0,
       "TargettingMode": {
         "TargettingType": 1,
-        "Range": 10.0
+        "Range": 20.0,
+        "AllowMultipleTargets": true
       },
       "EffectParams": [
         {
@@ -26,20 +27,37 @@
     },
     {
       "EffectIds": [
-        "debug_effect",
         "slow"
       ],
       "TriggerType": 8,
       "Cooldown": 5.0,
       "TargettingMode": {
-        "TargettingType": 1,
-        "Range": 10.0
+        "TargettingType": 0,
+        "Range": 2.0,
+        "TargetCaster": true,
+        "AllowMultipleTargets": false
       },
       "EffectParams": [
-        {},
         {
           "Value": 50,
           "Duration": 5.0
+        }
+      ]
+    },
+    {
+      "EffectIds": [
+        "debug_effect"
+      ],
+      "TriggerType": 0,
+      "Cooldown": 5.0,
+      "TargettingMode": {
+        "TargettingType": 2,
+        "Range": 5.0,
+        "AllowMultipleTargets": true
+      },
+      "EffectParams": [
+        {
+          "StringValue": "Self Targetted Debug Effect"
         }
       ]
     }
