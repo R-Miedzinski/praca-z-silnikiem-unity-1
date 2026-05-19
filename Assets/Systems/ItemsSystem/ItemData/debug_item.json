@@ -9,8 +9,8 @@
       ],
       "TriggerType": 2,
       "Cooldown": 0.1,
-      "TargettingMode": {
-        "TargettingType": 1,
+      "TargetingMode": {
+        "TargetingType": 1,
         "Range": 5.0,
         "AllowMultipleTargets": false
       },
@@ -27,8 +27,8 @@
       ],
       "TriggerType": 0,
       "Cooldown": 5.0,
-      "TargettingMode": {
-        "TargettingType": 1,
+      "TargetingMode": {
+        "TargetingType": 1,
         "Range": 20.0,
         "AllowMultipleTargets": true
       },
@@ -48,8 +48,8 @@
       ],
       "TriggerType": 8,
       "Cooldown": 5.0,
-      "TargettingMode": {
-        "TargettingType": 0,
+      "TargetingMode": {
+        "TargetingType": 0,
         "Range": 2.0,
         "TargetCaster": true,
         "AllowMultipleTargets": false
@@ -67,8 +67,8 @@
       ],
       "TriggerType": 0,
       "Cooldown": 5.0,
-      "TargettingMode": {
-        "TargettingType": 2,
+      "TargetingMode": {
+        "TargetingType": 2,
         "Range": 2.0,
         "AllowMultipleTargets": true
       },
@@ -84,8 +84,8 @@
       ],
       "TriggerType": 0,
       "Cooldown": 5.0,
-      "TargettingMode": {
-        "TargettingType": 4
+      "TargetingMode": {
+        "TargetingType": 4
       },
       "EffectParams": [
         {

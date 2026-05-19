@@ -1,26 +1,26 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class AreaTargettingStrategy : TargettingStrategy
+public class AreaTargetingStrategy : TargetingStrategy
 {
-  public override Unit[] Target(TargettingMode targettingMode, Vector3 target, Unit caster)
+  public override Unit[] Target(TargetingMode targetingMode, Vector3 target, Unit caster)
   {
     Vector3 origin = caster.transform.position;
-    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(target, targettingMode.Range);
+    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(target, targetingMode.Range);
 
     // draw debug sphere
-    DrawDebugCircle(target, targettingMode.Range, Color.blue, 1f);
-    
+    DrawDebugCircle(target, targetingMode.Range, Color.blue, 1f);
+
     List<Unit> targets = new List<Unit>();
     foreach (var hitCollider in hitColliders)
     {
       Unit unit = hitCollider.GetComponent<Unit>();
       if (unit != null)
       {
-        if (!targettingMode.TargetCaster && unit == caster)
+        if (!targetingMode.TargetCaster && unit == caster)
           continue;
 
-        if (!targettingMode.AllowMultipleTargets && targets.Count > 0)
+        if (!targetingMode.AllowMultipleTargets && targets.Count > 0)
           continue;
 
         targets.Add(unit);

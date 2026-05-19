@@ -1,26 +1,26 @@
-public class TargettingMode
+public class TargetingMode
 {
-  public ETargettingType TargettingType { get { return targettingType; } }
+  public ETargetingType TargetingType { get { return targetingType; } }
   public float Range { get { return range; } }
   public bool AllowMultipleTargets { get { return allowMultipleTargets; } }
   public bool TargetCaster { get { return targetCaster; } }
 
-  private ETargettingType targettingType;
+  private ETargetingType targetingType;
   private float range;
   private bool allowMultipleTargets;
   private bool targetCaster;
 
-  public TargettingMode(ETargettingType _targettingType, float _range, bool _allowMultipleTargets, bool _targetCaster)
+  public TargetingMode(ETargetingType _targetingType, float _range, bool _allowMultipleTargets, bool _targetCaster)
   {
-    targettingType = _targettingType;
+    targetingType = _targetingType;
     range = _range;
     allowMultipleTargets = _allowMultipleTargets;
     targetCaster = _targetCaster;
   }
 
-  public TargettingMode(TargettingModeData data)
+  public TargetingMode(TargetingModeData data)
   {
-    targettingType = data.TargettingType;
+    targetingType = data.TargetingType;
     range = data.Range;
     allowMultipleTargets = data.AllowMultipleTargets;
     targetCaster = data.TargetCaster;

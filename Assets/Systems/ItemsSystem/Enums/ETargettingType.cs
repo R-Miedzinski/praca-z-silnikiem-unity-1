@@ -1,4 +1,4 @@
-public enum ETargettingType
+public enum ETargetingType
 {
   Self,
   Line,

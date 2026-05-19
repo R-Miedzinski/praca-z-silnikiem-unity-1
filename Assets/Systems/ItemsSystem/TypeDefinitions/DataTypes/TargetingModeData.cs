@@ -1,9 +1,9 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct TargettingModeData
+public struct TargetingModeData
 {
-  public ETargettingType TargettingType;
+  public ETargetingType TargetingType;
   public float Range;
   public bool AllowMultipleTargets;
   public bool TargetCaster;

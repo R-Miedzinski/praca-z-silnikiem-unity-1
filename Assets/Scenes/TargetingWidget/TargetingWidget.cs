@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TargettingWidget : MonoBehaviour
+public class TargetingWidget : MonoBehaviour
 {
     [SerializeField] private Color color = Color.red;
     private SpriteRenderer spriteRenderer;

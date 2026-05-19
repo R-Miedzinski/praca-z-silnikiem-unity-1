@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public static class IdToEffectMap
 {
-  static private Dictionary<string, System.Func<Effect>> map = new Dictionary<string, System.Func<Effect>>
+  private static readonly Dictionary<string, System.Func<Effect>> map = new()
   {
     { "deal_damage", () => new DealDamageEffect() },
     { "debug_effect", () => new DebugEffect() },

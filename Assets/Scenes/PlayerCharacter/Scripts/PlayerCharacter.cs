@@ -4,9 +4,9 @@ using System.Collections.Generic;
 public class PlayerCharacter : Unit
 {
     public float Heat { get { return heat; } set { heat = Mathf.Clamp(value, 0, maxHeat); } }
-    public TargettingWidget TargettingWidget { get { return targettingWidget; } }
+    public TargetingWidget TargetingWidget { get { return targetingWidget; } }
     [SerializeField] private float maxHeat;
-    [SerializeField] private TargettingWidget targettingWidget;
+    [SerializeField] private TargetingWidget targetingWidget;
     private PlayerControls playerControls;
     private Equipment equipment;
     private float heat;
@@ -45,13 +45,13 @@ public class PlayerCharacter : Unit
 
     public override void TakeDamage(float amount)
     {
-        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnDamageTaken, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: amount));
+        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnDamageTaken, new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: amount));
         base.TakeDamage(amount);
     }
 
     public override void Heal(float amount)
     {
-        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeal, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: amount));
+        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeal, new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: amount));
         CurrentHealth += amount;
     }
 
@@ -64,7 +64,7 @@ public class PlayerCharacter : Unit
     {
         if (heatDelta > 0)
         {
-            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeatGain, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: heatDelta));
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeatGain, new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: heatDelta));
         }
 
         Heat += heatDelta;
@@ -76,13 +76,13 @@ public class PlayerCharacter : Unit
         if (movementInput != Vector2.zero)
         {
             float movementMagnitude = movementInput.magnitude * MovementSpeed * Time.deltaTime;
-            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnMove, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: movementMagnitude));
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnMove, new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: movementMagnitude));
         }
     }
 
     private void HandleUseItem(ESlotsInEquipment itemSlot, EItemUsageType usageType)
     {
-        Vector3 targettedPosition = targettingWidget.transform.position;
+        Vector3 targettedPosition = targetingWidget.transform.position;
         equipment.UseItem(itemSlot, usageType, targettedPosition);
     }
 

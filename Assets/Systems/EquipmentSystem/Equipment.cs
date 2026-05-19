@@ -25,7 +25,7 @@ public class Equipment : MonoBehaviour
 
             ItemTriggerEventSystem.Instance.SendTriggerEvent(
                 ETriggerType.Active3,
-                new ItemTriggerEventContext(targettedPosition: PlayerCharacter.Instance.TargettingWidget.transform.position, itemActivated: item.Id)
+                new ItemTriggerEventContext(targettedPosition: PlayerCharacter.Instance.TargetingWidget.transform.position, itemActivated: item.Id)
             );
         }
     }
@@ -108,7 +108,7 @@ public class Equipment : MonoBehaviour
 
             ItemTriggerEventSystem.Instance.SendTriggerEvent(
                 ETriggerType.Active3Release,
-                new ItemTriggerEventContext(targettedPosition: PlayerCharacter.Instance.TargettingWidget.transform.position, itemActivated: item.Id)
+                new ItemTriggerEventContext(targettedPosition: PlayerCharacter.Instance.TargetingWidget.transform.position, itemActivated: item.Id)
             );
         }
     }

@@ -24,7 +24,7 @@ public class Item
       {
         effects[effectData.TriggerType] = new List<ItemEffect>();
       }
-      effects[effectData.TriggerType].Add(new ItemEffect(effectData.Effects, effectData.TriggerType, effectData.Cooldown, effectData.TargettingMode));
+      effects[effectData.TriggerType].Add(new ItemEffect(effectData.Effects, effectData.TriggerType, effectData.Cooldown, effectData.TargetingMode));
     }
   }
 
@@ -42,12 +42,12 @@ public class Item
         newEffects.Add(IdToEffectMap.GetEffectById(effectData.EffectIds[i], effectData.EffectParams[i]));
       }
 
-      TargettingMode targettingMode = new TargettingMode(effectData.TargettingMode);
+      TargetingMode targetingMode = new TargetingMode(effectData.TargetingMode);
       if (!effects.ContainsKey(effectData.TriggerType))
       {
         effects[effectData.TriggerType] = new List<ItemEffect>();
       }
-      effects[effectData.TriggerType].Add(new ItemEffect(newEffects.ToArray(), effectData.TriggerType, effectData.Cooldown, targettingMode));
+      effects[effectData.TriggerType].Add(new ItemEffect(newEffects.ToArray(), effectData.TriggerType, effectData.Cooldown, targetingMode));
     }
   }
 
@@ -78,11 +78,11 @@ public class Item
       {
         if (!itemEffects.CanUse())
           continue;
-        itemEffects.StartCooldown();
+        itemEffects.StartCooldown(PlayerCharacter.Instance);
 
-        TargettingMode targettingMode = itemEffects.TargettingMode;
-        TargettingStrategy strategy = TargettingStrategyUtils.GetTargettingStrategy(targettingMode.TargettingType);
-        Unit[] targets = strategy.Target(targettingMode, targettedPosition, PlayerCharacter.Instance);
+        TargetingMode targetingMode = itemEffects.TargetingMode;
+        TargetingStrategy strategy = TargetingStrategyUtils.GetTargetingStrategy(targetingMode.TargetingType);
+        Unit[] targets = strategy.Target(targetingMode, targettedPosition, PlayerCharacter.Instance);
 
         foreach (var target in targets)
         {
@@ -104,7 +104,7 @@ public class Item
       {
         if (!itemEffects.CanUse())
           continue;
-        itemEffects.StartCooldown();
+        itemEffects.StartCooldown(PlayerCharacter.Instance);
 
         foreach (var effect in itemEffects.Effects)
         {
