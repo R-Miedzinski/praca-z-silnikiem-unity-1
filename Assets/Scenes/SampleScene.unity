@@ -710,6 +710,10 @@ PrefabInstance:
       value: PlayerCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 1161942788134814214, guid: 361d10a0deebc8c41ad235675847f716, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161942788134814214, guid: 361d10a0deebc8c41ad235675847f716, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
