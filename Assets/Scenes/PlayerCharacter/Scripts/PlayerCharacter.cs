@@ -80,7 +80,7 @@ public class PlayerCharacter : Unit
         if (movementInput2D == Vector2.zero)
             return;
 
-        movementInput2D = correctMovementINputForCollisions(movementInput2D, movementMagnitude);
+        movementInput2D = CorrectMovementINputForCollisions(movementInput2D, movementMagnitude);
 
         gameObject.transform.Translate(movementInput2D.normalized * movementMagnitude);
         ItemTriggerEventSystem.Instance.SendTriggerEvent(
@@ -94,7 +94,7 @@ public class PlayerCharacter : Unit
         equipment.UseItem(itemSlot, usageType, targettedPosition);
     }
 
-    private Vector2 correctMovementINputForCollisions(Vector2 movementInput2D, float movementMagnitude)
+    private Vector2 CorrectMovementINputForCollisions(Vector2 movementInput2D, float movementMagnitude)
     {
         float radius = playerCollider.bounds.extents.x;
         float castDistance = movementMagnitude * 1.2f; // slight buffer added to ensure collision is detected
