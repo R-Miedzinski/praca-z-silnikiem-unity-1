@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SelfTargetingStrategy : AreaTargetingStrategy
 {
-  public override Unit[] Target(TargetingMode targetingMode, Vector3 target, Unit caster)
+  public override void Target(TargetingMode targetingMode, Vector3 target, Unit caster, Effect[] effects)
   {
-    return base.Target(targetingMode, caster.transform.position, caster);
+    base.Target(targetingMode, caster.transform.position, caster, effects);
   }
 }
