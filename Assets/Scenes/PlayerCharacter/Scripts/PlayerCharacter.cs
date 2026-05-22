@@ -9,6 +9,7 @@ public class PlayerCharacter : Unit
     [SerializeField] private TargetingWidget targetingWidget;
     private PlayerControls playerControls;
     private Equipment equipment;
+    private Collider2D playerCollider;
     private float heat;
 
     public static PlayerCharacter Instance { get; private set; }
@@ -29,6 +30,7 @@ public class PlayerCharacter : Unit
 
         equipment = GetComponent<Equipment>();
         playerControls = GetComponent<PlayerControls>();
+        playerCollider = GetComponent<Collider2D>();
     }
 
     private void Start()
@@ -72,18 +74,56 @@ public class PlayerCharacter : Unit
 
     private void HandleMove(Vector2 movementInput)
     {
-        gameObject.transform.Translate(movementInput * MovementSpeed * Time.deltaTime);
-        if (movementInput != Vector2.zero)
-        {
-            float movementMagnitude = movementInput.magnitude * MovementSpeed * Time.deltaTime;
-            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnMove, new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: movementMagnitude));
-        }
-    }
+        Vector2 movementInput2D = new(movementInput.x, movementInput.y);
+        float movementMagnitude = movementInput2D.magnitude * MovementSpeed * Time.deltaTime;
 
+        if (movementInput2D == Vector2.zero)
+            return;
+
+        movementInput2D = correctMovementINputForCollisions(movementInput2D, movementMagnitude);
+
+        gameObject.transform.Translate(movementInput2D.normalized * movementMagnitude);
+        ItemTriggerEventSystem.Instance.SendTriggerEvent(
+            ETriggerType.OnMove,
+            new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: movementMagnitude)
+        );
+    }
     private void HandleUseItem(ESlotsInEquipment itemSlot, EItemUsageType usageType)
     {
         Vector3 targettedPosition = targetingWidget.transform.position;
         equipment.UseItem(itemSlot, usageType, targettedPosition);
+    }
+
+    private Vector2 correctMovementINputForCollisions(Vector2 movementInput2D, float movementMagnitude)
+    {
+        float radius = playerCollider.bounds.extents.x;
+        float castDistance = movementMagnitude * 1.2f; // slight buffer added to ensure collision is detected
+
+        RaycastHit2D hit = Physics2D.CircleCast(
+            transform.position,
+            radius,
+            movementInput2D.normalized,
+            castDistance,
+            LayerMask.GetMask(new string[] { "Environment" })
+        );
+
+        Debug.DrawRay(transform.position, movementInput2D.normalized * (radius + castDistance), Color.red);
+
+        if (hit.collider != null)
+        {
+            Debug.DrawRay(hit.point, hit.normal, Color.blue);
+
+            float dot = Vector2.Dot(movementInput2D.normalized, hit.normal);
+            if (dot < 0)
+            {
+                Vector2 slideDirection = (movementInput2D.normalized - dot * hit.normal).normalized;
+                movementInput2D = slideDirection * movementInput2D.magnitude;
+
+                Debug.DrawRay(transform.position, slideDirection * movementMagnitude, Color.green);
+            }
+        }
+
+        return movementInput2D;
     }
 
     private void EquipDebugItem()
