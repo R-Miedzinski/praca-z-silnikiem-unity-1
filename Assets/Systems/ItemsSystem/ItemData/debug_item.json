@@ -22,6 +22,24 @@
     },
     {
       "EffectIds": [
+        "deal_damage"
+      ],
+      "TriggerType": 1,
+      "Cooldown": 3.0,
+      "TargetingMode": {
+        "TargetingType": 3,
+        "Range": 5.0,
+        "TravelTime": 1.0,
+        "AllowMultipleTargets": false
+      },
+      "EffectParams": [
+        {
+          "Value": 0.5
+        }
+      ]
+    },
+    {
+      "EffectIds": [
         "deal_damage",
         "damage_over_time"
       ],
