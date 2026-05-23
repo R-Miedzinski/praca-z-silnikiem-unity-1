@@ -27,6 +27,7 @@ abstract public class Unit : MonoBehaviour
   protected bool canMove = true;
   protected bool canTakeDamage = true;
 
+
   abstract public void TakeDamage(float amount);
   abstract public void Heal(float amount);
   abstract public void Die();

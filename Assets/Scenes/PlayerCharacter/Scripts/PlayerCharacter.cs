@@ -10,6 +10,7 @@ public class PlayerCharacter : Unit
     [SerializeField] private PlayerControls playerControls;
     [SerializeField] private Equipment equipment;
     [SerializeField] private TargettingWidget targettingWidget;
+    [SerializeField] private PlayerCollisionBlocker collisionBlocker;
 
     public static PlayerCharacter Instance { get; private set; }
 
@@ -26,6 +27,16 @@ public class PlayerCharacter : Unit
 
         PlayerControls.OnMove += HandleMove;
         PlayerControls.OnUseItem += HandleUseItem;
+
+        if (collisionBlocker == null)
+        {
+            collisionBlocker = GetComponent<PlayerCollisionBlocker>();
+        }
+
+        if (collisionBlocker == null)
+        {
+            collisionBlocker = gameObject.AddComponent<PlayerCollisionBlocker>();
+        }
     }
 
     private void Start()
@@ -75,10 +86,14 @@ public class PlayerCharacter : Unit
 
     private void HandleMove(Vector2 movementInput)
     {
-        gameObject.transform.Translate(movementInput * MovementSpeed * Time.deltaTime);
-        if (movementInput != Vector2.zero)
+        Vector2 desiredMovement = movementInput * MovementSpeed * Time.deltaTime;
+        Vector2 allowedMovement = collisionBlocker != null ? collisionBlocker.GetAllowedMovement(desiredMovement) : desiredMovement;
+
+        gameObject.transform.Translate(allowedMovement);
+
+        if (allowedMovement != Vector2.zero)
         {
-            float movementMagnitude = movementInput.magnitude * MovementSpeed * Time.deltaTime;
+            float movementMagnitude = allowedMovement.magnitude;
             ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnMove, new ItemTriggerEventContext(targettedPosition: targettingWidget.transform.position, changeValue: movementMagnitude));
         }
     }
