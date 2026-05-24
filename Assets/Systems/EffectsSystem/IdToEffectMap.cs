@@ -1,22 +1,55 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public static class IdToEffectMap
 {
-  private static readonly Dictionary<string, System.Func<Effect>> map = new()
+  // ******
+  // TODO: Move to external file config
+  private struct EffectConfig
   {
-    { "deal_damage", () => new DealDamageEffect() },
-    { "debug_effect", () => new DebugEffect() },
-    { "damage_over_time", () => new DamageOverTimeEffect() },
-    { "slow", () => new SlowEffect() },
-    // { "heal", () => new HealEffect() },
-  };
+    public string id;
+    public string className;
+  }
 
+  private static readonly EffectConfig[] effectConfigs = new[]
+  {
+    new EffectConfig { id = "deal_damage", className = "DealDamageEffect" },
+    new EffectConfig { id = "debug_effect", className = "DebugEffect" },
+    new EffectConfig { id = "damage_over_time", className = "DamageOverTimeEffect" },
+    new EffectConfig { id = "slow", className = "SlowEffect" },
+    // new EffectConfig { id = "heal", className = "HealEffect" },
+  };
+  // END TODO
+  // ******
+
+  private static readonly Dictionary<string, System.Func<Effect>> map = BuildMap();
+
+  static private Dictionary<string, System.Func<Effect>> BuildMap()
+  {
+    var result = new Dictionary<string, System.Func<Effect>>();
+    foreach (var config in effectConfigs)
+    {
+      var type = System.Type.GetType(config.className);
+      if (type != null)
+      {
+        result[config.id] = () => (Effect)System.Activator.CreateInstance(type);
+      }
+    }
+    return result;
+  }
+
+  static public string[] GetAllEffectIds()
+  {
+    var keys = new string[map.Keys.Count];
+    map.Keys.CopyTo(keys, 0);
+    return keys;
+  }
   static public Effect GetEffectById(string id)
   {
     if (!map.TryGetValue(id, out var effectFactory))
     {
-      UnityEngine.Debug.LogError($"Effect with id {id} not found in IdToEffectMap.");
+      Debug.LogError($"Effect with id {id} not found in IdToEffectMap.");
       return null;
     }
 
@@ -27,7 +60,7 @@ public static class IdToEffectMap
   {
     if (!map.TryGetValue(id, out var effectFactory))
     {
-      UnityEngine.Debug.LogError($"Effect with id {id} not found in IdToEffectMap.");
+      Debug.LogError($"Effect with id {id} not found in IdToEffectMap.");
       return null;
     }
 

@@ -237,9 +237,18 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DebugKey"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
-                    ""id"": ""9742020b-d4b8-4f54-8481-c10c0ca2b72b"",
+                    ""id"": ""f53cecb8-a21d-44cd-9367-5acb63b020fa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwapLoadout"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e098743-68c0-49ce-bea2-a7e9c6de7239"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -447,17 +456,6 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""42a028c3-b72c-47f9-88b1-065593ce0417"",
-                    ""path"": ""<Keyboard>/h"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DebugKey"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""bd7b1718-c3cd-4a9c-b392-fa87abccab81"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -475,6 +473,28 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseHoldHandLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1a81529-2811-4c28-b464-75c791cecd07"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""387d4944-2e12-47bc-b539-f8444af91e15"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapLoadout"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -529,7 +549,8 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         m_Player_UseHoldHandLeft = m_Player.FindAction("UseHoldHandLeft", throwIfNotFound: true);
         m_Player_UseAltHandLeft = m_Player.FindAction("UseAltHandLeft", throwIfNotFound: true);
         m_Player_UseHandLeft = m_Player.FindAction("UseHandLeft", throwIfNotFound: true);
-        m_Player_DebugKey = m_Player.FindAction("DebugKey", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_SwapLoadout = m_Player.FindAction("SwapLoadout", throwIfNotFound: true);
         // MouseTracker
         m_MouseTracker = asset.FindActionMap("MouseTracker", throwIfNotFound: true);
         m_MouseTracker_MousePosition = m_MouseTracker.FindAction("MousePosition", throwIfNotFound: true);
@@ -630,7 +651,8 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_UseHoldHandLeft;
     private readonly InputAction m_Player_UseAltHandLeft;
     private readonly InputAction m_Player_UseHandLeft;
-    private readonly InputAction m_Player_DebugKey;
+    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_SwapLoadout;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -707,9 +729,13 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @UseHandLeft => m_Wrapper.m_Player_UseHandLeft;
         /// <summary>
-        /// Provides access to the underlying input action "Player/DebugKey".
+        /// Provides access to the underlying input action "Player/Interact".
         /// </summary>
-        public InputAction @DebugKey => m_Wrapper.m_Player_DebugKey;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwapLoadout".
+        /// </summary>
+        public InputAction @SwapLoadout => m_Wrapper.m_Player_SwapLoadout;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -784,9 +810,12 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
             @UseHandLeft.started += instance.OnUseHandLeft;
             @UseHandLeft.performed += instance.OnUseHandLeft;
             @UseHandLeft.canceled += instance.OnUseHandLeft;
-            @DebugKey.started += instance.OnDebugKey;
-            @DebugKey.performed += instance.OnDebugKey;
-            @DebugKey.canceled += instance.OnDebugKey;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @SwapLoadout.started += instance.OnSwapLoadout;
+            @SwapLoadout.performed += instance.OnSwapLoadout;
+            @SwapLoadout.canceled += instance.OnSwapLoadout;
         }
 
         /// <summary>
@@ -846,9 +875,12 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
             @UseHandLeft.started -= instance.OnUseHandLeft;
             @UseHandLeft.performed -= instance.OnUseHandLeft;
             @UseHandLeft.canceled -= instance.OnUseHandLeft;
-            @DebugKey.started -= instance.OnDebugKey;
-            @DebugKey.performed -= instance.OnDebugKey;
-            @DebugKey.canceled -= instance.OnDebugKey;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @SwapLoadout.started -= instance.OnSwapLoadout;
+            @SwapLoadout.performed -= instance.OnSwapLoadout;
+            @SwapLoadout.canceled -= instance.OnSwapLoadout;
         }
 
         /// <summary>
@@ -1098,12 +1130,19 @@ public partial class @PlayerCharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseHandLeft(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "DebugKey" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDebugKey(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwapLoadout" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwapLoadout(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MouseTracker" which allows adding and removing callbacks.
