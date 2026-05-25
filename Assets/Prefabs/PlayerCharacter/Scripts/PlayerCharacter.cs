@@ -37,7 +37,7 @@ public class PlayerCharacter : Unit
         playerControls.OnMove += HandleMove;
         playerControls.OnUseItem += HandleUseItem;
         playerControls.OnInteract += HandleInteract;
-        // playerControls.OnSwapLoadout += HandleSwapLoadout;
+        playerControls.OnSwapLoadout += HandleSwapLoadout;
     }
 
     private void Start()
@@ -51,7 +51,7 @@ public class PlayerCharacter : Unit
         playerControls.OnMove -= HandleMove;
         playerControls.OnUseItem -= HandleUseItem;
         playerControls.OnInteract -= HandleInteract;
-        // playerControls.OnSwapLoadout -= HandleSwapLoadout;
+        playerControls.OnSwapLoadout -= HandleSwapLoadout;
     }
 
     public override void TakeDamage(float amount)
@@ -108,6 +108,11 @@ public class PlayerCharacter : Unit
         interactionCollider.Interact(this);
     }
 
+    private void HandleSwapLoadout()
+    {
+        equipment.SwapLoadout();
+    }
+
     private Vector2 CorrectMovementINputForCollisions(Vector2 movementInput2D, float movementMagnitude)
     {
         float radius = playerCollider.bounds.extents.x;
@@ -145,7 +150,8 @@ public class PlayerCharacter : Unit
         Item debugItem = ItemsDatabase.Instance.GetItemById("debug_item");
         Item debugItem2 = ItemsDatabase.Instance.GetItemById("debug_item_object");
 
+        equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem2);
+        equipment.SwapLoadout();
         equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem);
-        equipment.EquipItem(ESlotsInEquipment.LeftHand, debugItem2);
     }
 }
