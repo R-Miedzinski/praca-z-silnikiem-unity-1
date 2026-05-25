@@ -5,4 +5,5 @@ public class PickupDataObject : ScriptableObject
 {
   public string PickupName;
   public EffectIdParamPair[] Effects;
+  public bool InteractOnContact;
 }

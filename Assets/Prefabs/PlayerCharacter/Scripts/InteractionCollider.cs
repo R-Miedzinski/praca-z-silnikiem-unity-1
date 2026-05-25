@@ -24,6 +24,12 @@ public class InteractionCollider : MonoBehaviour
         IInteractable interactable = other.GetComponent<IInteractable>();
         if (interactable != null)
         {
+            if (interactable.InteractOnContact)
+            {
+                interactable.Interact(PlayerCharacter.Instance);
+                return;
+            }
+
             int id = interactable.GetHashCode();
             if (!interactablesInRange.ContainsKey(id))
             {
