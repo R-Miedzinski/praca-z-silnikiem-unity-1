@@ -19,3 +19,4 @@ MonoBehaviour:
       Value: 0
       Duration: 0
       StringValue: Hello
+  InteractOnContact: 0
