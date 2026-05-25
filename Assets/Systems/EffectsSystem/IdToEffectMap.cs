@@ -1,32 +1,17 @@
 using UnityEngine;
+using UnityEditor;
 using System.Collections.Generic;
 using System;
 
 public static class IdToEffectMap
 {
-  // ******
-  // TODO: Move to external file config
-  private struct EffectConfig
-  {
-    public string id;
-    public string className;
-  }
-
-  private static readonly EffectConfig[] effectConfigs = new[]
-  {
-    new EffectConfig { id = "deal_damage", className = "DealDamageEffect" },
-    new EffectConfig { id = "debug_effect", className = "DebugEffect" },
-    new EffectConfig { id = "damage_over_time", className = "DamageOverTimeEffect" },
-    new EffectConfig { id = "slow", className = "SlowEffect" },
-    // new EffectConfig { id = "heal", className = "HealEffect" },
-  };
-  // END TODO
-  // ******
-
+  private const string EffectConfigsPath = "Assets/Systems/EffectsSystem/Settings/EffectDefinitionsDataObject.asset";
   private static readonly Dictionary<string, System.Func<Effect>> map = BuildMap();
 
   static private Dictionary<string, System.Func<Effect>> BuildMap()
   {
+    EffectConfig[] effectConfigs = AssetDatabase.LoadAssetAtPath<EffectDefinitionsDataObject>(EffectConfigsPath).EffectConfigs;
+
     var result = new Dictionary<string, System.Func<Effect>>();
     foreach (var config in effectConfigs)
     {

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DebugPickup
   m_EditorClassIdentifier: 
   PickupName: DebugPickup
-  EffectIds:
-  - debug_effect
-  EffectParams:
-  - Value: 0
-    Duration: 0
-    StringValue: From DebugPickup
+  Effects:
+  - EffectId: debug_effect
+    EffectParams:
+      Value: 0
+      Duration: 0
+      StringValue: Hello

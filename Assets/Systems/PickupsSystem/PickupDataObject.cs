@@ -4,8 +4,5 @@ using UnityEngine;
 public class PickupDataObject : ScriptableObject
 {
   public string PickupName;
-
-  [EffectIdSelection]
-  public string[] EffectIds;
-  public EffectParamsData[] EffectParams;
+  public EffectIdParamPair[] Effects;
 }

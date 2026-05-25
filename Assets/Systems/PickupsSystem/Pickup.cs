@@ -11,16 +11,16 @@ public class Pickup : MonoBehaviour, IInteractable
   public void Awake()
   {
     List<Effect> newEffects = new List<Effect>();
-    for (int i = 0; i < pickupData.EffectIds.Length; i++)
+    foreach (EffectIdParamPair effectPair in pickupData.Effects)
     {
-      Effect effect = IdToEffectMap.GetEffectById(pickupData.EffectIds[i], pickupData.EffectParams[i]);
+      Effect effect = IdToEffectMap.GetEffectById(effectPair.EffectId, effectPair.EffectParams);
       if (effect != null)
       {
         newEffects.Add(effect);
       }
       else
       {
-        Debug.LogError($"Effect with id {pickupData.EffectIds[i]} not found for pickup {pickupData.PickupName}.");
+        Debug.LogError($"Effect with id {effectPair.EffectId} not found for pickup {pickupData.PickupName}.");
       }
     }
 
