@@ -82,15 +82,7 @@ public class Item
 
         TargetingMode targetingMode = itemEffects.TargetingMode;
         TargetingStrategy strategy = TargetingStrategyUtils.GetTargetingStrategy(targetingMode.TargetingType);
-        Unit[] targets = strategy.Target(targetingMode, targettedPosition, PlayerCharacter.Instance);
-
-        foreach (var target in targets)
-        {
-          foreach (var effect in itemEffects.Effects)
-          {
-            effect.ApplyEffect(PlayerCharacter.Instance, target);
-          }
-        }
+        strategy.Target(targetingMode, targettedPosition, PlayerCharacter.Instance, itemEffects.Effects);
       }
     }
   }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class AreaTargetingStrategy : TargetingStrategy
 {
-  public override Unit[] Target(TargetingMode targetingMode, Vector3 target, Unit caster)
+  public override void Target(TargetingMode targetingMode, Vector3 target, Unit caster, Effect[] effects)
   {
     Vector3 origin = caster.transform.position;
     Collider2D[] hitColliders = Physics2D.OverlapCircleAll(target, targetingMode.Range);
@@ -26,7 +26,11 @@ public class AreaTargetingStrategy : TargetingStrategy
         targets.Add(unit);
       }
     }
-    return targets.ToArray();
+
+    foreach (var targetUnit in targets)
+    {
+      ApplyEffectsToUnit(targetUnit, caster, effects);
+    }
   }
 
   private void DrawDebugCircle(Vector3 center, float radius, Color color, float duration)
