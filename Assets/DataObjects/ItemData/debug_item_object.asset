@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af66a0e65ec7ad74c83cfec5454fc40d, type: 3}
+  m_Name: debug_item_object
+  m_EditorClassIdentifier: 
+  Id: debug_item_object
+  ItemName: Debug Item Object
+  Description: Debug Item created as a ScriptableObject
+  Effects:
+  - Effects:
+    - EffectId: deal_damage
+      EffectParams:
+        Value: 1
+        Duration: 0
+        StringValue: 
+    - EffectId: debug_effect
+      EffectParams:
+        Value: 0
+        Duration: 0
+        StringValue: Debug Effect from object item
+    TriggerType: 0
+    Cooldown: 1
+    TargetingMode:
+      TargetingType: 3
+      Range: 10
+      TravelTime: 1
+      AllowMultipleTargets: 0
+      TargetCaster: 0
+  EquipmentSlot: 0

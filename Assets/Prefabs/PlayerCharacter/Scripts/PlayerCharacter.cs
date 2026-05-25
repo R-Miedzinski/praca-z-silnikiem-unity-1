@@ -143,7 +143,9 @@ public class PlayerCharacter : Unit
     private void EquipDebugItem()
     {
         Item debugItem = ItemsDatabase.Instance.GetItemById("debug_item");
+        Item debugItem2 = ItemsDatabase.Instance.GetItemById("debug_item_object");
 
         equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem);
+        equipment.EquipItem(ESlotsInEquipment.LeftHand, debugItem2);
     }
 }

@@ -1072,14 +1072,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3580988647537165566, guid: 361d10a0deebc8c41ad235675847f716, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3580988647537165566, guid: 361d10a0deebc8c41ad235675847f716, type: 3}
-      propertyPath: m_IncludeLayers.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 5507443561257986778, guid: 361d10a0deebc8c41ad235675847f716, type: 3}
       propertyPath: targetingWidget
       value: 
@@ -1223,7 +1215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acbbe2d1e6b275e44b9f46420e8279c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsDataPath: Systems/ItemsSystem/ItemData
 --- !u!1 &2030271242
 GameObject:
   m_ObjectHideFlags: 0
