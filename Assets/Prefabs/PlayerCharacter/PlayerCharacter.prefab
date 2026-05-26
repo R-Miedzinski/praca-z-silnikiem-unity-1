@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb0d41af5e37844f8001942a43d5fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxBackpackSize: 2
+  swapLoadoutCooldown: 1
 --- !u!50 &3580988647537165566
 Rigidbody2D:
   serializedVersion: 5

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: EffectDefinitionsDataObject
   m_EditorClassIdentifier: 
   EffectConfigs:
-  - id: deal_damage
-    className: DealDamageEffect
-  - id: damage_over_time
-    className: DamageOverTimeEffect
-  - id: slow
-    className: SlowEffect
-  - id: debug_effect
-    className: DebugEffect
+  - Id: deal_damage
+    ClassName: DealDamageEffect
+  - Id: damage_over_time
+    ClassName: DamageOverTimeEffect
+  - Id: slow
+    ClassName: SlowEffect
+  - Id: debug_effect
+    ClassName: DebugEffect

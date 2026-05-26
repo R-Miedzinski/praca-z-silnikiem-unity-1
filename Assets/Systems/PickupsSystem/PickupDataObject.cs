@@ -1,8 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PickupDataObject", menuName = "Scriptable Objects/PickupDataObject")]
+[CreateAssetMenu(fileName = "PickupDataObject", menuName = "Pickups/PickupDataObject")]
 public class PickupDataObject : ScriptableObject
 {
   public string PickupName;
   public EffectIdParamPair[] Effects;
+  public bool InteractOnContact;
 }

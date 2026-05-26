@@ -3,10 +3,19 @@ using System.Collections.Generic;
 
 public class Equipment : MonoBehaviour
 {
-    private List<Item> backpackItems = new List<Item>();
+    [SerializeField]
     private int maxBackpackSize = 2;
-    private Dictionary<ESlotsInEquipment, Item> equippedItems = new Dictionary<ESlotsInEquipment, Item>();
-    private Dictionary<EItemUsageType, ETriggerType> usageTypeToTriggerTypeMap = new Dictionary<EItemUsageType, ETriggerType>()
+    [SerializeField]
+    private float swapLoadoutCooldown = 1f;
+    private float lastSwapLoadoutTime = -Mathf.Infinity;
+    private readonly List<Item> backpackItems = new List<Item>();
+    private readonly Dictionary<ESlotsInEquipment, Item> equippedItems = new();
+    private readonly Dictionary<ESlotsInEquipment, Item> inactiveLoadout = new()
+    {
+        { ESlotsInEquipment.LeftHand, null },
+        { ESlotsInEquipment.RightHand, null },
+    };
+    private readonly Dictionary<EItemUsageType, ETriggerType> usageTypeToTriggerTypeMap = new()
     {
         { EItemUsageType.Default, ETriggerType.Active1 },
         { EItemUsageType.Alternative, ETriggerType.Active2 },
@@ -14,7 +23,7 @@ public class Equipment : MonoBehaviour
         { EItemUsageType.Release, ETriggerType.Active3Release },
     };
 
-    private Dictionary<ESlotsInEquipment, Item> activeHoldItems = new Dictionary<ESlotsInEquipment, Item>();
+    private readonly Dictionary<ESlotsInEquipment, Item> activeHoldItems = new();
 
     private void Update()
     {
@@ -60,6 +69,42 @@ public class Equipment : MonoBehaviour
     public void RemoveItemFromBackpack(Item item)
     {
         backpackItems.Remove(item);
+    }
+
+    public void SwapLoadout()
+    {
+        if (Time.time - lastSwapLoadoutTime < swapLoadoutCooldown)
+        {
+            Debug.Log("Swap loadout is on cooldown.");
+            return;
+        }
+        lastSwapLoadoutTime = Time.time;
+
+        var slotsToSwap = new List<ESlotsInEquipment>(inactiveLoadout.Keys);
+        foreach (var slot in slotsToSwap)
+        {
+            Item itemInInactiveLoadout = inactiveLoadout[slot];
+
+            if (equippedItems.TryGetValue(slot, out Item currentlyEquippedItem))
+            {
+                currentlyEquippedItem.Unequip();
+                inactiveLoadout[slot] = currentlyEquippedItem;
+            }
+            else
+            {
+                inactiveLoadout[slot] = null;
+            }
+
+            if (itemInInactiveLoadout != null)
+            {
+                itemInInactiveLoadout.Equip();
+                equippedItems[slot] = itemInInactiveLoadout;
+            }
+            else
+            {
+                equippedItems.Remove(slot);
+            }
+        }
     }
 
     public void UseItem(ESlotsInEquipment slot, EItemUsageType usageType, Vector3 targettedPostion)

@@ -51,6 +51,29 @@ public class Item
     }
   }
 
+  public Item(ItemDataObject itemDataObject)
+  {
+    id = itemDataObject.Id;
+    itemName = itemDataObject.ItemName;
+    equipmentSlot = itemDataObject.EquipmentSlot;
+    effects = new Dictionary<ETriggerType, List<ItemEffect>>();
+    foreach (var effectData in itemDataObject.Effects)
+    {
+      List<Effect> newEffects = new List<Effect>();
+      foreach (EffectIdParamPair effectPair in effectData.Effects)
+      {
+        newEffects.Add(IdToEffectMap.GetEffectById(effectPair.EffectId, effectPair.EffectParams));
+      }
+
+      TargetingMode targetingMode = new TargetingMode(effectData.TargetingMode);
+      if (!effects.ContainsKey(effectData.TriggerType))
+      {
+        effects[effectData.TriggerType] = new List<ItemEffect>();
+      }
+      effects[effectData.TriggerType].Add(new ItemEffect(newEffects.ToArray(), effectData.TriggerType, effectData.Cooldown, targetingMode));
+    }
+  }
+
   public void Equip()
   {
     var presentEffectTriggers = new List<ETriggerType>(effects.Keys);

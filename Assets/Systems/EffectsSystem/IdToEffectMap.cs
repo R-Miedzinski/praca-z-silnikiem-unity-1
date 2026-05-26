@@ -6,19 +6,19 @@ using System;
 public static class IdToEffectMap
 {
   private const string EffectConfigsPath = "Assets/Systems/EffectsSystem/Settings/EffectDefinitionsDataObject.asset";
-  private static readonly Dictionary<string, System.Func<Effect>> map = BuildMap();
+  private static readonly Dictionary<string, Func<Effect>> map = BuildMap();
 
-  static private Dictionary<string, System.Func<Effect>> BuildMap()
+  static private Dictionary<string, Func<Effect>> BuildMap()
   {
     EffectConfig[] effectConfigs = AssetDatabase.LoadAssetAtPath<EffectDefinitionsDataObject>(EffectConfigsPath).EffectConfigs;
 
-    var result = new Dictionary<string, System.Func<Effect>>();
+    var result = new Dictionary<string, Func<Effect>>();
     foreach (var config in effectConfigs)
     {
-      var type = System.Type.GetType(config.className);
+      var type = Type.GetType(config.ClassName);
       if (type != null)
       {
-        result[config.id] = () => (Effect)System.Activator.CreateInstance(type);
+        result[config.Id] = () => (Effect)Activator.CreateInstance(type);
       }
     }
     return result;

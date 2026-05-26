@@ -20,7 +20,7 @@ public class ItemEffect
     triggerType = _triggerType;
     cooldown = _cooldown;
     baseCooldown = _cooldown;
-    lastUsedTime = Time.time - cooldown;
+    lastUsedTime = -Mathf.Infinity;
     targetingMode = _targetingMode;
   }
 

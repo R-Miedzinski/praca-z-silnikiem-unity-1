@@ -7,9 +7,12 @@ public class Pickup : MonoBehaviour, IInteractable
   public Effect[] Effects { get { return effects; } }
   [SerializeField] private SpriteRenderer Highlight;
   private Effect[] effects;
+  public bool InteractOnContact { get { return interactOnContact; } }
+  private bool interactOnContact;
 
   public void Awake()
   {
+    interactOnContact = pickupData.InteractOnContact;
     List<Effect> newEffects = new List<Effect>();
     foreach (EffectIdParamPair effectPair in pickupData.Effects)
     {
