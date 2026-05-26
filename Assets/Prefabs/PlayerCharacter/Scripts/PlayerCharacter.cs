@@ -6,11 +6,15 @@ public class PlayerCharacter : Unit
     public float Heat { get { return heat; } set { heat = Mathf.Clamp(value, 0, maxHeat); } }
     public TargetingWidget TargetingWidget { get { return targetingWidget; } }
     [SerializeField] private float maxHeat;
+    private float heat;
     [SerializeField] private TargetingWidget targetingWidget;
+    // ******
+    // Player Components
+    // ******
     private PlayerControls playerControls;
     private Equipment equipment;
     private Collider2D playerCollider;
-    private float heat;
+    private InteractionCollider interactionCollider;
 
     public static PlayerCharacter Instance { get; private set; }
 
@@ -25,12 +29,15 @@ public class PlayerCharacter : Unit
             Destroy(gameObject);
         }
 
-        PlayerControls.OnMove += HandleMove;
-        PlayerControls.OnUseItem += HandleUseItem;
-
         equipment = GetComponent<Equipment>();
         playerControls = GetComponent<PlayerControls>();
         playerCollider = GetComponent<Collider2D>();
+        interactionCollider = transform.Find("InteractionCollider").GetComponent<InteractionCollider>();
+
+        playerControls.OnMove += HandleMove;
+        playerControls.OnUseItem += HandleUseItem;
+        playerControls.OnInteract += HandleInteract;
+        // playerControls.OnSwapLoadout += HandleSwapLoadout;
     }
 
     private void Start()
@@ -41,8 +48,10 @@ public class PlayerCharacter : Unit
 
     private void OnDestroy()
     {
-        PlayerControls.OnMove -= HandleMove;
-        PlayerControls.OnUseItem -= HandleUseItem;
+        playerControls.OnMove -= HandleMove;
+        playerControls.OnUseItem -= HandleUseItem;
+        playerControls.OnInteract -= HandleInteract;
+        // playerControls.OnSwapLoadout -= HandleSwapLoadout;
     }
 
     public override void TakeDamage(float amount)
@@ -92,6 +101,11 @@ public class PlayerCharacter : Unit
     {
         Vector3 targettedPosition = targetingWidget.transform.position;
         equipment.UseItem(itemSlot, usageType, targettedPosition);
+    }
+
+    private void HandleInteract()
+    {
+        interactionCollider.Interact(this);
     }
 
     private Vector2 CorrectMovementINputForCollisions(Vector2 movementInput2D, float movementMagnitude)

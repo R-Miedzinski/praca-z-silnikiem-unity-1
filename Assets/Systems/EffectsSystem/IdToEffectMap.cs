@@ -1,22 +1,40 @@
 using UnityEngine;
+using UnityEditor;
 using System.Collections.Generic;
+using System;
 
 public static class IdToEffectMap
 {
-  private static readonly Dictionary<string, System.Func<Effect>> map = new()
-  {
-    { "deal_damage", () => new DealDamageEffect() },
-    { "debug_effect", () => new DebugEffect() },
-    { "damage_over_time", () => new DamageOverTimeEffect() },
-    { "slow", () => new SlowEffect() },
-    // { "heal", () => new HealEffect() },
-  };
+  private const string EffectConfigsPath = "Assets/Systems/EffectsSystem/Settings/EffectDefinitionsDataObject.asset";
+  private static readonly Dictionary<string, System.Func<Effect>> map = BuildMap();
 
+  static private Dictionary<string, System.Func<Effect>> BuildMap()
+  {
+    EffectConfig[] effectConfigs = AssetDatabase.LoadAssetAtPath<EffectDefinitionsDataObject>(EffectConfigsPath).EffectConfigs;
+
+    var result = new Dictionary<string, System.Func<Effect>>();
+    foreach (var config in effectConfigs)
+    {
+      var type = System.Type.GetType(config.className);
+      if (type != null)
+      {
+        result[config.id] = () => (Effect)System.Activator.CreateInstance(type);
+      }
+    }
+    return result;
+  }
+
+  static public string[] GetAllEffectIds()
+  {
+    var keys = new string[map.Keys.Count];
+    map.Keys.CopyTo(keys, 0);
+    return keys;
+  }
   static public Effect GetEffectById(string id)
   {
     if (!map.TryGetValue(id, out var effectFactory))
     {
-      UnityEngine.Debug.LogError($"Effect with id {id} not found in IdToEffectMap.");
+      Debug.LogError($"Effect with id {id} not found in IdToEffectMap.");
       return null;
     }
 
@@ -27,7 +45,7 @@ public static class IdToEffectMap
   {
     if (!map.TryGetValue(id, out var effectFactory))
     {
-      UnityEngine.Debug.LogError($"Effect with id {id} not found in IdToEffectMap.");
+      Debug.LogError($"Effect with id {id} not found in IdToEffectMap.");
       return null;
     }
 

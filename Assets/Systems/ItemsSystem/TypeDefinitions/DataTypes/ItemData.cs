@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// TODO: Move to scriptable objects and editor asset config
 [System.Serializable]
 public struct ItemData
 {
