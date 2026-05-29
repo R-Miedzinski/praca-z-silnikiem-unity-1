@@ -55,15 +55,15 @@ MonoBehaviour:
   - Effects:
     - EffectId: push_away
       EffectParams:
-        Value: 1
+        Value: 0.5
         Duration: 0
         StringValue: 
     EffectTriggers: 02000000
-    Cooldown: 1
+    Cooldown: 0.1
     Charges: -1
     TargetingMode:
       TargetingType: 0
-      Range: 5
+      Range: 3
       TravelTime: 0
       AllowMultipleTargets: 1
       TargetCaster: 0
