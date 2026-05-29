@@ -10,29 +10,45 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af66a0e65ec7ad74c83cfec5454fc40d, type: 3}
-  m_Name: debug_item_object
+  m_Name: DebugItemObject
   m_EditorClassIdentifier: 
   Id: debug_item_object
   ItemName: Debug Item Object
   Description: Debug Item created as a ScriptableObject
+  EquipmentSlot: 0
   Effects:
   - Effects:
-    - EffectId: deal_damage
+    - EffectId: protect_from_damage_effect
       EffectParams:
-        Value: 1
-        Duration: 0
+        Value: 0
+        Duration: 0.2
         StringValue: 
     - EffectId: debug_effect
       EffectParams:
         Value: 0
         Duration: 0
-        StringValue: Debug Effect from object item
-    TriggerType: 0
-    Cooldown: 1
+        StringValue: Protect from damage effect
+    EffectTriggers: 0200000006000000
+    Cooldown: 10
+    Charges: -1
     TargetingMode:
-      TargetingType: 3
-      Range: 10
-      TravelTime: 1
+      TargetingType: 0
+      Range: 0
+      TravelTime: 0
       AllowMultipleTargets: 0
-      TargetCaster: 0
-  EquipmentSlot: 0
+      TargetCaster: 1
+  - Effects:
+    - EffectId: debug_effect
+      EffectParams:
+        Value: 0
+        Duration: 0
+        StringValue: Test Active 1
+    EffectTriggers: 00000000
+    Cooldown: 1
+    Charges: -1
+    TargetingMode:
+      TargetingType: 0
+      Range: 0
+      TravelTime: 0
+      AllowMultipleTargets: 0
+      TargetCaster: 1

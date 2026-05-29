@@ -30,7 +30,7 @@ public class EffectInstance : MonoBehaviour
         Destroy(this);
       }
     }
-    else
+    else if (Effect is not IPersistentEffect)
     {
       Destroy(this); // Remove the effect instance immediately for non-timed effects
     }

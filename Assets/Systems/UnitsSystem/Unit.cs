@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 abstract public class Unit : MonoBehaviour
@@ -12,7 +13,9 @@ abstract public class Unit : MonoBehaviour
   public float MovementSpeedModifier { get { return movementSpeedModifier; } set { movementSpeedModifier = value; } }
   public float DamageModifier { get { return damageModifier; } set { damageModifier = value; } }
   public float ArmorModifier { get { return armorModifier; } set { armorModifier = value; } }
-  public List<EffectInstance> ActiveEffects { get; } = new List<EffectInstance>();
+  public bool CanTakeDamage { get { return canTakeDamage; } set { canTakeDamage = value; } }
+  public bool CanMove { get { return canMove; } set { canMove = value; } }
+  public Dictionary<string, EffectInstance> ActiveEffects { get; } = new Dictionary<string, EffectInstance>();
 
   [SerializeField] protected string unitName;
   protected float health;
@@ -27,24 +30,65 @@ abstract public class Unit : MonoBehaviour
   protected bool canMove = true;
   protected bool canTakeDamage = true;
 
+  private float pendingDamage = 0f;
+  private Coroutine damageCoroutine;
+
+  private void OnEnable()
+  {
+    canMove = true;
+    canTakeDamage = true;
+    pendingDamage = 0f;
+
+    if (damageCoroutine != null)
+    {
+      StopCoroutine(damageCoroutine);
+    }
+    damageCoroutine = StartCoroutine(ApplyDamageAtEndOfFrame());
+  }
+
   private void OnDisable()
   {
     canMove = false;
     canTakeDamage = false;
+    pendingDamage = 0f;
+
+    if (damageCoroutine != null)
+    {
+      StopCoroutine(damageCoroutine);
+      damageCoroutine = null;
+    }
   }
 
   public virtual void TakeDamage(float amount)
   {
-    if (!canTakeDamage)
-      return;
-
-    CurrentHealth -= amount;
-
-    if (CurrentHealth <= 0)
-    {
-      Die();
-    }
+    pendingDamage += amount;
   }
+
   public abstract void Heal(float amount);
   public abstract void Die();
+
+  private IEnumerator ApplyDamageAtEndOfFrame()
+  {
+    while (true)
+    {
+      yield return new WaitForEndOfFrame();
+
+      if (!canTakeDamage) // is in immunity frame
+      {
+        pendingDamage = 0f;
+        continue;
+      }
+
+      if (pendingDamage > 0f)
+      {
+        CurrentHealth -= pendingDamage;
+        pendingDamage = 0f;
+
+        if (CurrentHealth <= 0)
+        {
+          Die();
+        }
+      }
+    }
+  }
 }

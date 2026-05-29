@@ -7,7 +7,8 @@
       "EffectIds": [
         "deal_damage"
       ],
-      "TriggerType": 2,
+      "Charges": -1,
+      "EffectTriggers": [2],
       "Cooldown": 0.1,
       "TargetingMode": {
         "TargetingType": 1,
@@ -24,7 +25,8 @@
       "EffectIds": [
         "deal_damage"
       ],
-      "TriggerType": 1,
+      "Charges": -1,
+      "EffectTriggers": [1],
       "Cooldown": 3.0,
       "TargetingMode": {
         "TargetingType": 3,
@@ -43,7 +45,8 @@
         "deal_damage",
         "damage_over_time"
       ],
-      "TriggerType": 0,
+      "Charges": -1,
+      "EffectTriggers": [0],
       "Cooldown": 5.0,
       "TargetingMode": {
         "TargetingType": 1,
@@ -64,7 +67,8 @@
       "EffectIds": [
         "slow"
       ],
-      "TriggerType": 8,
+      "Charges": -1,
+      "EffectTriggers": [8],
       "Cooldown": 5.0,
       "TargetingMode": {
         "TargetingType": 0,
@@ -83,7 +87,8 @@
       "EffectIds": [
         "debug_effect"
       ],
-      "TriggerType": 0,
+      "Charges": -1,
+      "EffectTriggers": [0],
       "Cooldown": 5.0,
       "TargetingMode": {
         "TargetingType": 2,
@@ -92,7 +97,7 @@
       },
       "EffectParams": [
         {
-          "StringValue": "Cursor Area Targetted Debug Effect"
+          "StringValue": "Cursor Area Targeted Debug Effect"
         }
       ]
     },
@@ -100,14 +105,15 @@
       "EffectIds": [
         "debug_effect"
       ],
-      "TriggerType": 0,
+      "Charges": -1,
+      "EffectTriggers": [0],
       "Cooldown": 5.0,
       "TargetingMode": {
         "TargetingType": 4
       },
       "EffectParams": [
         {
-          "StringValue": "Point Targetted Debug Effect"
+          "StringValue": "Point Targeted Debug Effect"
         }
       ]
     }
