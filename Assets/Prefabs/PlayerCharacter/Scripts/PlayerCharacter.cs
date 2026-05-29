@@ -46,6 +46,11 @@ public class PlayerCharacter : Unit
         EquipDebugItem();
     }
 
+    private void Update()
+    {
+        frontDirection = (targetingWidget.transform.position - transform.position).normalized;
+    }
+
     private void OnDestroy()
     {
         playerControls.OnMove -= HandleMove;

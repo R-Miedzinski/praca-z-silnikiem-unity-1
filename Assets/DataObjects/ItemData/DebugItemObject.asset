@@ -18,7 +18,7 @@ MonoBehaviour:
   EquipmentSlot: 0
   Effects:
   - Effects:
-    - EffectId: protect_from_damage_effect
+    - EffectId: protect_from_damage
       EffectParams:
         Value: 0
         Duration: 0.2
@@ -38,11 +38,11 @@ MonoBehaviour:
       AllowMultipleTargets: 0
       TargetCaster: 1
   - Effects:
-    - EffectId: debug_effect
+    - EffectId: dash
       EffectParams:
-        Value: 0
+        Value: 1
         Duration: 0
-        StringValue: Test Active 1
+        StringValue: 
     EffectTriggers: 00000000
     Cooldown: 1
     Charges: -1
@@ -52,3 +52,18 @@ MonoBehaviour:
       TravelTime: 0
       AllowMultipleTargets: 0
       TargetCaster: 1
+  - Effects:
+    - EffectId: push_away
+      EffectParams:
+        Value: 1
+        Duration: 0
+        StringValue: 
+    EffectTriggers: 02000000
+    Cooldown: 1
+    Charges: -1
+    TargetingMode:
+      TargetingType: 0
+      Range: 5
+      TravelTime: 0
+      AllowMultipleTargets: 1
+      TargetCaster: 0

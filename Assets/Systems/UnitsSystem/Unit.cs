@@ -15,6 +15,7 @@ abstract public class Unit : MonoBehaviour
   public float ArmorModifier { get { return armorModifier; } set { armorModifier = value; } }
   public bool CanTakeDamage { get { return canTakeDamage; } set { canTakeDamage = value; } }
   public bool CanMove { get { return canMove; } set { canMove = value; } }
+  public Vector2 FrontDirection { get { return frontDirection; } }
   public Dictionary<string, EffectInstance> ActiveEffects { get; } = new Dictionary<string, EffectInstance>();
 
   [SerializeField] protected string unitName;
@@ -29,6 +30,7 @@ abstract public class Unit : MonoBehaviour
   [SerializeField] protected float armorModifier = 1f;
   protected bool canMove = true;
   protected bool canTakeDamage = true;
+  protected Vector2 frontDirection = Vector2.right;
 
   private float pendingDamage = 0f;
   private Coroutine damageCoroutine;
