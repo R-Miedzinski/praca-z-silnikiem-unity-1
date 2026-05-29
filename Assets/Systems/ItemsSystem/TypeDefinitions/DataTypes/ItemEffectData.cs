@@ -4,8 +4,9 @@ using UnityEngine;
 public struct ItemEffectData
 {
   public string[] EffectIds;
-  public ETriggerType TriggerType;
+  public ETriggerType[] EffectTriggers;
   public float Cooldown;
   public TargetingModeData TargetingMode;
+  public int Charges;
   public EffectParamsData[] EffectParams;
 }

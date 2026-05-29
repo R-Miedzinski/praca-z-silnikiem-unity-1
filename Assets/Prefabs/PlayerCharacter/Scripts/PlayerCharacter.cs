@@ -56,13 +56,13 @@ public class PlayerCharacter : Unit
 
     public override void TakeDamage(float amount)
     {
-        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnDamageTaken, new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: amount));
+        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnDamageTaken, new TakeDamageEventContext(targetedPosition: targetingWidget.transform.position, changeValue: amount));
         base.TakeDamage(amount);
     }
 
     public override void Heal(float amount)
     {
-        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeal, new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: amount));
+        // ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeal, new HealEventContext(targetedPosition: targetingWidget.transform.position, changeValue: amount));
         CurrentHealth += amount;
     }
 
@@ -75,7 +75,7 @@ public class PlayerCharacter : Unit
     {
         if (heatDelta > 0)
         {
-            ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeatGain, new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: heatDelta));
+            // ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnHeatGain, new HeatEventContext(targetedPosition: targetingWidget.transform.position, changeValue: heatDelta));
         }
 
         Heat += heatDelta;
@@ -94,13 +94,13 @@ public class PlayerCharacter : Unit
         gameObject.transform.Translate(movementInput2D.normalized * movementMagnitude);
         ItemTriggerEventSystem.Instance.SendTriggerEvent(
             ETriggerType.OnMove,
-            new ItemTriggerEventContext(targettedPosition: targetingWidget.transform.position, changeValue: movementMagnitude)
+            new MoveEventContext(targetedPosition: targetingWidget.transform.position, changeValue: movementMagnitude)
         );
     }
     private void HandleUseItem(ESlotsInEquipment itemSlot, EItemUsageType usageType)
     {
-        Vector3 targettedPosition = targetingWidget.transform.position;
-        equipment.UseItem(itemSlot, usageType, targettedPosition);
+        Vector3 targetedPosition = targetingWidget.transform.position;
+        equipment.UseItem(itemSlot, usageType, targetedPosition);
     }
 
     private void HandleInteract()
@@ -150,8 +150,8 @@ public class PlayerCharacter : Unit
         Item debugItem = ItemsDatabase.Instance.GetItemById("debug_item");
         Item debugItem2 = ItemsDatabase.Instance.GetItemById("debug_item_object");
 
-        equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem2);
-        equipment.SwapLoadout();
         equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem);
+        equipment.SwapLoadout();
+        equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem2);
     }
 }

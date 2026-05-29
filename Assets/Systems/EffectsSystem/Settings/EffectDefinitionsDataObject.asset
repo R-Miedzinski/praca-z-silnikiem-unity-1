@@ -21,3 +21,5 @@ MonoBehaviour:
     ClassName: SlowEffect
   - Id: debug_effect
     ClassName: DebugEffect
+  - Id: protect_from_damage_effect
+    ClassName: ProtectFromDamageEffect
