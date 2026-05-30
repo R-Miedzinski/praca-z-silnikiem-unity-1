@@ -31,3 +31,5 @@ MonoBehaviour:
     ClassName: PushAwayEffect
   - Id: dash
     ClassName: DashEffect
+  - Id: add_item_to_backpack
+    ClassName: AddItemToBackpackEffect

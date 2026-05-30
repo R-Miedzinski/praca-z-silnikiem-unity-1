@@ -86,6 +86,11 @@ public class PlayerCharacter : Unit
         Heat += heatDelta;
     }
 
+    public void AddItemToBackpack(Item item)
+    {
+        equipment.AddItemToBackpack(item);
+    }
+
     private void HandleMove(Vector2 movementInput)
     {
         Vector2 movementInput2D = new(movementInput.x, movementInput.y);
