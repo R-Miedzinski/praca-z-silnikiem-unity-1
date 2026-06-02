@@ -5,4 +5,5 @@ public enum ETargetingType
   Area,
   Projectile,
   Point,
+  Cone,
 }

@@ -35,10 +35,11 @@ MonoBehaviour:
       TargetingType: 0
       Range: 0
       TravelTime: 0
+      Angle: 0
       AllowMultipleTargets: 0
       TargetCaster: 1
   - Effects:
-    - EffectId: dash
+    - EffectId: push_away
       EffectParams:
         Value: 1
         Duration: 0
@@ -47,11 +48,12 @@ MonoBehaviour:
     Cooldown: 1
     Charges: -1
     TargetingMode:
-      TargetingType: 0
-      Range: 0
+      TargetingType: 5
+      Range: 5
       TravelTime: 0
-      AllowMultipleTargets: 0
-      TargetCaster: 1
+      Angle: 90
+      AllowMultipleTargets: 1
+      TargetCaster: 0
   - Effects:
     - EffectId: push_away
       EffectParams:
@@ -65,5 +67,6 @@ MonoBehaviour:
       TargetingType: 0
       Range: 3
       TravelTime: 0
+      Angle: 0
       AllowMultipleTargets: 1
       TargetCaster: 0
