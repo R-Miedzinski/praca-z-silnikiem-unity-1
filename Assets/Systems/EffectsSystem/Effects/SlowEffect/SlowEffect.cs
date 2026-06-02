@@ -15,7 +15,7 @@ public class SlowEffect : Effect, IParametrizedEffect, ITimedEffect
 
     EffectInstance effectInstance = target.gameObject.AddComponent<EffectInstance>();
     effectInstance.Initialize(this, caster, target);
-    target.ActiveEffects.Add(effectInstance);
+    target.ActiveEffects[Id] = effectInstance;
   }
 
   public void Lift(Unit target)
