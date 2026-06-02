@@ -19,4 +19,9 @@ MonoBehaviour:
       Value: 0
       Duration: 0
       StringValue: Hello
+  - EffectId: add_item_to_backpack
+    EffectParams:
+      Value: 0
+      Duration: 0
+      StringValue: debug_item_object
   InteractOnContact: 0

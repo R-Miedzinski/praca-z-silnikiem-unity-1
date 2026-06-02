@@ -34,7 +34,11 @@ public class Equipment : MonoBehaviour
 
             ItemTriggerEventSystem.Instance.SendTriggerEvent(
                 ETriggerType.Active3,
-                new ItemTriggerEventContext(targettedPosition: PlayerCharacter.Instance.TargetingWidget.transform.position, itemActivated: item.Id)
+                new ActivateItemEventContext(targetedPosition: PlayerCharacter.Instance.TargetingWidget.transform.position, itemActivated: item.Id)
+            );
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(
+                ETriggerType.OnSelfActive3,
+                new ActivateItemEventContext(targetedPosition: PlayerCharacter.Instance.TargetingWidget.transform.position, itemActivated: item.Id)
             );
         }
     }
@@ -107,23 +111,31 @@ public class Equipment : MonoBehaviour
         }
     }
 
-    public void UseItem(ESlotsInEquipment slot, EItemUsageType usageType, Vector3 targettedPostion)
+    public void UseItem(ESlotsInEquipment slot, EItemUsageType usageType, Vector3 targetedPostion)
     {
         if (equippedItems.TryGetValue(slot, out Item item))
         {
             if (usageTypeToTriggerTypeMap.TryGetValue(usageType, out ETriggerType triggerType))
             {
-                if (triggerType == ETriggerType.Active1 || triggerType == ETriggerType.Active2)
+                switch (triggerType)
                 {
-                    ItemTriggerEventSystem.Instance.SendTriggerEvent(triggerType, new ItemTriggerEventContext(targettedPosition: targettedPostion, itemActivated: item.Id));
-                }
-                else if (triggerType == ETriggerType.Active3)
-                {
-                    StartHoldItem(slot);
-                }
-                else if (triggerType == ETriggerType.Active3Release)
-                {
-                    ReleaseHoldItem(slot);
+                    case ETriggerType.Active1:
+                        ItemTriggerEventSystem.Instance.SendTriggerEvent(triggerType, new ActivateItemEventContext(targetedPosition: targetedPostion, itemActivated: item.Id));
+                        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnSelfActive1, new ActivateItemEventContext(targetedPosition: targetedPostion, itemActivated: item.Id));
+                        break;
+                    case ETriggerType.Active2:
+                        ItemTriggerEventSystem.Instance.SendTriggerEvent(triggerType, new ActivateItemEventContext(targetedPosition: targetedPostion, itemActivated: item.Id));
+                        ItemTriggerEventSystem.Instance.SendTriggerEvent(ETriggerType.OnSelfActive2, new ActivateItemEventContext(targetedPosition: targetedPostion, itemActivated: item.Id));
+                        break;
+                    case ETriggerType.Active3:
+                        StartHoldItem(slot);
+                        break;
+                    case ETriggerType.Active3Release:
+                        ReleaseHoldItem(slot);
+                        break;
+                    default:
+                        Debug.LogWarning($"Unhandled trigger type {triggerType} for usage type {usageType}");
+                        break;
                 }
             }
             else
@@ -153,7 +165,7 @@ public class Equipment : MonoBehaviour
 
             ItemTriggerEventSystem.Instance.SendTriggerEvent(
                 ETriggerType.Active3Release,
-                new ItemTriggerEventContext(targettedPosition: PlayerCharacter.Instance.TargetingWidget.transform.position, itemActivated: item.Id)
+                new ActivateItemEventContext(targetedPosition: PlayerCharacter.Instance.TargetingWidget.transform.position, itemActivated: item.Id)
             );
         }
     }

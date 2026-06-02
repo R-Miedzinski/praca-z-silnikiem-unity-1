@@ -9,6 +9,7 @@ public class TargetingStrategyUtils
     { ETargetingType.Area, new AreaTargetingStrategy() },
     { ETargetingType.Projectile, new ProjectileTargetingStrategy() },
     { ETargetingType.Point, new PointTargetingStrategy() },
+    { ETargetingType.Cone, new ConeTargetingStrategy() },
   };
 
   public static TargetingStrategy GetTargetingStrategy(ETargetingType targetingType)

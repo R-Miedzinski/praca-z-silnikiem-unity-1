@@ -13,11 +13,23 @@ MonoBehaviour:
   m_Name: EffectDefinitionsDataObject
   m_EditorClassIdentifier: 
   EffectConfigs:
+  - Id: debug_effect
+    ClassName: DebugEffect
   - Id: deal_damage
     ClassName: DealDamageEffect
   - Id: damage_over_time
     ClassName: DamageOverTimeEffect
   - Id: slow
     ClassName: SlowEffect
-  - Id: debug_effect
-    ClassName: DebugEffect
+  - Id: protect_from_damage
+    ClassName: ProtectFromDamageEffect
+  - Id: change_heat
+    ClassName: ChangeHeatEffect
+  - Id: heal
+    ClassName: HealEffect
+  - Id: push_away
+    ClassName: PushAwayEffect
+  - Id: dash
+    ClassName: DashEffect
+  - Id: add_item_to_backpack
+    ClassName: AddItemToBackpackEffect

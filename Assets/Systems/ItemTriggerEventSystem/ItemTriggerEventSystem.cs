@@ -1,25 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemTriggerEventSystem : MonoBehaviour
 {
   public static ItemTriggerEventSystem Instance { get; private set; }
 
-  public delegate void OnMoveTrigger(ItemTriggerEventContext context);
-  public event OnMoveTrigger MoveTriggerEvent;
-  public delegate void OnHitTrigger(ItemTriggerEventContext context);
-  public event OnHitTrigger HitTriggerEvent;
-  public delegate void OnDamageTakenTrigger(ItemTriggerEventContext context);
-  public event OnDamageTakenTrigger DamageTakenTriggerEvent;
-  public delegate void OnHeatGainTrigger(ItemTriggerEventContext context);
-  public event OnHeatGainTrigger HeatGainTriggerEvent;
-  public delegate void OnActive1Trigger(ItemTriggerEventContext context);
-  public event OnActive1Trigger Active1TriggerEvent;
-  public delegate void OnActive2Trigger(ItemTriggerEventContext context);
-  public event OnActive2Trigger Active2TriggerEvent;
-  public delegate void OnActive3Trigger(ItemTriggerEventContext context);
-  public event OnActive3Trigger Active3TriggerEvent;
-  public delegate void OnActive3ReleaseTrigger(ItemTriggerEventContext context);
-  public event OnActive3ReleaseTrigger Active3ReleaseTriggerEvent;
+  public delegate void OnProcessTriggers(TriggerVector activeTriggers, Dictionary<ETriggerType, ItemTriggerEventContext> triggerContexts);
+  public event OnProcessTriggers ProcessTriggersEvent;
+
+  private TriggerVector activatedTriggers = new TriggerVector();
+  private Dictionary<ETriggerType, ItemTriggerEventContext> triggerContexts = new Dictionary<ETriggerType, ItemTriggerEventContext>();
 
   private void Awake()
   {
@@ -31,75 +21,39 @@ public class ItemTriggerEventSystem : MonoBehaviour
     {
       Destroy(gameObject);
     }
+
+    foreach (ETriggerType triggerType in System.Enum.GetValues(typeof(ETriggerType)))
+    {
+      activatedTriggers.Deactivate(triggerType);
+      triggerContexts[triggerType] = default;
+    }
+  }
+
+  private void Update()
+  {
+    if (activatedTriggers.HasActiveTrigger())
+    {
+      ProcessTriggersEvent?.Invoke(activatedTriggers, triggerContexts);
+    }
+
+    foreach (ETriggerType triggerType in System.Enum.GetValues(typeof(ETriggerType)))
+    {
+      activatedTriggers.Deactivate(triggerType);
+      triggerContexts[triggerType] = default;
+    }
   }
 
   public void SendTriggerEvent(ETriggerType triggerType, ItemTriggerEventContext context = default)
   {
-    switch (triggerType)
+    activatedTriggers.Activate(triggerType);
+    triggerContexts.TryGetValue(triggerType, out ItemTriggerEventContext existingContext);
+    if (existingContext != null)
     {
-      case ETriggerType.OnMove:
-        TriggerMove(context);
-        break;
-      case ETriggerType.OnHit:
-        TriggerHit(context);
-        break;
-      case ETriggerType.OnDamageTaken:
-        TriggerDamageTaken(context);
-        break;
-      case ETriggerType.OnHeatGain:
-        TriggerHeatGain(context);
-        break;
-      case ETriggerType.Active1:
-        TriggerActive1(context);
-        break;
-      case ETriggerType.Active2:
-        TriggerActive2(context);
-        break;
-      case ETriggerType.Active3:
-        TriggerActive3(context);
-        break;
-      case ETriggerType.Active3Release:
-        TriggerActive3Release(context);
-        break;
+      existingContext.AppendContext(context);
     }
-  }
-  private void TriggerMove(ItemTriggerEventContext context)
-  {
-    MoveTriggerEvent?.Invoke(context);
-  }
-
-  private void TriggerHit(ItemTriggerEventContext context)
-  {
-    HitTriggerEvent?.Invoke(context);
-  }
-
-  private void TriggerDamageTaken(ItemTriggerEventContext context)
-  {
-    DamageTakenTriggerEvent?.Invoke(context);
-  }
-
-  private void TriggerHeatGain(ItemTriggerEventContext context)
-  {
-    HeatGainTriggerEvent?.Invoke(context);
-  }
-
-  private void TriggerActive1(ItemTriggerEventContext context)
-  {
-    Active1TriggerEvent?.Invoke(context);
-  }
-
-  private void TriggerActive2(ItemTriggerEventContext context)
-  {
-    Active2TriggerEvent?.Invoke(context);
-  }
-
-  private void TriggerActive3(ItemTriggerEventContext context)
-  {
-    Active3TriggerEvent?.Invoke(context);
-  }
-
-  private void TriggerActive3Release(ItemTriggerEventContext context)
-  {
-    Active3ReleaseTriggerEvent?.Invoke(context);
+    else
+    {
+      triggerContexts[triggerType] = context;
+    }
   }
 }

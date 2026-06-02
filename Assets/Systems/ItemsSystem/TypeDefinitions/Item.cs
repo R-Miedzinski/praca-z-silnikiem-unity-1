@@ -1,30 +1,39 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 public class Item
 {
   public string Id { get { return id; } }
   public string ItemName { get { return itemName; } }
   public EEquipmentSlot EquipmentSlot { get { return equipmentSlot; } }
-  public Dictionary<ETriggerType, List<ItemEffect>> Effects { get { return effects; } }
+  public Dictionary<TriggerVector, List<ItemEffect>> TriggerEffects { get { return triggerEffects; } }
   private string id;
   private string itemName;
   private EEquipmentSlot equipmentSlot;
-  private Dictionary<ETriggerType, List<ItemEffect>> effects;
+  private Dictionary<TriggerVector, List<ItemEffect>> triggerEffects;
 
   public Item(string _id, string _name, EEquipmentSlot _equipmentSlot, ItemEffect[] _effects)
   {
     id = _id;
     itemName = _name;
     equipmentSlot = _equipmentSlot;
-    effects = new Dictionary<ETriggerType, List<ItemEffect>>();
+    triggerEffects = new Dictionary<TriggerVector, List<ItemEffect>>();
     foreach (var effectData in _effects)
     {
-      if (!effects.ContainsKey(effectData.TriggerType))
+      ItemEffect newItemEffect = new ItemEffect(effectData.Effects, effectData.EffectTriggers, effectData.TargetingMode, effectData.Cooldown, effectData.Charges);
+
+      TriggerVector triggerVector = new TriggerVector();
+      foreach (ETriggerType triggerType in effectData.EffectTriggers)
       {
-        effects[effectData.TriggerType] = new List<ItemEffect>();
+        triggerVector.Activate(triggerType);
       }
-      effects[effectData.TriggerType].Add(new ItemEffect(effectData.Effects, effectData.TriggerType, effectData.Cooldown, effectData.TargetingMode));
+      if (!triggerEffects.ContainsKey(triggerVector))
+      {
+        triggerEffects[triggerVector] = new List<ItemEffect>();
+      }
+      triggerEffects[triggerVector].Add(newItemEffect);
     }
   }
 
@@ -33,21 +42,31 @@ public class Item
     id = itemData.Id;
     itemName = itemData.ItemName;
     equipmentSlot = itemData.EquipmentSlot;
-    effects = new Dictionary<ETriggerType, List<ItemEffect>>();
+    triggerEffects = new Dictionary<TriggerVector, List<ItemEffect>>();
     foreach (var effectData in itemData.Effects)
     {
       List<Effect> newEffects = new List<Effect>();
       for (int i = 0; i < effectData.EffectIds.Length; i++)
       {
-        newEffects.Add(IdToEffectMap.GetEffectById(effectData.EffectIds[i], effectData.EffectParams[i]));
+        Effect effect = IdToEffectMap.GetEffectById(effectData.EffectIds[i], effectData.EffectParams[i]);
+        effect.Id = effectData.EffectIds[i] + "_" + id + "_" + string.Join("_", effectData.EffectTriggers.Select(t => t.ToString())); // Ensure unique ID for each effect instance
+
+        newEffects.Add(effect);
       }
 
       TargetingMode targetingMode = new TargetingMode(effectData.TargetingMode);
-      if (!effects.ContainsKey(effectData.TriggerType))
+      ItemEffect newItemEffect = new ItemEffect(newEffects.ToArray(), effectData.EffectTriggers, targetingMode, effectData.Cooldown, effectData.Charges);
+
+      TriggerVector triggerVector = new TriggerVector();
+      foreach (ETriggerType triggerType in effectData.EffectTriggers)
       {
-        effects[effectData.TriggerType] = new List<ItemEffect>();
+        triggerVector.Activate(triggerType);
       }
-      effects[effectData.TriggerType].Add(new ItemEffect(newEffects.ToArray(), effectData.TriggerType, effectData.Cooldown, targetingMode));
+      if (!triggerEffects.ContainsKey(triggerVector))
+      {
+        triggerEffects[triggerVector] = new List<ItemEffect>();
+      }
+      triggerEffects[triggerVector].Add(newItemEffect);
     }
   }
 
@@ -56,45 +75,47 @@ public class Item
     id = itemDataObject.Id;
     itemName = itemDataObject.ItemName;
     equipmentSlot = itemDataObject.EquipmentSlot;
-    effects = new Dictionary<ETriggerType, List<ItemEffect>>();
+    triggerEffects = new Dictionary<TriggerVector, List<ItemEffect>>();
     foreach (var effectData in itemDataObject.Effects)
     {
       List<Effect> newEffects = new List<Effect>();
       foreach (EffectIdParamPair effectPair in effectData.Effects)
       {
-        newEffects.Add(IdToEffectMap.GetEffectById(effectPair.EffectId, effectPair.EffectParams));
+        Effect effect = IdToEffectMap.GetEffectById(effectPair.EffectId, effectPair.EffectParams);
+        effect.Id = effectPair.EffectId + "_" + id + "_" + string.Join("_", effectData.EffectTriggers.Select(t => t.ToString())); // Ensure unique ID for each effect instance
+
+        newEffects.Add(effect);
       }
 
       TargetingMode targetingMode = new TargetingMode(effectData.TargetingMode);
-      if (!effects.ContainsKey(effectData.TriggerType))
+      ItemEffect newItemEffect = new ItemEffect(newEffects.ToArray(), effectData.EffectTriggers, targetingMode, effectData.Cooldown, effectData.Charges);
+
+      TriggerVector triggerVector = new TriggerVector();
+      foreach (ETriggerType triggerType in effectData.EffectTriggers)
       {
-        effects[effectData.TriggerType] = new List<ItemEffect>();
+        triggerVector.Activate(triggerType);
       }
-      effects[effectData.TriggerType].Add(new ItemEffect(newEffects.ToArray(), effectData.TriggerType, effectData.Cooldown, targetingMode));
+      if (!triggerEffects.ContainsKey(triggerVector))
+      {
+        triggerEffects[triggerVector] = new List<ItemEffect>();
+      }
+      triggerEffects[triggerVector].Add(newItemEffect);
     }
   }
 
   public void Equip()
   {
-    var presentEffectTriggers = new List<ETriggerType>(effects.Keys);
-    foreach (var triggerType in presentEffectTriggers)
-    {
-      ConnectEffectTrigger(triggerType);
-    }
+    ItemTriggerEventSystem.Instance.ProcessTriggersEvent += ReactToItemTriggerEvent;
   }
 
   public void Unequip()
   {
-    var presentEffectTriggers = new List<ETriggerType>(effects.Keys);
-    foreach (var triggerType in presentEffectTriggers)
-    {
-      DisconnectEffectTrigger(triggerType);
-    }
+    ItemTriggerEventSystem.Instance.ProcessTriggersEvent -= ReactToItemTriggerEvent;
   }
 
-  public void Use(ETriggerType triggerType, Vector3 targettedPosition, ItemTriggerEventContext context = null)
+  public void Use(TriggerVector triggerVector, Vector3 targetedPosition)
   {
-    effects.TryGetValue(triggerType, out List<ItemEffect> effectsToApply);
+    triggerEffects.TryGetValue(triggerVector, out List<ItemEffect> effectsToApply);
     if (effectsToApply != null)
     {
       foreach (var itemEffects in effectsToApply)
@@ -105,14 +126,14 @@ public class Item
 
         TargetingMode targetingMode = itemEffects.TargetingMode;
         TargetingStrategy strategy = TargetingStrategyUtils.GetTargetingStrategy(targetingMode.TargetingType);
-        strategy.Target(targetingMode, targettedPosition, PlayerCharacter.Instance, itemEffects.Effects);
+        strategy.Target(targetingMode, targetedPosition, PlayerCharacter.Instance, itemEffects.Effects);
       }
     }
   }
 
-  public void Use(ETriggerType triggerType, Unit target, ItemTriggerEventContext context = null)
+  public void Use(TriggerVector triggerVector, Unit[] targets)
   {
-    effects.TryGetValue(triggerType, out List<ItemEffect> effectsToApply);
+    triggerEffects.TryGetValue(triggerVector, out List<ItemEffect> effectsToApply);
     if (effectsToApply != null)
     {
       foreach (var itemEffects in effectsToApply)
@@ -123,129 +144,123 @@ public class Item
 
         foreach (var effect in itemEffects.Effects)
         {
-          effect.ApplyEffect(PlayerCharacter.Instance, target);
+          foreach (var target in targets)
+          {
+            effect.ApplyEffect(PlayerCharacter.Instance, target);
+          }
         }
       }
     }
   }
 
-  private void ConnectEffectTrigger(ETriggerType triggerType)
+  private void ReactToItemTriggerEvent(TriggerVector activatedTriggers, Dictionary<ETriggerType, ItemTriggerEventContext> triggerContexts)
   {
-    switch (triggerType)
+    foreach (var kvp in triggerEffects)
     {
-      case ETriggerType.OnMove:
-        ItemTriggerEventSystem.Instance.MoveTriggerEvent += UseOnMove;
-        break;
-      case ETriggerType.OnHit:
-        ItemTriggerEventSystem.Instance.HitTriggerEvent += UseOnHit;
-        break;
-      case ETriggerType.OnDamageTaken:
-        ItemTriggerEventSystem.Instance.DamageTakenTriggerEvent += UseOnDamageTaken;
-        break;
-      case ETriggerType.OnHeatGain:
-        ItemTriggerEventSystem.Instance.HeatGainTriggerEvent += UseOnHeatGain;
-        break;
-      case ETriggerType.Active1:
-        ItemTriggerEventSystem.Instance.Active1TriggerEvent += UseOnActive1;
-        break;
-      case ETriggerType.Active2:
-        ItemTriggerEventSystem.Instance.Active2TriggerEvent += UseOnActive2;
-        break;
-      case ETriggerType.Active3:
-        ItemTriggerEventSystem.Instance.Active3TriggerEvent += UseOnActive3;
-        break;
-      case ETriggerType.Active3Release:
-        ItemTriggerEventSystem.Instance.Active3ReleaseTriggerEvent += UseOnActive3Release;
-        break;
+      TriggerVector effectTriggerVector = kvp.Key;
+      List<ItemEffect> effectsToApply = kvp.Value;
+
+      if (!activatedTriggers.Check(effectTriggerVector))
+        continue;
+
+      if (!IsActivationValid(effectTriggerVector, triggerContexts))
+        continue;
+
+      TargetInfo targetInfo = GetTargetInfo(effectTriggerVector, triggerContexts);
+      if (targetInfo.Type == Targetype.Position)
+      {
+        Use(effectTriggerVector, targetInfo.Position);
+      }
+      else
+      {
+        // TODO: Ensure this works, when OnHit effects are implemented
+        Use(effectTriggerVector, targetInfo.Units);
+      }
     }
   }
 
-  private void DisconnectEffectTrigger(ETriggerType triggerType)
+  private bool IsActivationValid(TriggerVector effectTriggerVector, Dictionary<ETriggerType, ItemTriggerEventContext> triggerContexts)
   {
-    switch (triggerType)
+    bool isValid = true;
+
+    if (
+      effectTriggerVector.HasActiveTrigger(ETriggerType.Active1) ||
+      effectTriggerVector.HasActiveTrigger(ETriggerType.Active2) ||
+      effectTriggerVector.HasActiveTrigger(ETriggerType.Active3) ||
+      effectTriggerVector.HasActiveTrigger(ETriggerType.Active3Release))
     {
-      case ETriggerType.OnMove:
-        ItemTriggerEventSystem.Instance.MoveTriggerEvent -= UseOnMove;
-        break;
-      case ETriggerType.OnHit:
-        ItemTriggerEventSystem.Instance.HitTriggerEvent -= UseOnHit;
-        break;
-      case ETriggerType.OnDamageTaken:
-        ItemTriggerEventSystem.Instance.DamageTakenTriggerEvent -= UseOnDamageTaken;
-        break;
-      case ETriggerType.OnHeatGain:
-        ItemTriggerEventSystem.Instance.HeatGainTriggerEvent -= UseOnHeatGain;
-        break;
-      case ETriggerType.Active1:
-        ItemTriggerEventSystem.Instance.Active1TriggerEvent -= UseOnActive1;
-        break;
-      case ETriggerType.Active2:
-        ItemTriggerEventSystem.Instance.Active2TriggerEvent -= UseOnActive2;
-        break;
-      case ETriggerType.Active3:
-        ItemTriggerEventSystem.Instance.Active3TriggerEvent -= UseOnActive3;
-        break;
-      case ETriggerType.Active3Release:
-        ItemTriggerEventSystem.Instance.Active3ReleaseTriggerEvent -= UseOnActive3Release;
-        break;
+      ETriggerType activeTriggerType =
+        effectTriggerVector.HasActiveTrigger(ETriggerType.Active1) ? ETriggerType.Active1 :
+        effectTriggerVector.HasActiveTrigger(ETriggerType.Active2) ? ETriggerType.Active2 :
+        effectTriggerVector.HasActiveTrigger(ETriggerType.Active3) ? ETriggerType.Active3 :
+        ETriggerType.Active3Release;
+
+      if (
+        triggerContexts.TryGetValue(activeTriggerType, out ItemTriggerEventContext context) &&
+        context != null &&
+        context is ActivateItemEventContext activateContext
+      )
+      {
+        isValid &= activateContext.ItemsActivated.Contains(Id);
+      }
+      else
+      {
+        Debug.Log($"No valid context found for trigger type {activeTriggerType}. Activation is invalid.");
+        return false;
+      }
     }
+
+    if (
+      effectTriggerVector.HasActiveTrigger(ETriggerType.OnSelfActive1) ||
+      effectTriggerVector.HasActiveTrigger(ETriggerType.OnSelfActive2) ||
+      effectTriggerVector.HasActiveTrigger(ETriggerType.OnSelfActive3))
+    {
+      ETriggerType selfActiveTriggerType =
+        effectTriggerVector.HasActiveTrigger(ETriggerType.OnSelfActive1) ? ETriggerType.OnSelfActive1 :
+        effectTriggerVector.HasActiveTrigger(ETriggerType.OnSelfActive2) ? ETriggerType.OnSelfActive2 :
+        ETriggerType.OnSelfActive3;
+
+      if (
+        triggerContexts.TryGetValue(selfActiveTriggerType, out ItemTriggerEventContext context) &&
+        context != null &&
+        context is ActivateItemEventContext activateContext
+      )
+      {
+        isValid &= activateContext.ItemsActivated.Contains(Id);
+      }
+      else
+      {
+        Debug.Log($"No valid context found for trigger type {selfActiveTriggerType}. Activation is invalid.");
+        return false;
+      }
+    }
+
+    return isValid;
   }
 
-  private void UseOnMove(ItemTriggerEventContext context)
+  private TargetInfo GetTargetInfo(TriggerVector effectTriggerVector, Dictionary<ETriggerType, ItemTriggerEventContext> triggerContexts)
   {
-    Use(ETriggerType.OnMove, context.TargettedPosition, context);
-  }
+    if (effectTriggerVector.HasActiveTrigger(ETriggerType.OnHit))
+    {
 
-  private void UseOnHit(ItemTriggerEventContext context)
-  {
-    // rework when onHit effect is introduced
-    Use(ETriggerType.OnHit, context.EnemyHit, context);
-  }
 
-  private void UseOnDamageTaken(ItemTriggerEventContext context)
-  {
-    // rework when onDamageTaken effect is introduced
-    Use(ETriggerType.OnDamageTaken, context.TargettedPosition, context);
-  }
+      if (triggerContexts.TryGetValue(ETriggerType.OnHit, out ItemTriggerEventContext context) && context is HitEventContext hitContext)
+      {
+        Unit[] units = hitContext.EnemyHit.Keys.ToArray();
 
-  private void UseOnHeatGain(ItemTriggerEventContext context)
-  {
-    // rework when onHeatGain effect is introduced
-    Use(ETriggerType.OnHeatGain, context.TargettedPosition, context);
-  }
+        return TargetInfo.FromUnits(units);
+      }
+    }
 
-  private void UseOnActive1(ItemTriggerEventContext context)
-  {
-    if (context.ItemActivated != Id)
-      return;
+    foreach (ItemTriggerEventContext context in triggerContexts.Values)
+    {
+      if (context != null && context.TargetedPosition != null)
+      {
+        return TargetInfo.FromPosition(context.TargetedPosition);
+      }
+    }
 
-    Use(ETriggerType.Active1, context.TargettedPosition, context);
-    Use(ETriggerType.OnSelfActive1, context.TargettedPosition, context);
-  }
-
-  private void UseOnActive2(ItemTriggerEventContext context)
-  {
-    if (context.ItemActivated != Id)
-      return;
-
-    Use(ETriggerType.Active2, context.TargettedPosition, context);
-    Use(ETriggerType.OnSelfActive2, context.TargettedPosition, context);
-  }
-
-  private void UseOnActive3(ItemTriggerEventContext context)
-  {
-    if (context.ItemActivated != Id)
-      return;
-
-    Use(ETriggerType.Active3, context.TargettedPosition, context);
-    Use(ETriggerType.OnSelfActive3, context.TargettedPosition, context);
-  }
-
-  private void UseOnActive3Release(ItemTriggerEventContext context)
-  {
-    if (context.ItemActivated != Id)
-      return;
-
-    Use(ETriggerType.Active3Release, context.TargettedPosition, context);
+    // Player position as fallback
+    return TargetInfo.FromPosition(PlayerCharacter.Instance.transform.position);
   }
 }
