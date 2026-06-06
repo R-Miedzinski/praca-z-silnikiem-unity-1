@@ -7,8 +7,7 @@ public class TerminalEdit : MonoBehaviour, IInteractable
 
   [SerializeField] private GameObject equipmentMenu;
   [SerializeField] private string equipmentMenuObjectName = "Equipment Menu";
-  [SerializeField] private string enemyLayerName = "Units";
-  [SerializeField] private Unit[] enemiesToDefeat;
+  [SerializeField] private SceneRoomMenago sceneRoomMenago;
   [SerializeField] private SpriteRenderer terminalRenderer;
   [SerializeField] private Color unlockedHighlightColor = Color.cyan;
   [SerializeField] private Color lockedHighlightColor = Color.red;
@@ -22,6 +21,12 @@ public class TerminalEdit : MonoBehaviour, IInteractable
     if (terminalRenderer == null)
     {
       terminalRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    if (sceneRoomMenago == null)
+    {
+      // Enemy checks.
+      sceneRoomMenago = SceneRoomMenago.GetOrCreate();
     }
 
     if (terminalRenderer != null)
@@ -43,6 +48,7 @@ public class TerminalEdit : MonoBehaviour, IInteractable
   private void Reset()
   {
     terminalRenderer = GetComponentInChildren<SpriteRenderer>();
+    sceneRoomMenago = FindAnyObjectByType<SceneRoomMenago>();
   }
 
   public void Interact(PlayerCharacter player)
@@ -74,65 +80,7 @@ public class TerminalEdit : MonoBehaviour, IInteractable
 
   private bool CanUseTerminal()
   {
-    if (HasAssignedEnemyAlive())
-    {
-      return false;
-    }
-
-    return !HasSceneEnemyAlive();
-  }
-
-  private bool HasAssignedEnemyAlive()
-  {
-    if (enemiesToDefeat == null)
-    {
-      return false;
-    }
-
-    foreach (Unit enemy in enemiesToDefeat)
-    {
-      if (IsActiveEnemy(enemy))
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private bool HasSceneEnemyAlive()
-  {
-    foreach (Unit unit in Resources.FindObjectsOfTypeAll<Unit>())
-    {
-      if (IsActiveEnemy(unit))
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private bool IsActiveEnemy(Unit unit)
-  {
-    if (unit == null || unit is PlayerCharacter)
-    {
-      return false;
-    }
-
-    if (!unit.gameObject.activeInHierarchy || !unit.gameObject.scene.IsValid() || !unit.gameObject.scene.isLoaded)
-    {
-      return false;
-    }
-
-    int enemyLayer = LayerMask.NameToLayer(enemyLayerName);
-    if (enemyLayer == -1)
-    {
-      Debug.LogWarning($"Enemy layer '{enemyLayerName}' does not exist.");
-      return false;
-    }
-
-    return unit.gameObject.layer == enemyLayer;
+    return sceneRoomMenago == null || !sceneRoomMenago.HasAliveEnemyInRoom();
   }
 
   private void OpenEquipmentMenu()
