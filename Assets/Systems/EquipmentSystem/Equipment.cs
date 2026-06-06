@@ -45,6 +45,12 @@ public class Equipment : MonoBehaviour
 
     public void EquipItem(ESlotsInEquipment slot, Item item)
     {
+        if (item == null)
+        {
+            Debug.LogWarning($"Cannot equip item in {slot} because item is null.");
+            return;
+        }
+
         if (!equippedItems.ContainsKey(slot))
         {
             equippedItems[slot] = item;

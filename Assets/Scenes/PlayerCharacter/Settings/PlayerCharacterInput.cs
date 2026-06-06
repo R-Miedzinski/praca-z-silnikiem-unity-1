@@ -84,7 +84,7 @@
 //     /// </summary>
 //     public @PlayerCharacterInput()
 //     {
-//         // asset = InputActionAsset.FromJson(@"{
+//         asset = InputActionAsset.FromJson(@"{
 //     ""version"": 1,
 //     ""name"": ""PlayerCharacterInput"",
 //     ""maps"": [
@@ -531,632 +531,632 @@
 //     ],
 //     ""controlSchemes"": []
 // }");
-//         // // Player
-//         // m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-//         // m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-//         // m_Player_UseHoldItem1 = m_Player.FindAction("UseHoldItem1", throwIfNotFound: true);
-//         // m_Player_UseAltItem1 = m_Player.FindAction("UseAltItem1", throwIfNotFound: true);
-//         // m_Player_UseItem1 = m_Player.FindAction("UseItem1", throwIfNotFound: true);
-//         // m_Player_UseHoldItem2 = m_Player.FindAction("UseHoldItem2", throwIfNotFound: true);
-//         // m_Player_UseAltItem2 = m_Player.FindAction("UseAltItem2", throwIfNotFound: true);
-//         // m_Player_UseItem2 = m_Player.FindAction("UseItem2", throwIfNotFound: true);
-//         // m_Player_UseHoldItem3 = m_Player.FindAction("UseHoldItem3", throwIfNotFound: true);
-//         // m_Player_UseAltItem3 = m_Player.FindAction("UseAltItem3", throwIfNotFound: true);
-//         // m_Player_UseItem3 = m_Player.FindAction("UseItem3", throwIfNotFound: true);
-//         // m_Player_UseHoldHandRight = m_Player.FindAction("UseHoldHandRight", throwIfNotFound: true);
-//         // m_Player_UseAltHandRight = m_Player.FindAction("UseAltHandRight", throwIfNotFound: true);
-//         // m_Player_UseHandRight = m_Player.FindAction("UseHandRight", throwIfNotFound: true);
-//         // m_Player_UseHoldHandLeft = m_Player.FindAction("UseHoldHandLeft", throwIfNotFound: true);
-//         // m_Player_UseAltHandLeft = m_Player.FindAction("UseAltHandLeft", throwIfNotFound: true);
-//         // m_Player_UseHandLeft = m_Player.FindAction("UseHandLeft", throwIfNotFound: true);
-//         // m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-//         // m_Player_SwapLoadout = m_Player.FindAction("SwapLoadout", throwIfNotFound: true);
-//         // // MouseTracker
-//         // m_MouseTracker = asset.FindActionMap("MouseTracker", throwIfNotFound: true);
-//         // m_MouseTracker_MousePosition = m_MouseTracker.FindAction("MousePosition", throwIfNotFound: true);
-//     // }
+//         // Player
+//         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+//         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+//         m_Player_UseHoldItem1 = m_Player.FindAction("UseHoldItem1", throwIfNotFound: true);
+//         m_Player_UseAltItem1 = m_Player.FindAction("UseAltItem1", throwIfNotFound: true);
+//         m_Player_UseItem1 = m_Player.FindAction("UseItem1", throwIfNotFound: true);
+//         m_Player_UseHoldItem2 = m_Player.FindAction("UseHoldItem2", throwIfNotFound: true);
+//         m_Player_UseAltItem2 = m_Player.FindAction("UseAltItem2", throwIfNotFound: true);
+//         m_Player_UseItem2 = m_Player.FindAction("UseItem2", throwIfNotFound: true);
+//         m_Player_UseHoldItem3 = m_Player.FindAction("UseHoldItem3", throwIfNotFound: true);
+//         m_Player_UseAltItem3 = m_Player.FindAction("UseAltItem3", throwIfNotFound: true);
+//         m_Player_UseItem3 = m_Player.FindAction("UseItem3", throwIfNotFound: true);
+//         m_Player_UseHoldHandRight = m_Player.FindAction("UseHoldHandRight", throwIfNotFound: true);
+//         m_Player_UseAltHandRight = m_Player.FindAction("UseAltHandRight", throwIfNotFound: true);
+//         m_Player_UseHandRight = m_Player.FindAction("UseHandRight", throwIfNotFound: true);
+//         m_Player_UseHoldHandLeft = m_Player.FindAction("UseHoldHandLeft", throwIfNotFound: true);
+//         m_Player_UseAltHandLeft = m_Player.FindAction("UseAltHandLeft", throwIfNotFound: true);
+//         m_Player_UseHandLeft = m_Player.FindAction("UseHandLeft", throwIfNotFound: true);
+//         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+//         m_Player_SwapLoadout = m_Player.FindAction("SwapLoadout", throwIfNotFound: true);
+//         // MouseTracker
+//         m_MouseTracker = asset.FindActionMap("MouseTracker", throwIfNotFound: true);
+//         m_MouseTracker_MousePosition = m_MouseTracker.FindAction("MousePosition", throwIfNotFound: true);
+//     }
 
-// //     ~@PlayerCharacterInput()
-// //     {
-// //         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerCharacterInput.Player.Disable() has not been called.");
-// //         UnityEngine.Debug.Assert(!m_MouseTracker.enabled, "This will cause a leak and performance issues, PlayerCharacterInput.MouseTracker.Disable() has not been called.");
-// //     }
+//     ~@PlayerCharacterInput()
+//     {
+//         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerCharacterInput.Player.Disable() has not been called.");
+//         UnityEngine.Debug.Assert(!m_MouseTracker.enabled, "This will cause a leak and performance issues, PlayerCharacterInput.MouseTracker.Disable() has not been called.");
+//     }
 
-// //     /// <summary>
-// //     /// Destroys this asset and all associated <see cref="InputAction"/> instances.
-// //     /// </summary>
-// //     public void Dispose()
-// //     {
-// //         UnityEngine.Object.Destroy(asset);
-// //     }
+//     /// <summary>
+//     /// Destroys this asset and all associated <see cref="InputAction"/> instances.
+//     /// </summary>
+//     public void Dispose()
+//     {
+//         UnityEngine.Object.Destroy(asset);
+//     }
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.bindingMask" />
-// //     public InputBinding? bindingMask
-// //     {
-// //         get => asset.bindingMask;
-// //         set => asset.bindingMask = value;
-// //     }
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.bindingMask" />
+//     public InputBinding? bindingMask
+//     {
+//         get => asset.bindingMask;
+//         set => asset.bindingMask = value;
+//     }
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.devices" />
-// //     public ReadOnlyArray<InputDevice>? devices
-// //     {
-// //         get => asset.devices;
-// //         set => asset.devices = value;
-// //     }
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.devices" />
+//     public ReadOnlyArray<InputDevice>? devices
+//     {
+//         get => asset.devices;
+//         set => asset.devices = value;
+//     }
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.controlSchemes" />
-// //     public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.controlSchemes" />
+//     public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.Contains(InputAction)" />
-// //     public bool Contains(InputAction action)
-// //     {
-// //         return asset.Contains(action);
-// //     }
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.Contains(InputAction)" />
+//     public bool Contains(InputAction action)
+//     {
+//         return asset.Contains(action);
+//     }
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.GetEnumerator()" />
-// //     public IEnumerator<InputAction> GetEnumerator()
-// //     {
-// //         return asset.GetEnumerator();
-// //     }
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.GetEnumerator()" />
+//     public IEnumerator<InputAction> GetEnumerator()
+//     {
+//         return asset.GetEnumerator();
+//     }
 
-// //     /// <inheritdoc cref="IEnumerable.GetEnumerator()" />
-// //     IEnumerator IEnumerable.GetEnumerator()
-// //     {
-// //         return GetEnumerator();
-// //     }
+//     /// <inheritdoc cref="IEnumerable.GetEnumerator()" />
+//     IEnumerator IEnumerable.GetEnumerator()
+//     {
+//         return GetEnumerator();
+//     }
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.Enable()" />
-// //     public void Enable()
-// //     {
-// //         asset.Enable();
-// //     }
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.Enable()" />
+//     public void Enable()
+//     {
+//         asset.Enable();
+//     }
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.Disable()" />
-// //     public void Disable()
-// //     {
-// //         asset.Disable();
-// //     }
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.Disable()" />
+//     public void Disable()
+//     {
+//         asset.Disable();
+//     }
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.bindings" />
-// //     public IEnumerable<InputBinding> bindings => asset.bindings;
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.bindings" />
+//     public IEnumerable<InputBinding> bindings => asset.bindings;
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.FindAction(string, bool)" />
-// //     public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
-// //     {
-// //         return asset.FindAction(actionNameOrId, throwIfNotFound);
-// //     }
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.FindAction(string, bool)" />
+//     public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
+//     {
+//         return asset.FindAction(actionNameOrId, throwIfNotFound);
+//     }
 
-// //     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.FindBinding(InputBinding, out InputAction)" />
-// //     public int FindBinding(InputBinding bindingMask, out InputAction action)
-// //     {
-// //         return asset.FindBinding(bindingMask, out action);
-// //     }
+//     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.FindBinding(InputBinding, out InputAction)" />
+//     public int FindBinding(InputBinding bindingMask, out InputAction action)
+//     {
+//         return asset.FindBinding(bindingMask, out action);
+//     }
 
-// //     // Player
-// //     private readonly InputActionMap m_Player;
-// //     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-// //     private readonly InputAction m_Player_Move;
-// //     private readonly InputAction m_Player_UseHoldItem1;
-// //     private readonly InputAction m_Player_UseAltItem1;
-// //     private readonly InputAction m_Player_UseItem1;
-// //     private readonly InputAction m_Player_UseHoldItem2;
-// //     private readonly InputAction m_Player_UseAltItem2;
-// //     private readonly InputAction m_Player_UseItem2;
-// //     private readonly InputAction m_Player_UseHoldItem3;
-// //     private readonly InputAction m_Player_UseAltItem3;
-// //     private readonly InputAction m_Player_UseItem3;
-// //     private readonly InputAction m_Player_UseHoldHandRight;
-// //     private readonly InputAction m_Player_UseAltHandRight;
-// //     private readonly InputAction m_Player_UseHandRight;
-// //     private readonly InputAction m_Player_UseHoldHandLeft;
-// //     private readonly InputAction m_Player_UseAltHandLeft;
-// //     private readonly InputAction m_Player_UseHandLeft;
-// //     private readonly InputAction m_Player_Interact;
-// //     private readonly InputAction m_Player_SwapLoadout;
-// //     /// <summary>
-// //     /// Provides access to input actions defined in input action map "Player".
-// //     /// </summary>
-// //     public struct PlayerActions
-// //     {
-// //         private @PlayerCharacterInput m_Wrapper;
+//     // Player
+//     private readonly InputActionMap m_Player;
+//     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+//     private readonly InputAction m_Player_Move;
+//     private readonly InputAction m_Player_UseHoldItem1;
+//     private readonly InputAction m_Player_UseAltItem1;
+//     private readonly InputAction m_Player_UseItem1;
+//     private readonly InputAction m_Player_UseHoldItem2;
+//     private readonly InputAction m_Player_UseAltItem2;
+//     private readonly InputAction m_Player_UseItem2;
+//     private readonly InputAction m_Player_UseHoldItem3;
+//     private readonly InputAction m_Player_UseAltItem3;
+//     private readonly InputAction m_Player_UseItem3;
+//     private readonly InputAction m_Player_UseHoldHandRight;
+//     private readonly InputAction m_Player_UseAltHandRight;
+//     private readonly InputAction m_Player_UseHandRight;
+//     private readonly InputAction m_Player_UseHoldHandLeft;
+//     private readonly InputAction m_Player_UseAltHandLeft;
+//     private readonly InputAction m_Player_UseHandLeft;
+//     private readonly InputAction m_Player_Interact;
+//     private readonly InputAction m_Player_SwapLoadout;
+//     /// <summary>
+//     /// Provides access to input actions defined in input action map "Player".
+//     /// </summary>
+//     public struct PlayerActions
+//     {
+//         private @PlayerCharacterInput m_Wrapper;
 
-// //         /// <summary>
-// //         /// Construct a new instance of the input action map wrapper class.
-// //         /// </summary>
-// //         public PlayerActions(@PlayerCharacterInput wrapper) { m_Wrapper = wrapper; }
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/Move".
-// //         /// </summary>
-// //         public InputAction @Move => m_Wrapper.m_Player_Move;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseHoldItem1".
-// //         /// </summary>
-// //         public InputAction @UseHoldItem1 => m_Wrapper.m_Player_UseHoldItem1;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseAltItem1".
-// //         /// </summary>
-// //         public InputAction @UseAltItem1 => m_Wrapper.m_Player_UseAltItem1;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseItem1".
-// //         /// </summary>
-// //         public InputAction @UseItem1 => m_Wrapper.m_Player_UseItem1;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseHoldItem2".
-// //         /// </summary>
-// //         public InputAction @UseHoldItem2 => m_Wrapper.m_Player_UseHoldItem2;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseAltItem2".
-// //         /// </summary>
-// //         public InputAction @UseAltItem2 => m_Wrapper.m_Player_UseAltItem2;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseItem2".
-// //         /// </summary>
-// //         public InputAction @UseItem2 => m_Wrapper.m_Player_UseItem2;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseHoldItem3".
-// //         /// </summary>
-// //         public InputAction @UseHoldItem3 => m_Wrapper.m_Player_UseHoldItem3;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseAltItem3".
-// //         /// </summary>
-// //         public InputAction @UseAltItem3 => m_Wrapper.m_Player_UseAltItem3;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseItem3".
-// //         /// </summary>
-// //         public InputAction @UseItem3 => m_Wrapper.m_Player_UseItem3;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseHoldHandRight".
-// //         /// </summary>
-// //         public InputAction @UseHoldHandRight => m_Wrapper.m_Player_UseHoldHandRight;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseAltHandRight".
-// //         /// </summary>
-// //         public InputAction @UseAltHandRight => m_Wrapper.m_Player_UseAltHandRight;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseHandRight".
-// //         /// </summary>
-// //         public InputAction @UseHandRight => m_Wrapper.m_Player_UseHandRight;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseHoldHandLeft".
-// //         /// </summary>
-// //         public InputAction @UseHoldHandLeft => m_Wrapper.m_Player_UseHoldHandLeft;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseAltHandLeft".
-// //         /// </summary>
-// //         public InputAction @UseAltHandLeft => m_Wrapper.m_Player_UseAltHandLeft;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/UseHandLeft".
-// //         /// </summary>
-// //         public InputAction @UseHandLeft => m_Wrapper.m_Player_UseHandLeft;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/Interact".
-// //         /// </summary>
-// //         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "Player/SwapLoadout".
-// //         /// </summary>
-// //         public InputAction @SwapLoadout => m_Wrapper.m_Player_SwapLoadout;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action map instance.
-// //         /// </summary>
-// //         public InputActionMap Get() { return m_Wrapper.m_Player; }
-// //         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-// //         public void Enable() { Get().Enable(); }
-// //         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-// //         public void Disable() { Get().Disable(); }
-// //         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-// //         public bool enabled => Get().enabled;
-// //         /// <summary>
-// //         /// Implicitly converts an <see ref="PlayerActions" /> to an <see ref="InputActionMap" /> instance.
-// //         /// </summary>
-// //         public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-// //         /// <summary>
-// //         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-// //         /// </summary>
-// //         /// <param name="instance">Callback instance.</param>
-// //         /// <remarks>
-// //         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-// //         /// </remarks>
-// //         /// <seealso cref="PlayerActions" />
-// //         public void AddCallbacks(IPlayerActions instance)
-// //         {
-// //             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
-// //             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-// //             @Move.started += instance.OnMove;
-// //             @Move.performed += instance.OnMove;
-// //             @Move.canceled += instance.OnMove;
-// //             @UseHoldItem1.started += instance.OnUseHoldItem1;
-// //             @UseHoldItem1.performed += instance.OnUseHoldItem1;
-// //             @UseHoldItem1.canceled += instance.OnUseHoldItem1;
-// //             @UseAltItem1.started += instance.OnUseAltItem1;
-// //             @UseAltItem1.performed += instance.OnUseAltItem1;
-// //             @UseAltItem1.canceled += instance.OnUseAltItem1;
-// //             @UseItem1.started += instance.OnUseItem1;
-// //             @UseItem1.performed += instance.OnUseItem1;
-// //             @UseItem1.canceled += instance.OnUseItem1;
-// //             @UseHoldItem2.started += instance.OnUseHoldItem2;
-// //             @UseHoldItem2.performed += instance.OnUseHoldItem2;
-// //             @UseHoldItem2.canceled += instance.OnUseHoldItem2;
-// //             @UseAltItem2.started += instance.OnUseAltItem2;
-// //             @UseAltItem2.performed += instance.OnUseAltItem2;
-// //             @UseAltItem2.canceled += instance.OnUseAltItem2;
-// //             @UseItem2.started += instance.OnUseItem2;
-// //             @UseItem2.performed += instance.OnUseItem2;
-// //             @UseItem2.canceled += instance.OnUseItem2;
-// //             @UseHoldItem3.started += instance.OnUseHoldItem3;
-// //             @UseHoldItem3.performed += instance.OnUseHoldItem3;
-// //             @UseHoldItem3.canceled += instance.OnUseHoldItem3;
-// //             @UseAltItem3.started += instance.OnUseAltItem3;
-// //             @UseAltItem3.performed += instance.OnUseAltItem3;
-// //             @UseAltItem3.canceled += instance.OnUseAltItem3;
-// //             @UseItem3.started += instance.OnUseItem3;
-// //             @UseItem3.performed += instance.OnUseItem3;
-// //             @UseItem3.canceled += instance.OnUseItem3;
-// //             @UseHoldHandRight.started += instance.OnUseHoldHandRight;
-// //             @UseHoldHandRight.performed += instance.OnUseHoldHandRight;
-// //             @UseHoldHandRight.canceled += instance.OnUseHoldHandRight;
-// //             @UseAltHandRight.started += instance.OnUseAltHandRight;
-// //             @UseAltHandRight.performed += instance.OnUseAltHandRight;
-// //             @UseAltHandRight.canceled += instance.OnUseAltHandRight;
-// //             @UseHandRight.started += instance.OnUseHandRight;
-// //             @UseHandRight.performed += instance.OnUseHandRight;
-// //             @UseHandRight.canceled += instance.OnUseHandRight;
-// //             @UseHoldHandLeft.started += instance.OnUseHoldHandLeft;
-// //             @UseHoldHandLeft.performed += instance.OnUseHoldHandLeft;
-// //             @UseHoldHandLeft.canceled += instance.OnUseHoldHandLeft;
-// //             @UseAltHandLeft.started += instance.OnUseAltHandLeft;
-// //             @UseAltHandLeft.performed += instance.OnUseAltHandLeft;
-// //             @UseAltHandLeft.canceled += instance.OnUseAltHandLeft;
-// //             @UseHandLeft.started += instance.OnUseHandLeft;
-// //             @UseHandLeft.performed += instance.OnUseHandLeft;
-// //             @UseHandLeft.canceled += instance.OnUseHandLeft;
-// //             @Interact.started += instance.OnInteract;
-// //             @Interact.performed += instance.OnInteract;
-// //             @Interact.canceled += instance.OnInteract;
-// //             @SwapLoadout.started += instance.OnSwapLoadout;
-// //             @SwapLoadout.performed += instance.OnSwapLoadout;
-// //             @SwapLoadout.canceled += instance.OnSwapLoadout;
-// //         }
+//         /// <summary>
+//         /// Construct a new instance of the input action map wrapper class.
+//         /// </summary>
+//         public PlayerActions(@PlayerCharacterInput wrapper) { m_Wrapper = wrapper; }
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/Move".
+//         /// </summary>
+//         public InputAction @Move => m_Wrapper.m_Player_Move;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseHoldItem1".
+//         /// </summary>
+//         public InputAction @UseHoldItem1 => m_Wrapper.m_Player_UseHoldItem1;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseAltItem1".
+//         /// </summary>
+//         public InputAction @UseAltItem1 => m_Wrapper.m_Player_UseAltItem1;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseItem1".
+//         /// </summary>
+//         public InputAction @UseItem1 => m_Wrapper.m_Player_UseItem1;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseHoldItem2".
+//         /// </summary>
+//         public InputAction @UseHoldItem2 => m_Wrapper.m_Player_UseHoldItem2;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseAltItem2".
+//         /// </summary>
+//         public InputAction @UseAltItem2 => m_Wrapper.m_Player_UseAltItem2;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseItem2".
+//         /// </summary>
+//         public InputAction @UseItem2 => m_Wrapper.m_Player_UseItem2;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseHoldItem3".
+//         /// </summary>
+//         public InputAction @UseHoldItem3 => m_Wrapper.m_Player_UseHoldItem3;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseAltItem3".
+//         /// </summary>
+//         public InputAction @UseAltItem3 => m_Wrapper.m_Player_UseAltItem3;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseItem3".
+//         /// </summary>
+//         public InputAction @UseItem3 => m_Wrapper.m_Player_UseItem3;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseHoldHandRight".
+//         /// </summary>
+//         public InputAction @UseHoldHandRight => m_Wrapper.m_Player_UseHoldHandRight;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseAltHandRight".
+//         /// </summary>
+//         public InputAction @UseAltHandRight => m_Wrapper.m_Player_UseAltHandRight;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseHandRight".
+//         /// </summary>
+//         public InputAction @UseHandRight => m_Wrapper.m_Player_UseHandRight;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseHoldHandLeft".
+//         /// </summary>
+//         public InputAction @UseHoldHandLeft => m_Wrapper.m_Player_UseHoldHandLeft;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseAltHandLeft".
+//         /// </summary>
+//         public InputAction @UseAltHandLeft => m_Wrapper.m_Player_UseAltHandLeft;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/UseHandLeft".
+//         /// </summary>
+//         public InputAction @UseHandLeft => m_Wrapper.m_Player_UseHandLeft;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/Interact".
+//         /// </summary>
+//         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+//         /// <summary>
+//         /// Provides access to the underlying input action "Player/SwapLoadout".
+//         /// </summary>
+//         public InputAction @SwapLoadout => m_Wrapper.m_Player_SwapLoadout;
+//         /// <summary>
+//         /// Provides access to the underlying input action map instance.
+//         /// </summary>
+//         public InputActionMap Get() { return m_Wrapper.m_Player; }
+//         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+//         public void Enable() { Get().Enable(); }
+//         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+//         public void Disable() { Get().Disable(); }
+//         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+//         public bool enabled => Get().enabled;
+//         /// <summary>
+//         /// Implicitly converts an <see ref="PlayerActions" /> to an <see ref="InputActionMap" /> instance.
+//         /// </summary>
+//         public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+//         /// <summary>
+//         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+//         /// </summary>
+//         /// <param name="instance">Callback instance.</param>
+//         /// <remarks>
+//         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+//         /// </remarks>
+//         /// <seealso cref="PlayerActions" />
+//         public void AddCallbacks(IPlayerActions instance)
+//         {
+//             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+//             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+//             @Move.started += instance.OnMove;
+//             @Move.performed += instance.OnMove;
+//             @Move.canceled += instance.OnMove;
+//             @UseHoldItem1.started += instance.OnUseHoldItem1;
+//             @UseHoldItem1.performed += instance.OnUseHoldItem1;
+//             @UseHoldItem1.canceled += instance.OnUseHoldItem1;
+//             @UseAltItem1.started += instance.OnUseAltItem1;
+//             @UseAltItem1.performed += instance.OnUseAltItem1;
+//             @UseAltItem1.canceled += instance.OnUseAltItem1;
+//             @UseItem1.started += instance.OnUseItem1;
+//             @UseItem1.performed += instance.OnUseItem1;
+//             @UseItem1.canceled += instance.OnUseItem1;
+//             @UseHoldItem2.started += instance.OnUseHoldItem2;
+//             @UseHoldItem2.performed += instance.OnUseHoldItem2;
+//             @UseHoldItem2.canceled += instance.OnUseHoldItem2;
+//             @UseAltItem2.started += instance.OnUseAltItem2;
+//             @UseAltItem2.performed += instance.OnUseAltItem2;
+//             @UseAltItem2.canceled += instance.OnUseAltItem2;
+//             @UseItem2.started += instance.OnUseItem2;
+//             @UseItem2.performed += instance.OnUseItem2;
+//             @UseItem2.canceled += instance.OnUseItem2;
+//             @UseHoldItem3.started += instance.OnUseHoldItem3;
+//             @UseHoldItem3.performed += instance.OnUseHoldItem3;
+//             @UseHoldItem3.canceled += instance.OnUseHoldItem3;
+//             @UseAltItem3.started += instance.OnUseAltItem3;
+//             @UseAltItem3.performed += instance.OnUseAltItem3;
+//             @UseAltItem3.canceled += instance.OnUseAltItem3;
+//             @UseItem3.started += instance.OnUseItem3;
+//             @UseItem3.performed += instance.OnUseItem3;
+//             @UseItem3.canceled += instance.OnUseItem3;
+//             @UseHoldHandRight.started += instance.OnUseHoldHandRight;
+//             @UseHoldHandRight.performed += instance.OnUseHoldHandRight;
+//             @UseHoldHandRight.canceled += instance.OnUseHoldHandRight;
+//             @UseAltHandRight.started += instance.OnUseAltHandRight;
+//             @UseAltHandRight.performed += instance.OnUseAltHandRight;
+//             @UseAltHandRight.canceled += instance.OnUseAltHandRight;
+//             @UseHandRight.started += instance.OnUseHandRight;
+//             @UseHandRight.performed += instance.OnUseHandRight;
+//             @UseHandRight.canceled += instance.OnUseHandRight;
+//             @UseHoldHandLeft.started += instance.OnUseHoldHandLeft;
+//             @UseHoldHandLeft.performed += instance.OnUseHoldHandLeft;
+//             @UseHoldHandLeft.canceled += instance.OnUseHoldHandLeft;
+//             @UseAltHandLeft.started += instance.OnUseAltHandLeft;
+//             @UseAltHandLeft.performed += instance.OnUseAltHandLeft;
+//             @UseAltHandLeft.canceled += instance.OnUseAltHandLeft;
+//             @UseHandLeft.started += instance.OnUseHandLeft;
+//             @UseHandLeft.performed += instance.OnUseHandLeft;
+//             @UseHandLeft.canceled += instance.OnUseHandLeft;
+//             @Interact.started += instance.OnInteract;
+//             @Interact.performed += instance.OnInteract;
+//             @Interact.canceled += instance.OnInteract;
+//             @SwapLoadout.started += instance.OnSwapLoadout;
+//             @SwapLoadout.performed += instance.OnSwapLoadout;
+//             @SwapLoadout.canceled += instance.OnSwapLoadout;
+//         }
 
-// //         /// <summary>
-// //         /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-// //         /// </summary>
-// //         /// <remarks>
-// //         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-// //         /// </remarks>
-// //         /// <seealso cref="PlayerActions" />
-// //         private void UnregisterCallbacks(IPlayerActions instance)
-// //         {
-// //             @Move.started -= instance.OnMove;
-// //             @Move.performed -= instance.OnMove;
-// //             @Move.canceled -= instance.OnMove;
-// //             @UseHoldItem1.started -= instance.OnUseHoldItem1;
-// //             @UseHoldItem1.performed -= instance.OnUseHoldItem1;
-// //             @UseHoldItem1.canceled -= instance.OnUseHoldItem1;
-// //             @UseAltItem1.started -= instance.OnUseAltItem1;
-// //             @UseAltItem1.performed -= instance.OnUseAltItem1;
-// //             @UseAltItem1.canceled -= instance.OnUseAltItem1;
-// //             @UseItem1.started -= instance.OnUseItem1;
-// //             @UseItem1.performed -= instance.OnUseItem1;
-// //             @UseItem1.canceled -= instance.OnUseItem1;
-// //             @UseHoldItem2.started -= instance.OnUseHoldItem2;
-// //             @UseHoldItem2.performed -= instance.OnUseHoldItem2;
-// //             @UseHoldItem2.canceled -= instance.OnUseHoldItem2;
-// //             @UseAltItem2.started -= instance.OnUseAltItem2;
-// //             @UseAltItem2.performed -= instance.OnUseAltItem2;
-// //             @UseAltItem2.canceled -= instance.OnUseAltItem2;
-// //             @UseItem2.started -= instance.OnUseItem2;
-// //             @UseItem2.performed -= instance.OnUseItem2;
-// //             @UseItem2.canceled -= instance.OnUseItem2;
-// //             @UseHoldItem3.started -= instance.OnUseHoldItem3;
-// //             @UseHoldItem3.performed -= instance.OnUseHoldItem3;
-// //             @UseHoldItem3.canceled -= instance.OnUseHoldItem3;
-// //             @UseAltItem3.started -= instance.OnUseAltItem3;
-// //             @UseAltItem3.performed -= instance.OnUseAltItem3;
-// //             @UseAltItem3.canceled -= instance.OnUseAltItem3;
-// //             @UseItem3.started -= instance.OnUseItem3;
-// //             @UseItem3.performed -= instance.OnUseItem3;
-// //             @UseItem3.canceled -= instance.OnUseItem3;
-// //             @UseHoldHandRight.started -= instance.OnUseHoldHandRight;
-// //             @UseHoldHandRight.performed -= instance.OnUseHoldHandRight;
-// //             @UseHoldHandRight.canceled -= instance.OnUseHoldHandRight;
-// //             @UseAltHandRight.started -= instance.OnUseAltHandRight;
-// //             @UseAltHandRight.performed -= instance.OnUseAltHandRight;
-// //             @UseAltHandRight.canceled -= instance.OnUseAltHandRight;
-// //             @UseHandRight.started -= instance.OnUseHandRight;
-// //             @UseHandRight.performed -= instance.OnUseHandRight;
-// //             @UseHandRight.canceled -= instance.OnUseHandRight;
-// //             @UseHoldHandLeft.started -= instance.OnUseHoldHandLeft;
-// //             @UseHoldHandLeft.performed -= instance.OnUseHoldHandLeft;
-// //             @UseHoldHandLeft.canceled -= instance.OnUseHoldHandLeft;
-// //             @UseAltHandLeft.started -= instance.OnUseAltHandLeft;
-// //             @UseAltHandLeft.performed -= instance.OnUseAltHandLeft;
-// //             @UseAltHandLeft.canceled -= instance.OnUseAltHandLeft;
-// //             @UseHandLeft.started -= instance.OnUseHandLeft;
-// //             @UseHandLeft.performed -= instance.OnUseHandLeft;
-// //             @UseHandLeft.canceled -= instance.OnUseHandLeft;
-// //             @Interact.started -= instance.OnInteract;
-// //             @Interact.performed -= instance.OnInteract;
-// //             @Interact.canceled -= instance.OnInteract;
-// //             @SwapLoadout.started -= instance.OnSwapLoadout;
-// //             @SwapLoadout.performed -= instance.OnSwapLoadout;
-// //             @SwapLoadout.canceled -= instance.OnSwapLoadout;
-// //         }
+//         /// <summary>
+//         /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+//         /// </summary>
+//         /// <remarks>
+//         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+//         /// </remarks>
+//         /// <seealso cref="PlayerActions" />
+//         private void UnregisterCallbacks(IPlayerActions instance)
+//         {
+//             @Move.started -= instance.OnMove;
+//             @Move.performed -= instance.OnMove;
+//             @Move.canceled -= instance.OnMove;
+//             @UseHoldItem1.started -= instance.OnUseHoldItem1;
+//             @UseHoldItem1.performed -= instance.OnUseHoldItem1;
+//             @UseHoldItem1.canceled -= instance.OnUseHoldItem1;
+//             @UseAltItem1.started -= instance.OnUseAltItem1;
+//             @UseAltItem1.performed -= instance.OnUseAltItem1;
+//             @UseAltItem1.canceled -= instance.OnUseAltItem1;
+//             @UseItem1.started -= instance.OnUseItem1;
+//             @UseItem1.performed -= instance.OnUseItem1;
+//             @UseItem1.canceled -= instance.OnUseItem1;
+//             @UseHoldItem2.started -= instance.OnUseHoldItem2;
+//             @UseHoldItem2.performed -= instance.OnUseHoldItem2;
+//             @UseHoldItem2.canceled -= instance.OnUseHoldItem2;
+//             @UseAltItem2.started -= instance.OnUseAltItem2;
+//             @UseAltItem2.performed -= instance.OnUseAltItem2;
+//             @UseAltItem2.canceled -= instance.OnUseAltItem2;
+//             @UseItem2.started -= instance.OnUseItem2;
+//             @UseItem2.performed -= instance.OnUseItem2;
+//             @UseItem2.canceled -= instance.OnUseItem2;
+//             @UseHoldItem3.started -= instance.OnUseHoldItem3;
+//             @UseHoldItem3.performed -= instance.OnUseHoldItem3;
+//             @UseHoldItem3.canceled -= instance.OnUseHoldItem3;
+//             @UseAltItem3.started -= instance.OnUseAltItem3;
+//             @UseAltItem3.performed -= instance.OnUseAltItem3;
+//             @UseAltItem3.canceled -= instance.OnUseAltItem3;
+//             @UseItem3.started -= instance.OnUseItem3;
+//             @UseItem3.performed -= instance.OnUseItem3;
+//             @UseItem3.canceled -= instance.OnUseItem3;
+//             @UseHoldHandRight.started -= instance.OnUseHoldHandRight;
+//             @UseHoldHandRight.performed -= instance.OnUseHoldHandRight;
+//             @UseHoldHandRight.canceled -= instance.OnUseHoldHandRight;
+//             @UseAltHandRight.started -= instance.OnUseAltHandRight;
+//             @UseAltHandRight.performed -= instance.OnUseAltHandRight;
+//             @UseAltHandRight.canceled -= instance.OnUseAltHandRight;
+//             @UseHandRight.started -= instance.OnUseHandRight;
+//             @UseHandRight.performed -= instance.OnUseHandRight;
+//             @UseHandRight.canceled -= instance.OnUseHandRight;
+//             @UseHoldHandLeft.started -= instance.OnUseHoldHandLeft;
+//             @UseHoldHandLeft.performed -= instance.OnUseHoldHandLeft;
+//             @UseHoldHandLeft.canceled -= instance.OnUseHoldHandLeft;
+//             @UseAltHandLeft.started -= instance.OnUseAltHandLeft;
+//             @UseAltHandLeft.performed -= instance.OnUseAltHandLeft;
+//             @UseAltHandLeft.canceled -= instance.OnUseAltHandLeft;
+//             @UseHandLeft.started -= instance.OnUseHandLeft;
+//             @UseHandLeft.performed -= instance.OnUseHandLeft;
+//             @UseHandLeft.canceled -= instance.OnUseHandLeft;
+//             @Interact.started -= instance.OnInteract;
+//             @Interact.performed -= instance.OnInteract;
+//             @Interact.canceled -= instance.OnInteract;
+//             @SwapLoadout.started -= instance.OnSwapLoadout;
+//             @SwapLoadout.performed -= instance.OnSwapLoadout;
+//             @SwapLoadout.canceled -= instance.OnSwapLoadout;
+//         }
 
-// //         /// <summary>
-// //         /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />.
-// //         /// </summary>
-// //         /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
-// //         public void RemoveCallbacks(IPlayerActions instance)
-// //         {
-// //             if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
-// //                 UnregisterCallbacks(instance);
-// //         }
+//         /// <summary>
+//         /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />.
+//         /// </summary>
+//         /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
+//         public void RemoveCallbacks(IPlayerActions instance)
+//         {
+//             if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+//                 UnregisterCallbacks(instance);
+//         }
 
-// //         /// <summary>
-// //         /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-// //         /// </summary>
-// //         /// <remarks>
-// //         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-// //         /// </remarks>
-// //         /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
-// //         /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
-// //         /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
-// //         public void SetCallbacks(IPlayerActions instance)
-// //         {
-// //             foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
-// //                 UnregisterCallbacks(item);
-// //             m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
-// //             AddCallbacks(instance);
-// //         }
-// //     }
-// //     /// <summary>
-// //     /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
-// //     /// </summary>
-// //     public PlayerActions @Player => new PlayerActions(this);
+//         /// <summary>
+//         /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+//         /// </summary>
+//         /// <remarks>
+//         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+//         /// </remarks>
+//         /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
+//         /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
+//         /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
+//         public void SetCallbacks(IPlayerActions instance)
+//         {
+//             foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
+//                 UnregisterCallbacks(item);
+//             m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
+//             AddCallbacks(instance);
+//         }
+//     }
+//     /// <summary>
+//     /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
+//     /// </summary>
+//     public PlayerActions @Player => new PlayerActions(this);
 
-// //     // MouseTracker
-// //     private readonly InputActionMap m_MouseTracker;
-// //     private List<IMouseTrackerActions> m_MouseTrackerActionsCallbackInterfaces = new List<IMouseTrackerActions>();
-// //     private readonly InputAction m_MouseTracker_MousePosition;
-// //     /// <summary>
-// //     /// Provides access to input actions defined in input action map "MouseTracker".
-// //     /// </summary>
-// //     public struct MouseTrackerActions
-// //     {
-// //         private @PlayerCharacterInput m_Wrapper;
+//     // MouseTracker
+//     private readonly InputActionMap m_MouseTracker;
+//     private List<IMouseTrackerActions> m_MouseTrackerActionsCallbackInterfaces = new List<IMouseTrackerActions>();
+//     private readonly InputAction m_MouseTracker_MousePosition;
+//     /// <summary>
+//     /// Provides access to input actions defined in input action map "MouseTracker".
+//     /// </summary>
+//     public struct MouseTrackerActions
+//     {
+//         private @PlayerCharacterInput m_Wrapper;
 
-// //         /// <summary>
-// //         /// Construct a new instance of the input action map wrapper class.
-// //         /// </summary>
-// //         public MouseTrackerActions(@PlayerCharacterInput wrapper) { m_Wrapper = wrapper; }
-// //         /// <summary>
-// //         /// Provides access to the underlying input action "MouseTracker/MousePosition".
-// //         /// </summary>
-// //         public InputAction @MousePosition => m_Wrapper.m_MouseTracker_MousePosition;
-// //         /// <summary>
-// //         /// Provides access to the underlying input action map instance.
-// //         /// </summary>
-// //         public InputActionMap Get() { return m_Wrapper.m_MouseTracker; }
-// //         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-// //         public void Enable() { Get().Enable(); }
-// //         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-// //         public void Disable() { Get().Disable(); }
-// //         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-// //         public bool enabled => Get().enabled;
-// //         /// <summary>
-// //         /// Implicitly converts an <see ref="MouseTrackerActions" /> to an <see ref="InputActionMap" /> instance.
-// //         /// </summary>
-// //         public static implicit operator InputActionMap(MouseTrackerActions set) { return set.Get(); }
-// //         /// <summary>
-// //         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-// //         /// </summary>
-// //         /// <param name="instance">Callback instance.</param>
-// //         /// <remarks>
-// //         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-// //         /// </remarks>
-// //         /// <seealso cref="MouseTrackerActions" />
-// //         public void AddCallbacks(IMouseTrackerActions instance)
-// //         {
-// //             if (instance == null || m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Contains(instance)) return;
-// //             m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Add(instance);
-// //             @MousePosition.started += instance.OnMousePosition;
-// //             @MousePosition.performed += instance.OnMousePosition;
-// //             @MousePosition.canceled += instance.OnMousePosition;
-// //         }
+//         /// <summary>
+//         /// Construct a new instance of the input action map wrapper class.
+//         /// </summary>
+//         public MouseTrackerActions(@PlayerCharacterInput wrapper) { m_Wrapper = wrapper; }
+//         /// <summary>
+//         /// Provides access to the underlying input action "MouseTracker/MousePosition".
+//         /// </summary>
+//         public InputAction @MousePosition => m_Wrapper.m_MouseTracker_MousePosition;
+//         /// <summary>
+//         /// Provides access to the underlying input action map instance.
+//         /// </summary>
+//         public InputActionMap Get() { return m_Wrapper.m_MouseTracker; }
+//         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+//         public void Enable() { Get().Enable(); }
+//         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+//         public void Disable() { Get().Disable(); }
+//         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+//         public bool enabled => Get().enabled;
+//         /// <summary>
+//         /// Implicitly converts an <see ref="MouseTrackerActions" /> to an <see ref="InputActionMap" /> instance.
+//         /// </summary>
+//         public static implicit operator InputActionMap(MouseTrackerActions set) { return set.Get(); }
+//         /// <summary>
+//         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+//         /// </summary>
+//         /// <param name="instance">Callback instance.</param>
+//         /// <remarks>
+//         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+//         /// </remarks>
+//         /// <seealso cref="MouseTrackerActions" />
+//         public void AddCallbacks(IMouseTrackerActions instance)
+//         {
+//             if (instance == null || m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Contains(instance)) return;
+//             m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Add(instance);
+//             @MousePosition.started += instance.OnMousePosition;
+//             @MousePosition.performed += instance.OnMousePosition;
+//             @MousePosition.canceled += instance.OnMousePosition;
+//         }
 
-// //         /// <summary>
-// //         /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-// //         /// </summary>
-// //         /// <remarks>
-// //         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-// //         /// </remarks>
-// //         /// <seealso cref="MouseTrackerActions" />
-// //         private void UnregisterCallbacks(IMouseTrackerActions instance)
-// //         {
-// //             @MousePosition.started -= instance.OnMousePosition;
-// //             @MousePosition.performed -= instance.OnMousePosition;
-// //             @MousePosition.canceled -= instance.OnMousePosition;
-// //         }
+//         /// <summary>
+//         /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+//         /// </summary>
+//         /// <remarks>
+//         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+//         /// </remarks>
+//         /// <seealso cref="MouseTrackerActions" />
+//         private void UnregisterCallbacks(IMouseTrackerActions instance)
+//         {
+//             @MousePosition.started -= instance.OnMousePosition;
+//             @MousePosition.performed -= instance.OnMousePosition;
+//             @MousePosition.canceled -= instance.OnMousePosition;
+//         }
 
-// //         /// <summary>
-// //         /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MouseTrackerActions.UnregisterCallbacks(IMouseTrackerActions)" />.
-// //         /// </summary>
-// //         /// <seealso cref="MouseTrackerActions.UnregisterCallbacks(IMouseTrackerActions)" />
-// //         public void RemoveCallbacks(IMouseTrackerActions instance)
-// //         {
-// //             if (m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Remove(instance))
-// //                 UnregisterCallbacks(instance);
-// //         }
+//         /// <summary>
+//         /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MouseTrackerActions.UnregisterCallbacks(IMouseTrackerActions)" />.
+//         /// </summary>
+//         /// <seealso cref="MouseTrackerActions.UnregisterCallbacks(IMouseTrackerActions)" />
+//         public void RemoveCallbacks(IMouseTrackerActions instance)
+//         {
+//             if (m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Remove(instance))
+//                 UnregisterCallbacks(instance);
+//         }
 
-// //         /// <summary>
-// //         /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-// //         /// </summary>
-// //         /// <remarks>
-// //         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-// //         /// </remarks>
-// //         /// <seealso cref="MouseTrackerActions.AddCallbacks(IMouseTrackerActions)" />
-// //         /// <seealso cref="MouseTrackerActions.RemoveCallbacks(IMouseTrackerActions)" />
-// //         /// <seealso cref="MouseTrackerActions.UnregisterCallbacks(IMouseTrackerActions)" />
-// //         public void SetCallbacks(IMouseTrackerActions instance)
-// //         {
-// //             foreach (var item in m_Wrapper.m_MouseTrackerActionsCallbackInterfaces)
-// //                 UnregisterCallbacks(item);
-// //             m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Clear();
-// //             AddCallbacks(instance);
-// //         }
-// //     }
-// //     /// <summary>
-// //     /// Provides a new <see cref="MouseTrackerActions" /> instance referencing this action map.
-// //     /// </summary>
-// //     public MouseTrackerActions @MouseTracker => new MouseTrackerActions(this);
-// //     /// <summary>
-// //     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
-// //     /// </summary>
-// //     /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
-// //     /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
-// //     public interface IPlayerActions
-// //     {
-// //         /// <summary>
-// //         /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnMove(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseHoldItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseHoldItem1(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseAltItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseAltItem1(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseItem1(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseHoldItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseHoldItem2(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseAltItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseAltItem2(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseItem2(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseHoldItem3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseHoldItem3(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseAltItem3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseAltItem3(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseItem3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseItem3(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseHoldHandRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseHoldHandRight(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseAltHandRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseAltHandRight(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseHandRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseHandRight(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseHoldHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseHoldHandLeft(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseAltHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseAltHandLeft(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "UseHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnUseHandLeft(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnInteract(InputAction.CallbackContext context);
-// //         /// <summary>
-// //         /// Method invoked when associated input action "SwapLoadout" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnSwapLoadout(InputAction.CallbackContext context);
-// //     }
-// //     /// <summary>
-// //     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MouseTracker" which allows adding and removing callbacks.
-// //     /// </summary>
-// //     /// <seealso cref="MouseTrackerActions.AddCallbacks(IMouseTrackerActions)" />
-// //     /// <seealso cref="MouseTrackerActions.RemoveCallbacks(IMouseTrackerActions)" />
-// //     public interface IMouseTrackerActions
-// //     {
-// //         /// <summary>
-// //         /// Method invoked when associated input action "MousePosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-// //         /// </summary>
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-// //         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-// //         void OnMousePosition(InputAction.CallbackContext context);
-// //     }
-// // }
+//         /// <summary>
+//         /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+//         /// </summary>
+//         /// <remarks>
+//         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+//         /// </remarks>
+//         /// <seealso cref="MouseTrackerActions.AddCallbacks(IMouseTrackerActions)" />
+//         /// <seealso cref="MouseTrackerActions.RemoveCallbacks(IMouseTrackerActions)" />
+//         /// <seealso cref="MouseTrackerActions.UnregisterCallbacks(IMouseTrackerActions)" />
+//         public void SetCallbacks(IMouseTrackerActions instance)
+//         {
+//             foreach (var item in m_Wrapper.m_MouseTrackerActionsCallbackInterfaces)
+//                 UnregisterCallbacks(item);
+//             m_Wrapper.m_MouseTrackerActionsCallbackInterfaces.Clear();
+//             AddCallbacks(instance);
+//         }
+//     }
+//     /// <summary>
+//     /// Provides a new <see cref="MouseTrackerActions" /> instance referencing this action map.
+//     /// </summary>
+//     public MouseTrackerActions @MouseTracker => new MouseTrackerActions(this);
+//     /// <summary>
+//     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
+//     /// </summary>
+//     /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
+//     /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
+//     public interface IPlayerActions
+//     {
+//         /// <summary>
+//         /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnMove(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseHoldItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseHoldItem1(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseAltItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseAltItem1(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseItem1(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseHoldItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseHoldItem2(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseAltItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseAltItem2(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseItem2(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseHoldItem3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseHoldItem3(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseAltItem3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseAltItem3(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseItem3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseItem3(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseHoldHandRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseHoldHandRight(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseAltHandRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseAltHandRight(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseHandRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseHandRight(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseHoldHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseHoldHandLeft(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseAltHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseAltHandLeft(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "UseHandLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnUseHandLeft(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnInteract(InputAction.CallbackContext context);
+//         /// <summary>
+//         /// Method invoked when associated input action "SwapLoadout" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnSwapLoadout(InputAction.CallbackContext context);
+//     }
+//     /// <summary>
+//     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MouseTracker" which allows adding and removing callbacks.
+//     /// </summary>
+//     /// <seealso cref="MouseTrackerActions.AddCallbacks(IMouseTrackerActions)" />
+//     /// <seealso cref="MouseTrackerActions.RemoveCallbacks(IMouseTrackerActions)" />
+//     public interface IMouseTrackerActions
+//     {
+//         /// <summary>
+//         /// Method invoked when associated input action "MousePosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+//         /// </summary>
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+//         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+//         void OnMousePosition(InputAction.CallbackContext context);
+//     }
+// }

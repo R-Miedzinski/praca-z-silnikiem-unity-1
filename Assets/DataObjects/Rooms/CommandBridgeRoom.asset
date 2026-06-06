@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137a5a605a514399b3d6922821eeef36, type: 3}
+  m_Name: CommandBridgeRoom
+  m_EditorClassIdentifier: 
+  Id: 2
+  RoomName: Command Bridge
+  ShortDescription: Central control room for navigation, ship status, and mission
+    command.
+  RoomPrefab: {fileID: 4001737185043764078, guid: 5a91ad875b4e0ae4ba97e634dfc71488, type: 3}
+  GridSize: {x: 6, y: 4}
+  DefaultSpawnPoint: {x: 0, y: 0}
+  AvailableInRoomPool: 1

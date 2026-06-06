@@ -10,8 +10,21 @@ public class TargetingWidget : MonoBehaviour
     void Awake()
     {
         mouseTracker = new InputAction("MouseTracker", binding: "<Mouse>/position");
-        spriteRenderer = GameObject.Find("Target").GetComponent<SpriteRenderer>();
-        spriteRenderer.color = color;
+        GameObject targetObject = GameObject.Find("Target");
+        if (targetObject != null)
+        {
+            spriteRenderer = targetObject.GetComponent<SpriteRenderer>();
+        }
+
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = color;
+        }
     }
 
     void OnEnable()
@@ -28,6 +41,11 @@ public class TargetingWidget : MonoBehaviour
 
     private void UpdateWidgetPosition(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        if (Camera.main == null)
+        {
+            return;
+        }
+
         Vector3 mousePosition = context.ReadValue<Vector2>();
         mousePosition.z = -Camera.main.transform.position.z;
         transform.position = Camera.main.ScreenToWorldPoint(mousePosition);

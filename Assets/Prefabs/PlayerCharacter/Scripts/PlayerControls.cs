@@ -23,7 +23,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Awake()
     {
-        playerInput = new PlayerCharacterInput();
+        InitializePlayerInput();
         isUsingHoldItem1 = false;
         isUsingHoldItem2 = false;
         isUsingHoldItem3 = false;
@@ -33,6 +33,12 @@ public class PlayerControls : MonoBehaviour
 
     private void OnEnable()
     {
+        InitializePlayerInput();
+        if (!HasValidPlayerInput())
+        {
+            return;
+        }
+
         playerInput.Enable();
 
         // ******
@@ -81,6 +87,11 @@ public class PlayerControls : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!HasValidPlayerInput())
+        {
+            return;
+        }
+
         playerInput.Disable();
         // ******
         // Disable Item 1 actions
@@ -129,7 +140,25 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
+        if (!HasValidPlayerInput())
+        {
+            return;
+        }
+
         HandleMove();
+    }
+
+    private void InitializePlayerInput()
+    {
+        if (playerInput == null)
+        {
+            playerInput = new PlayerCharacterInput();
+        }
+    }
+
+    private bool HasValidPlayerInput()
+    {
+        return playerInput != null && playerInput.asset != null;
     }
 
     private void HandleMove()

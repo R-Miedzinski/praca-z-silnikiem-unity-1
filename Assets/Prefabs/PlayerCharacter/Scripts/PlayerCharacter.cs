@@ -32,27 +32,52 @@ public class PlayerCharacter : Unit
         equipment = GetComponent<Equipment>();
         playerControls = GetComponent<PlayerControls>();
         playerCollider = GetComponent<Collider2D>();
-        interactionCollider = transform.Find("InteractionCollider").GetComponent<InteractionCollider>();
+        Transform interactionColliderTransform = transform.Find("InteractionCollider");
+        if (interactionColliderTransform != null)
+        {
+            interactionCollider = interactionColliderTransform.GetComponent<InteractionCollider>();
+        }
 
-        playerControls.OnMove += HandleMove;
-        playerControls.OnUseItem += HandleUseItem;
-        playerControls.OnInteract += HandleInteract;
-        playerControls.OnSwapLoadout += HandleSwapLoadout;
+        if (targetingWidget == null)
+        {
+            targetingWidget = UnityEngine.Object.FindFirstObjectByType<TargetingWidget>();
+        }
+
+        if (playerControls != null)
+        {
+            playerControls.OnMove += HandleMove;
+            playerControls.OnUseItem += HandleUseItem;
+            playerControls.OnInteract += HandleInteract;
+            playerControls.OnSwapLoadout += HandleSwapLoadout;
+        }
     }
 
     private void Start()
     {
+        if (targetingWidget == null)
+        {
+            targetingWidget = UnityEngine.Object.FindFirstObjectByType<TargetingWidget>();
+        }
+
         CurrentHealth = maxHealth;
         EquipDebugItem();
     }
 
     private void Update()
     {
-        frontDirection = (targetingWidget.transform.position - transform.position).normalized;
+        if (targetingWidget != null)
+        {
+            frontDirection = (targetingWidget.transform.position - transform.position).normalized;
+        }
     }
 
     private void OnDestroy()
     {
+        if (playerControls == null)
+        {
+            return;
+        }
+
         playerControls.OnMove -= HandleMove;
         playerControls.OnUseItem -= HandleUseItem;
         playerControls.OnInteract -= HandleInteract;
@@ -102,20 +127,26 @@ public class PlayerCharacter : Unit
         movementInput2D = CorrectMovementInputForCollisions(movementInput2D, movementMagnitude);
 
         gameObject.transform.Translate(movementInput2D.normalized * movementMagnitude);
-        ItemTriggerEventSystem.Instance.SendTriggerEvent(
-            ETriggerType.OnMove,
-            new MoveEventContext(targetedPosition: targetingWidget.transform.position, changeValue: movementMagnitude)
-        );
+        if (ItemTriggerEventSystem.Instance != null)
+        {
+            ItemTriggerEventSystem.Instance.SendTriggerEvent(
+                ETriggerType.OnMove,
+                new MoveEventContext(targetedPosition: GetTargetedPosition(), changeValue: movementMagnitude)
+            );
+        }
     }
     private void HandleUseItem(ESlotsInEquipment itemSlot, EItemUsageType usageType)
     {
-        Vector3 targetedPosition = targetingWidget.transform.position;
+        Vector3 targetedPosition = GetTargetedPosition();
         equipment.UseItem(itemSlot, usageType, targetedPosition);
     }
 
     private void HandleInteract()
     {
-        interactionCollider.Interact(this);
+        if (interactionCollider != null)
+        {
+            interactionCollider.Interact(this);
+        }
     }
 
     private void HandleSwapLoadout()
@@ -157,11 +188,26 @@ public class PlayerCharacter : Unit
 
     private void EquipDebugItem()
     {
+        if (ItemsDatabase.Instance == null || equipment == null)
+        {
+            return;
+        }
+
         Item debugItem = ItemsDatabase.Instance.GetItemById("debug_item");
         Item debugItem2 = ItemsDatabase.Instance.GetItemById("debug_item_object");
 
         equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem);
         equipment.SwapLoadout();
         equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem2);
+    }
+
+    private Vector3 GetTargetedPosition()
+    {
+        if (targetingWidget != null)
+        {
+            return targetingWidget.transform.position;
+        }
+
+        return transform.position;
     }
 }

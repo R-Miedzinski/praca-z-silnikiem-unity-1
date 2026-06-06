@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 5290114640458154500}
   - component: {fileID: -7924043375634081117}
   - component: {fileID: 8384753515017978940}
+  - component: {fileID: 1902299875903258720}
   m_Layer: 7
   m_Name: Terminal
   m_TagString: Untagged
@@ -194,3 +195,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1902299875903258720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791213654517500970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303964b3a064483d859482891796b98e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentMenu: {fileID: 5840994537261061390, guid: b27f5645c9d56c045baa6a11bd643572, type: 3}
+  equipmentMenuObjectName: Equipment Menu
+  enemyLayerName: Units
+  enemiesToDefeat: []
+  terminalRenderer: {fileID: 7016735202131058677}
+  unlockedHighlightColor: {r: 0, g: 1, b: 1, a: 1}
+  lockedHighlightColor: {r: 1, g: 0, b: 0, a: 1}
