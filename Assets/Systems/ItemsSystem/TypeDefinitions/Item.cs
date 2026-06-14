@@ -37,44 +37,6 @@ public class Item
     }
   }
 
-  public Item(ItemData itemData)
-  {
-    id = itemData.Id;
-    itemName = itemData.ItemName;
-    equipmentSlot = itemData.EquipmentSlot;
-    triggerEffects = new Dictionary<TriggerVector, List<ItemEffect>>();
-    foreach (var effectData in itemData.Effects)
-    {
-      List<Effect> newEffects = new List<Effect>();
-      for (int i = 0; i < effectData.EffectIds.Length; i++)
-      {
-        Effect effect = IdToEffectMap.GetEffectById(effectData.EffectIds[i], effectData.EffectParams[i]);
-        effect.Id = string.Join("_", new string[] {
-          effectData.EffectIds[i],
-          id,
-          string.Join("_", effectData.EffectTriggers.Select(t => t.ToString())),
-          Guid.NewGuid().ToString()
-        }); // Ensure unique ID for each effect instance
-
-        newEffects.Add(effect);
-      }
-
-      TargetingMode targetingMode = new TargetingMode(effectData.TargetingMode);
-      ItemEffect newItemEffect = new ItemEffect(newEffects.ToArray(), effectData.EffectTriggers, targetingMode, effectData.Cooldown, effectData.Charges, effectData.IsTogglable);
-
-      TriggerVector triggerVector = new TriggerVector();
-      foreach (ETriggerType triggerType in effectData.EffectTriggers)
-      {
-        triggerVector.Activate(triggerType);
-      }
-      if (!triggerEffects.ContainsKey(triggerVector))
-      {
-        triggerEffects[triggerVector] = new List<ItemEffect>();
-      }
-      triggerEffects[triggerVector].Add(newItemEffect);
-    }
-  }
-
   public Item(ItemDataObject itemDataObject)
   {
     id = itemDataObject.Id;

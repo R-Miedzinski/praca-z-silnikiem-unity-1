@@ -35,18 +35,6 @@ public class ItemsDatabase : MonoBehaviour
     InitializeDatabase();
   }
 
-  public void AddItem(ItemData itemData)
-  {
-    if (!items.ContainsKey(itemData.Id))
-    {
-      items[itemData.Id] = new Item(itemData);
-    }
-    else
-    {
-      Debug.LogWarning($"Item with ID {itemData.Id} already exists in the database.");
-    }
-  }
-
   public void AddItem(ItemDataObject itemDataObject)
   {
     if (!items.ContainsKey(itemDataObject.Id))
@@ -74,38 +62,11 @@ public class ItemsDatabase : MonoBehaviour
   {
     DirectoryInfo dir = new DirectoryInfo(itemDataDefinitionsPath);
 
-    // Handle json items
-    FileInfo[] jsonItems = dir.GetFiles("*.json");
-    foreach (FileInfo f in jsonItems)
-    {
-      try 
-      {
-        string json = File.ReadAllText(f.FullName);
-        if (json != null)
-        {
-          ItemData itemData = ItemsUtils.ParseJsonToItemData(json);
-          Debug.Log($"Parsed Item data object: {itemData.Id}, Name: {itemData.ItemName}, Description: {itemData.Description}," + 
-          $"Effects: {string.Join(", ", Array.ConvertAll(itemData.Effects, e => string.Join(", ", e.EffectIds)))}" + 
-          $"Params: {string.Join(", ", (object[])Array.ConvertAll(itemData.Effects, e => string.Join(", ", (object[])e.EffectParams)))}");
-          AddItem(itemData);
-          Debug.Log($"Successfully added ItemData from JSON file {f.Name} \n path: {f.FullName}");
-        }
-        else
-        {
-          Debug.LogError($"Failed to parse ItemData from {f.Name} \n path: {f.FullName}");
-        }
-      }
-      catch (System.Exception ex)
-      {
-        Debug.LogError($"Error reading or parsing JSON file {f.Name}: {ex.Message}");
-      }
-    }
-
     // Handle scriptable object items
     FileInfo[] soItems = dir.GetFiles("*.asset");
     foreach (FileInfo f in soItems)
     {
-      try 
+      try
       {
         string assetPath = Path.Combine("Assets", itemsDataPath, f.Name);
         ItemDataObject itemDataObject = AssetDatabase.LoadAssetAtPath<ItemDataObject>(assetPath);
