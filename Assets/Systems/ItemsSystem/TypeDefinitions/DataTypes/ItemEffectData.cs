@@ -9,4 +9,5 @@ public struct ItemEffectData
   public TargetingModeData TargetingMode;
   public int Charges;
   public EffectParamsData[] EffectParams;
+  public bool IsTogglable;
 }

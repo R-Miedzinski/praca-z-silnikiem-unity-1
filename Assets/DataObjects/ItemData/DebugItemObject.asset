@@ -38,22 +38,24 @@ MonoBehaviour:
       Angle: 0
       AllowMultipleTargets: 0
       TargetCaster: 1
+    IsTogglable: 0
   - Effects:
-    - EffectId: push_away
+    - EffectId: slow
       EffectParams:
-        Value: 1
-        Duration: 0
+        Value: 80
+        Duration: 1
         StringValue: 
     EffectTriggers: 00000000
-    Cooldown: 1
+    Cooldown: 0
     Charges: -1
     TargetingMode:
-      TargetingType: 5
+      TargetingType: 0
       Range: 5
       TravelTime: 0
       Angle: 90
-      AllowMultipleTargets: 1
-      TargetCaster: 0
+      AllowMultipleTargets: 0
+      TargetCaster: 1
+    IsTogglable: 1
   - Effects:
     - EffectId: push_away
       EffectParams:
@@ -70,3 +72,4 @@ MonoBehaviour:
       Angle: 0
       AllowMultipleTargets: 1
       TargetCaster: 0
+    IsTogglable: 0

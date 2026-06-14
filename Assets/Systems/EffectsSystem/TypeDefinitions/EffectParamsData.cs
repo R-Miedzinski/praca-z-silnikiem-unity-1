@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// TODO: change to array of any, handle by index on each ParameterizedEffect
 [System.Serializable]
 public struct EffectParamsData
 {

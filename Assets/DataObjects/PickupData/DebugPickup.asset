@@ -19,9 +19,9 @@ MonoBehaviour:
       Value: 0
       Duration: 0
       StringValue: Hello
-  - EffectId: slow
+  - EffectId: slow_timed
     EffectParams:
       Value: 100
-      Duration: 1
+      Duration: 3
       StringValue: Hello
   InteractOnContact: 0

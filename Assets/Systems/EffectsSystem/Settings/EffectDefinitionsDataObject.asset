@@ -21,6 +21,8 @@ MonoBehaviour:
     ClassName: DamageOverTimeEffect
   - Id: slow
     ClassName: SlowEffect
+  - Id: slow_timed
+    ClassName: SlowEffectTimed
   - Id: protect_from_damage
     ClassName: ProtectFromDamageEffect
   - Id: change_heat

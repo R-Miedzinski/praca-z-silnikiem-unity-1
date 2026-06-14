@@ -1,12 +1,10 @@
-public class SlowEffect : Effect, IParametrizedEffect, ITimedEffect
+public class SlowEffect : Effect, IParametrizedEffect, IPersistentEffect
 {
   public float SlowValue { get; set; }
-  public float Duration { get; set; }
 
-  public void SetParameters(EffectParamsData parameters)
+  public virtual void SetParameters(EffectParamsData parameters)
   {
     SlowValue = -parameters.Value / 100f;
-    Duration = parameters.Duration;
   }
 
   public override void ApplyEffect(Unit caster, Unit target)

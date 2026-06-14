@@ -50,7 +50,7 @@ public static class IdToEffectMap
     }
 
     var effect = effectFactory();
-    if (!(effect is IParametrizedEffect))
+    if (effect is not IParametrizedEffect)
     {
       return effect;
     }

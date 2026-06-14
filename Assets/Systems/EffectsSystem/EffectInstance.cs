@@ -14,6 +14,7 @@ public class EffectInstance : MonoBehaviour
     Caster = caster;
     Target = target;
     elapsedTime = 0f;
+    EffectApplicationTracker.ReportTarget(target);
   }
 
   private void Update()
