@@ -16,7 +16,5 @@ MonoBehaviour:
   Effects:
   - EffectId: debug_effect
     EffectParams:
-      Value: 0
-      Duration: 0
-      StringValue: Hello Auto Pickup
+    - Hello Auto Pickup
   InteractOnContact: 1

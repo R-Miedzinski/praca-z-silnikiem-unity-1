@@ -8,6 +8,6 @@ public struct ItemEffectData
   public float Cooldown;
   public TargetingModeData TargetingMode;
   public int Charges;
-  public EffectParamsData[] EffectParams;
+  public string[][] EffectParams;
   public bool IsTogglable;
 }

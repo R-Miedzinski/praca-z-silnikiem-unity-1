@@ -15,11 +15,7 @@
         "Range": 5.0,
         "AllowMultipleTargets": false
       },
-      "EffectParams": [
-        {
-          "Value": 0.5
-        }
-      ]
+      "EffectParams": [["0.5"]]
     },
     {
       "EffectIds": [
@@ -34,88 +30,7 @@
         "TravelTime": 1.0,
         "AllowMultipleTargets": false
       },
-      "EffectParams": [
-        {
-          "Value": 0.5
-        }
-      ]
-    },
-    {
-      "EffectIds": [
-        "deal_damage",
-        "damage_over_time"
-      ],
-      "Charges": -1,
-      "EffectTriggers": [0],
-      "Cooldown": 5.0,
-      "TargetingMode": {
-        "TargetingType": 1,
-        "Range": 20.0,
-        "AllowMultipleTargets": true
-      },
-      "EffectParams": [
-        {
-          "Value": 1.5
-        },
-        {
-          "Value": 0.5,
-          "Duration": 5.0
-        }
-      ]
-    },
-    {
-      "EffectIds": [
-        "slow"
-      ],
-      "Charges": -1,
-      "EffectTriggers": [8],
-      "Cooldown": 5.0,
-      "TargetingMode": {
-        "TargetingType": 0,
-        "Range": 2.0,
-        "TargetCaster": true,
-        "AllowMultipleTargets": false
-      },
-      "EffectParams": [
-        {
-          "Value": 50,
-          "Duration": 5.0
-        }
-      ]
-    },
-    {
-      "EffectIds": [
-        "debug_effect"
-      ],
-      "Charges": -1,
-      "EffectTriggers": [0],
-      "Cooldown": 5.0,
-      "TargetingMode": {
-        "TargetingType": 2,
-        "Range": 2.0,
-        "AllowMultipleTargets": true
-      },
-      "EffectParams": [
-        {
-          "StringValue": "Cursor Area Targeted Debug Effect"
-        }
-      ]
-    },
-    {
-      "EffectIds": [
-        "debug_effect"
-      ],
-      "Charges": -1,
-      "EffectTriggers": [0],
-      "Cooldown": 5.0,
-      "TargetingMode": {
-        "TargetingType": 4
-      },
-      "EffectParams": [
-        {
-          "StringValue": "Point Targeted Debug Effect"
-        }
-      ]
+      "EffectParams": [["0.5"]]
     }
   ],
   "EquipmentSlot": 0

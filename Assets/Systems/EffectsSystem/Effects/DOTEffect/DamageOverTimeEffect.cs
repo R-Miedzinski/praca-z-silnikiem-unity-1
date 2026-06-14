@@ -1,16 +1,31 @@
 using UnityEngine;
 
-public class DamageOverTimeEffect : Effect, IParametrizedEffect, ITimedEffect
+public class DamageOverTimeEffect : Effect, IParametrizedEffect, IPersistentEffect
 {
   public float DamagePerSecond { get { return damagePerSecond; } set { damagePerSecond = Mathf.Max(0, value); } }
   private float damagePerSecond;
 
   public float Duration { get; set; }
 
-  public void SetParameters(EffectParamsData parameters)
+  public void SetParameters(string[] parameters)
   {
-    DamagePerSecond = parameters.Value;
-    Duration = parameters.Duration;
+    if (parameters.Length > 0 && EffectsUtils.TryParseFloat(parameters[0], out float result))
+    {
+      DamagePerSecond = result;
+    }
+    else
+    {
+    EffectsUtils.InvalidParameters(0, "float (DamagePerSecond)");
+    }
+
+    if (parameters.Length > 1 && EffectsUtils.TryParseFloat(parameters[1], out float durationResult))
+    {
+      Duration = durationResult;
+    }
+    else
+    {
+    EffectsUtils.InvalidParameters(1, "float (Duration)");
+    }
   }
 
   public override void ApplyEffect(Unit caster, Unit target)

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class ItemEffect
 {
   public Effect[] Effects { get { return effects; } }
-  // TODO: Refactor to support multi-trigger actiavtions
   public ETriggerType[] EffectTriggers { get { return effectTriggers; } }
   public TargetingMode TargetingMode { get { return targetingMode; } }
   public float Cooldown { get { return cooldown; } }

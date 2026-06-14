@@ -41,7 +41,7 @@ public static class IdToEffectMap
     return effectFactory();
   }
 
-  static public Effect GetEffectById(string id, EffectParamsData parameters)
+  static public Effect GetEffectById(string id, string[] parameters)
   {
     if (!map.TryGetValue(id, out var effectFactory))
     {

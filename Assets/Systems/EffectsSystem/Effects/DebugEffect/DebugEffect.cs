@@ -8,8 +8,15 @@ public class DebugEffect : Effect, IParametrizedEffect
     UnityEngine.Debug.Log(message + " with caster: " + caster + " and target: " + target);
   }
 
-  public void SetParameters(EffectParamsData parameters)
+  public void SetParameters(string[] parameters)
   {
-    message = parameters.StringValue;
+    if (parameters.Length > 0)
+    {
+      message = (string)parameters[0];
+    }
+    else
+    {
+      EffectsUtils.InvalidParameters(0, "string (message)");
+    }
   }
 }

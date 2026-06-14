@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
+using System;
 
 public class ItemsDatabase : MonoBehaviour
 {
@@ -77,15 +78,26 @@ public class ItemsDatabase : MonoBehaviour
     FileInfo[] jsonItems = dir.GetFiles("*.json");
     foreach (FileInfo f in jsonItems)
     {
-      string json = File.ReadAllText(f.FullName);
-      if (json != null)
+      try 
       {
-        ItemData itemData = ItemsUtils.ParseJsonToItemData(json);
-        AddItem(itemData);
+        string json = File.ReadAllText(f.FullName);
+        if (json != null)
+        {
+          ItemData itemData = ItemsUtils.ParseJsonToItemData(json);
+          Debug.Log($"Parsed Item data object: {itemData.Id}, Name: {itemData.ItemName}, Description: {itemData.Description}," + 
+          $"Effects: {string.Join(", ", Array.ConvertAll(itemData.Effects, e => string.Join(", ", e.EffectIds)))}" + 
+          $"Params: {string.Join(", ", (object[])Array.ConvertAll(itemData.Effects, e => string.Join(", ", (object[])e.EffectParams)))}");
+          AddItem(itemData);
+          Debug.Log($"Successfully added ItemData from JSON file {f.Name} \n path: {f.FullName}");
+        }
+        else
+        {
+          Debug.LogError($"Failed to parse ItemData from {f.Name} \n path: {f.FullName}");
+        }
       }
-      else
+      catch (System.Exception ex)
       {
-        Debug.LogError($"Failed to parse ItemData from {f.Name} \n path: {f.FullName}");
+        Debug.LogError($"Error reading or parsing JSON file {f.Name}: {ex.Message}");
       }
     }
 
@@ -93,16 +105,22 @@ public class ItemsDatabase : MonoBehaviour
     FileInfo[] soItems = dir.GetFiles("*.asset");
     foreach (FileInfo f in soItems)
     {
-      string itemPath = $"Assets/{itemsDataPath}/{f.Name}";
-
-      ItemDataObject itemDataObject = AssetDatabase.LoadAssetAtPath<ItemDataObject>(itemPath);
-      if (itemDataObject != null)
+      try 
       {
-        AddItem(itemDataObject);
+        string assetPath = Path.Combine("Assets", itemsDataPath, f.Name);
+        ItemDataObject itemDataObject = AssetDatabase.LoadAssetAtPath<ItemDataObject>(assetPath);
+        if (itemDataObject != null)
+        {
+          AddItem(itemDataObject);
+        }
+        else
+        {
+          Debug.LogError($"Failed to load ItemDataObject from {f.Name} \n path: {assetPath}");
+        }
       }
-      else
+      catch (System.Exception ex)
       {
-        Debug.LogError($"Failed to load ItemDataObject from {f.Name} \n path: {itemPath}");
+        Debug.LogError($"Error loading ScriptableObject file {f.Name}: {ex.Message}");
       }
     }
   }
