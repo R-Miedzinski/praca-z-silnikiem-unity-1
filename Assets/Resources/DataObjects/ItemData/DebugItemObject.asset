@@ -20,14 +20,10 @@ MonoBehaviour:
   - Effects:
     - EffectId: protect_from_damage
       EffectParams:
-        Value: 0
-        Duration: 0.2
-        StringValue: 
+      - 0.2
     - EffectId: debug_effect
       EffectParams:
-        Value: 0
-        Duration: 0
-        StringValue: Protect from damage effect
+      - Protect from damage effect
     EffectTriggers: 0200000006000000
     Cooldown: 10
     Charges: -1
@@ -38,28 +34,26 @@ MonoBehaviour:
       Angle: 0
       AllowMultipleTargets: 0
       TargetCaster: 1
+    IsTogglable: 0
   - Effects:
-    - EffectId: push_away
+    - EffectId: slow
       EffectParams:
-        Value: 1
-        Duration: 0
-        StringValue: 
+      - 80
     EffectTriggers: 00000000
-    Cooldown: 1
+    Cooldown: 0
     Charges: -1
     TargetingMode:
-      TargetingType: 5
-      Range: 5
+      TargetingType: 0
+      Range: 0.1
       TravelTime: 0
-      Angle: 90
-      AllowMultipleTargets: 1
-      TargetCaster: 0
+      Angle: 0
+      AllowMultipleTargets: 0
+      TargetCaster: 1
+    IsTogglable: 1
   - Effects:
     - EffectId: push_away
       EffectParams:
-        Value: 0.5
-        Duration: 0
-        StringValue: 
+      - 0.5
     EffectTriggers: 02000000
     Cooldown: 0.1
     Charges: -1
@@ -70,3 +64,4 @@ MonoBehaviour:
       Angle: 0
       AllowMultipleTargets: 1
       TargetCaster: 0
+    IsTogglable: 0

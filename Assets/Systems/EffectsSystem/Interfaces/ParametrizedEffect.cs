@@ -1,4 +1,4 @@
 public interface IParametrizedEffect
 {
-  void SetParameters(EffectParamsData parameters);
+  void SetParameters(string[] parameters);
 }

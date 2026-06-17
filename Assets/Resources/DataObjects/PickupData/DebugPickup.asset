@@ -16,12 +16,9 @@ MonoBehaviour:
   Effects:
   - EffectId: debug_effect
     EffectParams:
-      Value: 0
-      Duration: 0
-      StringValue: Hello
+    - Hello
   - EffectId: slow
     EffectParams:
-      Value: 100
-      Duration: 1
-      StringValue: Hello
+    - 100
+    - 3
   InteractOnContact: 0
