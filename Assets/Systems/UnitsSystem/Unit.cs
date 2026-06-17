@@ -6,6 +6,7 @@ abstract public class Unit : MonoBehaviour
 {
   public string UnitName { get { return unitName; } }
   public float CurrentHealth { get { return health; } set { health = Mathf.Clamp(value, 0, maxHealth); } }
+  public float MaxHealth { get { return maxHealth; } }
   public float MovementSpeed { get { return movementSpeed * Mathf.Max(0, movementSpeedModifier); } }
   public float Damage { get { return baseDamage * Mathf.Max(0, damageModifier); } }
   public float CooldownReduction { get { return cooldownReduction; } }

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Graphics/UI/Scripts.meta
+guid: 0e24a5b63e1ed61449284008549abe6a
+========
 guid: 47e2e56bdcb822847b990517ac2a4773
+>>>>>>>> main:Assets/Resources.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
