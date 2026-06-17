@@ -28,7 +28,7 @@ abstract public class Unit : MonoBehaviour
   [SerializeField] protected float cooldownReduction;
   [SerializeField] protected float armor;
   [SerializeField] protected float armorModifier = 1f;
-  protected bool canMove = true;
+  [SerializeField] protected bool canMove = true;
   protected bool canTakeDamage = true;
   protected Vector2 frontDirection = Vector2.right;
 

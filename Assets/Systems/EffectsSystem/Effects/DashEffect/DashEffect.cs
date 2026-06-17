@@ -4,9 +4,16 @@ public class DashEffect : Effect, IParametrizedEffect
 {
   private float dashDistance;
 
-  public void SetParameters(EffectParamsData parameters)
+  public void SetParameters(string[] parameters)
   {
-    dashDistance = parameters.Value;
+    if (parameters.Length > 0 && EffectsUtils.TryParseFloat(parameters[0], out float result))
+    {
+      dashDistance = result;
+    }
+    else
+    {
+    EffectsUtils.InvalidParameters(0, "float (dashDistance)");
+    }
   }
 
   public override void ApplyEffect(Unit caster, Unit target)

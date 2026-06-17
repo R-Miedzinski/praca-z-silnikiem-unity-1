@@ -10,18 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b56eb08f229f0e47b0aae1ad5dc3ebf, type: 3}
-  m_Name: DebugPickup
+  m_Name: DebugAutoPickup
   m_EditorClassIdentifier: 
   PickupName: DebugPickup
   Effects:
   - EffectId: debug_effect
     EffectParams:
-      Value: 0
-      Duration: 0
-      StringValue: Hello
-  - EffectId: slow
-    EffectParams:
-      Value: 100
-      Duration: 1
-      StringValue: Hello
-  InteractOnContact: 0
+    - Hello Auto Pickup
+  InteractOnContact: 1
