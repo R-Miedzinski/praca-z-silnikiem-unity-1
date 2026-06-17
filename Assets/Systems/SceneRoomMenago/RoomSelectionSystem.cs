@@ -15,6 +15,7 @@ public class RoomSelectionSystem : MonoBehaviour
 
   // Other scripts can read the same generated room order from this instance.
   public static RoomSelectionSystem Instance { get; private set; }
+  [SerializeField] private List<RoomDataObject> availableRooms = new List<RoomDataObject>();
   public List<RoomDataObject> RoomOrder = new List<RoomDataObject>();
 
   private void Awake()
@@ -33,7 +34,7 @@ public class RoomSelectionSystem : MonoBehaviour
 
   public void InitializeRoomOrder()
   {
-    if (RoomOrder.Count > 0)
+    if (HasValidRoomOrder())
     {
       return;
     }
@@ -45,30 +46,87 @@ public class RoomSelectionSystem : MonoBehaviour
   private RoomDataObject[] LoadRooms()
   {
 #if UNITY_EDITOR
-    // Assets outside Resources can be found in the editor.
-    List<RoomDataObject> rooms = new List<RoomDataObject>();
-    string[] roomGuids = AssetDatabase.FindAssets("t:RoomDataObject", new[] { RoomsDataPath });
+    RefreshAvailableRoomsFromAssetDatabase();
+#endif
 
-    foreach (string roomGuid in roomGuids)
+    return GetValidAvailableRooms().ToArray();
+  }
+
+  private bool HasValidRoomOrder()
+  {
+    if (RoomOrder == null || RoomOrder.Count == 0)
     {
-      string roomPath = AssetDatabase.GUIDToAssetPath(roomGuid);
-      RoomDataObject room = AssetDatabase.LoadAssetAtPath<RoomDataObject>(roomPath);
-      if (room != null)
+      return false;
+    }
+
+    foreach (RoomDataObject room in RoomOrder)
+    {
+      if (!IsValidRoom(room))
       {
-        rooms.Add(room);
+        return false;
       }
     }
 
-    return rooms.ToArray();
-#else
-    Debug.LogWarning("RoomSelectionSystem can auto-load rooms only in the Unity Editor. Put rooms in Resources or assign them another way for player builds.");
-    return new RoomDataObject[0];
-#endif
+    return true;
+  }
+
+  private List<RoomDataObject> GetValidAvailableRooms()
+  {
+    List<RoomDataObject> validRooms = new List<RoomDataObject>();
+
+    if (availableRooms == null || availableRooms.Count == 0)
+    {
+      Debug.LogWarning("RoomSelectionSystem has no available rooms assigned.");
+      return validRooms;
+    }
+
+    HashSet<RoomDataObject> addedRooms = new HashSet<RoomDataObject>();
+    foreach (RoomDataObject room in availableRooms)
+    {
+      if (!IsValidRoom(room) || !addedRooms.Add(room))
+      {
+        continue;
+      }
+
+      validRooms.Add(room);
+    }
+
+    return validRooms;
+  }
+
+  private bool IsValidRoom(RoomDataObject room)
+  {
+    if (room == null)
+    {
+      Debug.LogWarning("RoomSelectionSystem found a missing room reference.");
+      return false;
+    }
+
+    if (string.IsNullOrWhiteSpace(room.RoomName))
+    {
+      Debug.LogWarning($"RoomSelectionSystem room asset '{room.name}' has no RoomName.");
+      return false;
+    }
+
+    if (room.RoomPrefab == null)
+    {
+      Debug.LogWarning($"RoomSelectionSystem room '{room.RoomName}' has no RoomPrefab assigned.");
+      return false;
+    }
+
+    return true;
   }
 
   private void BuildRoomOrder(RoomDataObject[] rooms)
   {
-    RoomOrder.Clear();
+    if (RoomOrder == null)
+    {
+      RoomOrder = new List<RoomDataObject>();
+    }
+    else
+    {
+      RoomOrder.Clear();
+    }
 
     if (rooms == null || rooms.Length == 0)
     {
@@ -113,6 +171,11 @@ public class RoomSelectionSystem : MonoBehaviour
 
   private RoomDataObject FindRoomByName(RoomDataObject[] rooms, string roomName)
   {
+    if (rooms == null || string.IsNullOrWhiteSpace(roomName))
+    {
+      return null;
+    }
+
     foreach (RoomDataObject room in rooms)
     {
       if (room != null && room.RoomName == roomName)
@@ -126,6 +189,11 @@ public class RoomSelectionSystem : MonoBehaviour
 
   private void ShuffleRooms(List<RoomDataObject> rooms)
   {
+    if (rooms == null)
+    {
+      return;
+    }
+
     // Keeps every room unique while randomizing order.
     for (int i = rooms.Count - 1; i > 0; i--)
     {
@@ -135,4 +203,32 @@ public class RoomSelectionSystem : MonoBehaviour
       rooms[randomIndex] = currentRoom;
     }
   }
+
+#if UNITY_EDITOR
+  private void OnValidate()
+  {
+    RefreshAvailableRoomsFromAssetDatabase();
+  }
+
+  private void RefreshAvailableRoomsFromAssetDatabase()
+  {
+    if (availableRooms == null)
+    {
+      availableRooms = new List<RoomDataObject>();
+    }
+
+    availableRooms.Clear();
+    string[] roomGuids = AssetDatabase.FindAssets("t:RoomDataObject", new[] { RoomsDataPath });
+
+    foreach (string roomGuid in roomGuids)
+    {
+      string roomPath = AssetDatabase.GUIDToAssetPath(roomGuid);
+      RoomDataObject room = AssetDatabase.LoadAssetAtPath<RoomDataObject>(roomPath);
+      if (room != null)
+      {
+        availableRooms.Add(room);
+      }
+    }
+  }
+#endif
 }

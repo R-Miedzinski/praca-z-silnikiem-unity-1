@@ -9,8 +9,19 @@ public class RoomDoorTransition : MonoBehaviour, IInteractable
   [SerializeField] private SceneRoomMenago sceneRoomMenago;
   [SerializeField] private SpriteRenderer highlightRenderer;
   [SerializeField] private Color highlightColor = Color.yellow;
+  [SerializeField]
+  [Tooltip("If enabled, this door is used as the room entrance and cannot move the player to the next room. If disabled, this door is an exit.")]
+  private bool isEntranceDoor;
+  [SerializeField]
+  [Tooltip("Optional exact player spawn point used when entering this room through this entrance door.")]
+  private Transform playerSpawnPoint;
+  [SerializeField]
+  [Tooltip("Distance from this entrance door toward the inside of the room when Player Spawn Point is not assigned.")]
+  private float insideSpawnOffset = 2f;
 
   private Color defaultColor;
+
+  public bool IsEntranceDoor { get { return isEntranceDoor; } }
 
   private void Awake()
   {
@@ -33,6 +44,11 @@ public class RoomDoorTransition : MonoBehaviour, IInteractable
     {
       defaultColor = highlightRenderer.color;
     }
+  }
+
+  private void OnValidate()
+  {
+    insideSpawnOffset = Mathf.Max(0f, insideSpawnOffset);
   }
 
   public void Interact(PlayerCharacter player)
@@ -76,7 +92,7 @@ public class RoomDoorTransition : MonoBehaviour, IInteractable
       return false;
     }
 
-    if (transitionSystem.IsEntranceDoor(this))
+    if (isEntranceDoor)
     {
       Debug.Log("This door is an entrance door and does not lead to the next room.");
       return false;
@@ -94,5 +110,25 @@ public class RoomDoorTransition : MonoBehaviour, IInteractable
     }
 
     return true;
+  }
+
+  public Vector3 GetPlayerSpawnPosition(Vector3 roomCenter, float defaultSpawnOffset)
+  {
+    if (playerSpawnPoint != null)
+    {
+      return playerSpawnPoint.position;
+    }
+
+    float spawnOffset = insideSpawnOffset > 0f ? insideSpawnOffset : defaultSpawnOffset;
+    Vector3 insideDirection = roomCenter - transform.position;
+    insideDirection.z = 0f;
+
+    if (insideDirection.sqrMagnitude <= Mathf.Epsilon)
+    {
+      // Fallback where the door and room center overlap.
+      insideDirection = transform.right;
+    }
+
+    return transform.position + insideDirection.normalized * spawnOffset;
   }
 }

@@ -739,6 +739,10 @@ GameObject:
   - component: {fileID: 2017922252}
   - component: {fileID: 2017922251}
   - component: {fileID: 2017922250}
+  - component: {fileID: 2017922254}
+  - component: {fileID: 2017922255}
+  - component: {fileID: 2017922256}
+  - component: {fileID: 2017922257}
   m_Layer: 0
   m_Name: GameSystems
   m_TagString: Untagged
@@ -811,6 +815,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30be1af58c664474a9f68d2bfbc9340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  availableRooms:
+  - {fileID: 11400000, guid: 8a42b6ff59e14f8f9ec4c7e7e48d29cb, type: 2}
+  - {fileID: 11400000, guid: 175770dd0b6f48efa928a756a0154d88, type: 2}
+  - {fileID: 11400000, guid: 8bb15ddfc62447ae939b5d0f58f21bc9, type: 2}
+  - {fileID: 11400000, guid: 8bff24af123549609bc789bb928421a6, type: 2}
+  - {fileID: 11400000, guid: 69ae865a38a147f6b7c3ef5f36d101a2, type: 2}
+  - {fileID: 11400000, guid: 0f1210bc7843403d87fbc8489cb26590, type: 2}
+  - {fileID: 11400000, guid: a85f5bfb1a5c4bd99817df5b97808877, type: 2}
+  - {fileID: 11400000, guid: 51d0097e8c074c43965a836dd8d55815, type: 2}
   RoomOrder: []
 --- !u!114 &2017922252
 MonoBehaviour:
@@ -824,7 +837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f19ee2f2f547e48996748fbf514f22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomSelectionSystem: {fileID: 0}
+  roomSelectionSystem: {fileID: 2017922251}
   roomParent: {fileID: 0}
   player: {fileID: 1645878592}
   playerSpawnOffset: 2
@@ -842,6 +855,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLayerName: Units
   enemiesInRoom: []
+--- !u!114 &2017922254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017922246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52dd4bfe6b944c6a1e9cbb69ecf1d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handlerBindings:
+  - terminalData: {fileID: 11400000, guid: e5b41bc4d7be4a619e11779c672164db, type: 2}
+    handlerComponent: {fileID: 2017922255}
+  - terminalData: {fileID: 11400000, guid: 4e499f93d9b344bf9968f031d2f7b1ce, type: 2}
+    handlerComponent: {fileID: 2017922256}
+  - terminalData: {fileID: 11400000, guid: fa7af015836c4dfc89aacd58d1ec2b75, type: 2}
+    handlerComponent: {fileID: 2017922257}
+--- !u!114 &2017922255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017922246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494a0529da8945b7b58ecbc49b9e30d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentMenu: {fileID: 5840994537261061390, guid: b27f5645c9d56c045baa6a11bd643572, type: 3}
+  equipmentMenuObjectName: Equipment Menu
+--- !u!114 &2017922256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017922246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76797162d6c04b6cb63709de6e8b3db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+  pauseMenuObjectName: Pause Menu
+--- !u!114 &2017922257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017922246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b7b78685cc4bcf920930f4d6c550fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hudObject: {fileID: 0}
+  hudObjectName: HuD
 --- !u!1001 &2118516913
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -193,7 +193,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.05, y: 1.05}
   m_EdgeRadius: 0
 --- !u!114 &1902299875903258720
 MonoBehaviour:
@@ -207,8 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303964b3a064483d859482891796b98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentMenu: {fileID: 5840994537261061390, guid: b27f5645c9d56c045baa6a11bd643572, type: 3}
-  equipmentMenuObjectName: Equipment Menu
+  terminalData: {fileID: 11400000, guid: e5b41bc4d7be4a619e11779c672164db, type: 2}
   sceneRoomMenago: {fileID: 0}
   terminalRenderer: {fileID: 7016735202131058677}
   unlockedHighlightColor: {r: 0, g: 1, b: 1, a: 1}

@@ -1,20 +1,21 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class TerminalEdit : MonoBehaviour, IInteractable
 {
+  public static event System.Action<TerminalData, PlayerCharacter> TerminalInteracted;
+
   public bool InteractOnContact { get { return false; } }
 
-  [SerializeField] private GameObject equipmentMenu;
-  [SerializeField] private string equipmentMenuObjectName = "Equipment Menu";
+  [SerializeField] private TerminalData terminalData;
   [SerializeField] private SceneRoomMenago sceneRoomMenago;
   [SerializeField] private SpriteRenderer terminalRenderer;
   [SerializeField] private Color unlockedHighlightColor = Color.cyan;
   [SerializeField] private Color lockedHighlightColor = Color.red;
 
-  private GameObject spawnedEquipmentMenu;
   private Color defaultColor;
   private bool isHighlighted;
+
+  public TerminalData TerminalData { get { return terminalData; } }
 
   private void Awake()
   {
@@ -41,8 +42,6 @@ public class TerminalEdit : MonoBehaviour, IInteractable
     {
       UpdateHighlightColor();
     }
-
-    HandleCloseEquipmentMenuInput();
   }
 
   private void Reset()
@@ -59,7 +58,24 @@ public class TerminalEdit : MonoBehaviour, IInteractable
       return;
     }
 
-    OpenEquipmentMenu();
+    if (terminalData == null)
+    {
+      Debug.LogWarning("TerminalEdit cannot identify the terminal because TerminalData is not assigned.", this);
+    }
+
+    if (player == null)
+    {
+      Debug.LogWarning("TerminalEdit was interacted with without a PlayerCharacter reference.", this);
+    }
+
+    System.Action<TerminalData, PlayerCharacter> terminalInteracted = TerminalInteracted;
+    if (terminalInteracted == null)
+    {
+      Debug.LogWarning("TerminalEdit has no TerminalSwitchSystem subscriber for terminal interaction events.", this);
+      return;
+    }
+
+    terminalInteracted.Invoke(terminalData, player);
   }
 
   public void EnableHighlight()
@@ -81,90 +97,6 @@ public class TerminalEdit : MonoBehaviour, IInteractable
   private bool CanUseTerminal()
   {
     return sceneRoomMenago == null || !sceneRoomMenago.HasAliveEnemyInRoom();
-  }
-
-  private void OpenEquipmentMenu()
-  {
-    GameObject menu = GetEquipmentMenu();
-    if (menu == null)
-    {
-      Debug.LogWarning($"Equipment Menu is not assigned to TerminalEdit and no loaded scene object named '{equipmentMenuObjectName}' was found.");
-      return;
-    }
-
-    menu.SetActive(true);
-
-    if (menu.transform.localScale == Vector3.zero)
-    {
-      menu.transform.localScale = Vector3.one;
-    }
-  }
-
-  private void CloseEquipmentMenu()
-  {
-    GameObject menu = GetEquipmentMenu();
-    if (menu == null || !menu.activeSelf)
-    {
-      return;
-    }
-
-    menu.SetActive(false);
-  }
-
-  private void HandleCloseEquipmentMenuInput()
-  {
-    if (Keyboard.current == null || !Keyboard.current.escapeKey.wasPressedThisFrame)
-    {
-      return;
-    }
-
-    CloseEquipmentMenu();
-  }
-
-  private GameObject GetEquipmentMenu()
-  {
-    if (spawnedEquipmentMenu != null)
-    {
-      return spawnedEquipmentMenu;
-    }
-
-    if (equipmentMenu == null)
-    {
-      equipmentMenu = FindEquipmentMenuInLoadedScenes();
-    }
-
-    if (equipmentMenu == null)
-    {
-      return null;
-    }
-
-    if (equipmentMenu.scene.IsValid() && equipmentMenu.scene.isLoaded)
-    {
-      return equipmentMenu;
-    }
-
-    spawnedEquipmentMenu = Instantiate(equipmentMenu);
-    return spawnedEquipmentMenu;
-  }
-
-  private GameObject FindEquipmentMenuInLoadedScenes()
-  {
-    foreach (GameObject candidate in Resources.FindObjectsOfTypeAll<GameObject>())
-    {
-      if (candidate.name != equipmentMenuObjectName)
-      {
-        continue;
-      }
-
-      if (!candidate.scene.IsValid() || !candidate.scene.isLoaded)
-      {
-        continue;
-      }
-
-      return candidate;
-    }
-
-    return null;
   }
 
   private void UpdateHighlightColor()

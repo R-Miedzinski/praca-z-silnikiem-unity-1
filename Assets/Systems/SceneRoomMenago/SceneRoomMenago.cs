@@ -1,82 +1,112 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Shared room manager that checks if enemies are still alive.
 public class SceneRoomMenago : MonoBehaviour
 {
-  [SerializeField] private string enemyLayerName = "Units";
-  [SerializeField] private Unit[] enemiesInRoom;
+  public static SceneRoomMenago Instance { get; private set; }
+
+  private readonly HashSet<EnemyRoomMember> aliveEnemies = new HashSet<EnemyRoomMember>();
+  private bool isSubscribed;
+
+  public int AliveEnemyCount { get { return aliveEnemies.Count; } }
+
+  private void Awake()
+  {
+    if (Instance != null && Instance != this)
+    {
+      Destroy(this);
+      return;
+    }
+
+    Instance = this;
+  }
+
+  private void OnEnable()
+  {
+    if (Instance != this)
+    {
+      return;
+    }
+
+    // Apear and disappear.
+    EnemyRoomMember.EnemyAppeared += HandleEnemyAppeared;
+    EnemyRoomMember.EnemyDisappeared += HandleEnemyDisappeared;
+    isSubscribed = true;
+
+    // Covers enemies that were enabled.
+    RefreshAliveEnemies();
+  }
+
+  private void OnDisable()
+  {
+    if (!isSubscribed)
+    {
+      return;
+    }
+
+    EnemyRoomMember.EnemyAppeared -= HandleEnemyAppeared;
+    EnemyRoomMember.EnemyDisappeared -= HandleEnemyDisappeared;
+    isSubscribed = false;
+
+    aliveEnemies.Clear();
+  }
+
+  private void OnDestroy()
+  {
+    if (Instance == this)
+    {
+      Instance = null;
+    }
+  }
 
   public bool HasAliveEnemyInRoom()
   {
-    // Assigned enemies are checked first, then the loaded scene is scanned.
-    if (HasAssignedEnemyAlive())
-    {
-      return true;
-    }
-
-    return HasSceneEnemyAlive();
+    return aliveEnemies.Count > 0;
   }
 
-  public bool IsAliveEnemy(Unit unit)
+  private void HandleEnemyAppeared(EnemyRoomMember enemy)
   {
-    if (unit == null || unit is PlayerCharacter)
-    {
-      return false;
-    }
-
-    if (!unit.gameObject.activeInHierarchy || !unit.gameObject.scene.IsValid() || !unit.gameObject.scene.isLoaded)
-    {
-      return false;
-    }
-
-    int enemyLayer = LayerMask.NameToLayer(enemyLayerName);
-    if (enemyLayer == -1)
-    {
-      Debug.LogWarning($"Enemy layer '{enemyLayerName}' does not exist.");
-      return false;
-    }
-
-    return unit.gameObject.layer == enemyLayer;
+    RegisterEnemy(enemy);
   }
 
-  private bool HasAssignedEnemyAlive()
+  private void HandleEnemyDisappeared(EnemyRoomMember enemy)
   {
-    if (enemiesInRoom == null)
-    {
-      return false;
-    }
-
-    foreach (Unit enemy in enemiesInRoom)
-    {
-      if (IsAliveEnemy(enemy))
-      {
-        return true;
-      }
-    }
-
-    return false;
+    aliveEnemies.Remove(enemy);
   }
 
-  private bool HasSceneEnemyAlive()
+  private void RefreshAliveEnemies()
   {
-    // Find all loaded Units.
-    foreach (Unit unit in Resources.FindObjectsOfTypeAll<Unit>())
+    aliveEnemies.Clear();
+
+    foreach (EnemyRoomMember enemy in FindObjectsByType<EnemyRoomMember>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
     {
-      if (IsAliveEnemy(unit))
-      {
-        return true;
-      }
+      RegisterEnemy(enemy);
+    }
+  }
+
+  private void RegisterEnemy(EnemyRoomMember enemy)
+  {
+    if (enemy == null || !enemy.isActiveAndEnabled)
+    {
+      return;
     }
 
-    return false;
+    aliveEnemies.Add(enemy);
   }
 
   public static SceneRoomMenago GetOrCreate()
   {
-    // Hier script ask about scene.
+    if (Instance != null)
+    {
+      return Instance;
+    }
+
+    // Reuse a manager already placed in the scene.
     SceneRoomMenago sceneRoomMenago = FindAnyObjectByType<SceneRoomMenago>();
     if (sceneRoomMenago != null)
     {
+      Instance = sceneRoomMenago;
       return sceneRoomMenago;
     }
 
