@@ -1,25 +1,14 @@
 using UnityEngine;
-using UnityEditor;
-using System.IO;
 using System.Collections.Generic;
-using System;
 
 public class ItemsDatabase : MonoBehaviour
 {
-  [SerializeField]
   private const string itemsDataPath = "DataObjects/ItemData";
 
   public static ItemsDatabase Instance { get { return instance; } private set { instance = value; } }
 
   private static ItemsDatabase instance;
-  private Dictionary<string, Item> items;
-  private string itemDataDefinitionsPath = "";
-
-  public ItemsDatabase()
-  {
-    items = new Dictionary<string, Item>();
-    itemDataDefinitionsPath = Path.Combine(Application.dataPath, itemsDataPath);
-  }
+  private readonly Dictionary<string, Item> items = new Dictionary<string, Item>();
 
   public void Awake()
   {
@@ -60,29 +49,25 @@ public class ItemsDatabase : MonoBehaviour
 
   private void InitializeDatabase()
   {
-    DirectoryInfo dir = new DirectoryInfo(itemDataDefinitionsPath);
+    items.Clear();
 
-    // Handle scriptable object items
-    FileInfo[] soItems = dir.GetFiles("*.asset");
-    foreach (FileInfo f in soItems)
+    // Resources works the same in editor and in player builds.
+    ItemDataObject[] soItems = Resources.LoadAll<ItemDataObject>(itemsDataPath);
+
+    if (soItems == null || soItems.Length == 0)
     {
-      try
+      Debug.LogWarning($"No ItemDataObject assets found at Resources/{itemsDataPath}.");
+      return;
+    }
+
+    foreach (ItemDataObject itemDataObject in soItems)
+    {
+      if (itemDataObject == null)
       {
-        string assetPath = Path.Combine("Assets", itemsDataPath, f.Name);
-        ItemDataObject itemDataObject = AssetDatabase.LoadAssetAtPath<ItemDataObject>(assetPath);
-        if (itemDataObject != null)
-        {
-          AddItem(itemDataObject);
-        }
-        else
-        {
-          Debug.LogError($"Failed to load ItemDataObject from {f.Name} \n path: {assetPath}");
-        }
+        continue;
       }
-      catch (System.Exception ex)
-      {
-        Debug.LogError($"Error loading ScriptableObject file {f.Name}: {ex.Message}");
-      }
+
+      AddItem(itemDataObject);
     }
   }
 }
