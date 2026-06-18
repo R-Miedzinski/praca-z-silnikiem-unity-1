@@ -4,11 +4,24 @@
 
 ```
 Unit (MonoBehaviour, abstrakcyjny)
-└── Enemy (abstrakcyjny) — logika AI: Patrol / Chase / Attack
+└── Enemy (abstrakcyjny) — logika AI oparta na grafie stanów
     └── MeleeEnemy — konkretny wróg walczący w zwarciu
 ```
 
-Skrypty bazowe: `Assets/Prefabs/Enemies/Shared/Enemy.cs`, `Assets/Systems/UnitsSystem/Unit.cs`
+```
+EnemyState (abstrakcyjny) — węzeł grafu stanów
+├── PatrolState
+├── ChaseState
+└── AttackState
+```
+
+| Skrypt | Lokalizacja |
+|---|---|
+| `Unit` | `Assets/Systems/UnitsSystem/Unit.cs` |
+| `Enemy` | `Assets/Systems/EnemySystem/Enemy.cs` |
+| `EnemyState` + stany | `Assets/Systems/EnemySystem/EnemyState.cs`, `States/` |
+| `EnemySpawner` | `Assets/Systems/EnemySystem/EnemySpawner.cs` |
+| `MeleeEnemy` | `Assets/Prefabs/Enemies/MeleeEnemy/MeleeEnemy.cs` |
 
 ---
 
@@ -41,6 +54,7 @@ Zaznacz obiekt w Hierarchy, w Inspektorze klikaj `Add Component`:
 | Max Health | `50` |
 | Movement Speed | `3` |
 | Base Damage | `10` |
+| Cooldown Reduction | `0` |
 | Armor | `0` |
 
 **Enemy** (logika AI):
@@ -56,8 +70,16 @@ Zaznacz obiekt w Hierarchy, w Inspektorze klikaj `Add Component`:
 
 | Pole | Przykład | Opis |
 |---|---|---|
-| Attack Cooldown | `1.5` | czas między atakami (sekundy) |
-| Damage Multiplier | `1` | mnożnik obrażeń relative do Base Damage |
+| Attack Cooldown | `1.5` | bazowy czas między atakami (modyfikowany przez Cooldown Reduction z Unit) |
+| Attack Effects | patrz niżej | lista efektów aplikowanych przy ataku |
+
+#### Konfiguracja Attack Effects
+
+W polu **Attack Effects** dodaj wpis:
+- **Effect Id** — wybierz `DealDamage` z listy
+- **Effect Params → Value** — mnożnik obrażeń (np. `1` = 100% Base Damage)
+
+Możesz dodać więcej efektów (np. `Slow`) żeby wróg przy ataku jednocześnie spowalniał gracza.
 
 ### 4. Zapisz jako prefab
 
@@ -107,7 +129,9 @@ Ustaw `0` żeby wyłączyć respawn.
 
 ---
 
-## Diagram stanów AI (Enemy)
+## Graf stanów AI
+
+Stany są klasami dziedziczącymi po `EnemyState`. Graf przejść budowany jest w `Enemy.BuildStateGraph()`.
 
 ```
 Patrol ──(gracz w Detection Range)──► Chase
@@ -116,11 +140,39 @@ Chase  ──(gracz w Attack Range)──────► Attack
 Attack ──(gracz za daleko)───────────► Chase
 ```
 
+Warunki przejść to lambdy przekazywane przez `AddTransition()` — nie są hardcoded w stanach.
+
 ---
 
 ## Dodawanie nowych typów wrogów
 
 1. Utwórz nowy skrypt dziedziczący po `Enemy`
-2. Zaimplementuj metodę `OnAttack()` — jest wymagana (abstrakcyjna)
-3. Opcjonalnie nadpisz `OnPatrol()` lub `OnChase()` jeśli chcesz zmienić zachowanie
+2. Zaimplementuj metodę `PerformAttack()` — jest wymagana (abstrakcyjna)
+3. Opcjonalnie nadpisz `BuildStateGraph()` żeby zmienić graf stanów (np. usunąć Patrol, dodać nowy stan)
 4. Zbuduj prefab według kroków z Kroku 1, używając nowego skryptu zamiast `MeleeEnemy`
+
+### Przykład — wróg bez patrolu
+
+```csharp
+public class RangedEnemy : Enemy
+{
+    protected override EnemyState BuildStateGraph()
+    {
+        var chase = new ChaseState();
+        var attack = new AttackState();
+
+        chase.AddTransition(attack, () => /* w zasięgu strzału */);
+        attack.AddTransition(chase, () => /* za daleko */);
+
+        return chase;
+    }
+
+    public override void PerformAttack() { /* logika strzału */ }
+}
+```
+
+### Dodawanie nowego stanu
+
+1. Utwórz klasę dziedziczącą po `EnemyState` w `Assets/Systems/EnemySystem/States/`
+2. Zaimplementuj `Execute(Enemy enemy)`
+3. Podepnij stan do grafu przez `AddTransition()` w `BuildStateGraph()` wybranego wroga
