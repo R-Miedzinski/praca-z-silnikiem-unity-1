@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Systems/EnemySystem.meta
 guid: f8423eb1756814701bb89837bd02e122
 folderAsset: yes
 DefaultImporter:
+========
+guid: 1f4fd5de8298a0e44b18dc61027cdc66
+PrefabImporter:
+>>>>>>>> origin/main:Assets/Graphics/UI/Camp Menu.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

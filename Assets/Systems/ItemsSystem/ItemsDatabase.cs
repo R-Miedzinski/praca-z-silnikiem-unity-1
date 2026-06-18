@@ -1,24 +1,14 @@
 using UnityEngine;
-using UnityEditor;
-using System.IO;
 using System.Collections.Generic;
 
 public class ItemsDatabase : MonoBehaviour
 {
-  [SerializeField]
   private const string itemsDataPath = "DataObjects/ItemData";
 
   public static ItemsDatabase Instance { get { return instance; } private set { instance = value; } }
 
   private static ItemsDatabase instance;
-  private Dictionary<string, Item> items;
-  private string itemDataDefinitionsPath = "";
-
-  public ItemsDatabase()
-  {
-    items = new Dictionary<string, Item>();
-    itemDataDefinitionsPath = Path.Combine(Application.dataPath, itemsDataPath);
-  }
+  private readonly Dictionary<string, Item> items = new Dictionary<string, Item>();
 
   public void Awake()
   {
@@ -32,18 +22,6 @@ public class ItemsDatabase : MonoBehaviour
     }
 
     InitializeDatabase();
-  }
-
-  public void AddItem(ItemData itemData)
-  {
-    if (!items.ContainsKey(itemData.Id))
-    {
-      items[itemData.Id] = new Item(itemData);
-    }
-    else
-    {
-      Debug.LogWarning($"Item with ID {itemData.Id} already exists in the database.");
-    }
   }
 
   public void AddItem(ItemDataObject itemDataObject)
@@ -71,39 +49,25 @@ public class ItemsDatabase : MonoBehaviour
 
   private void InitializeDatabase()
   {
-    DirectoryInfo dir = new DirectoryInfo(itemDataDefinitionsPath);
+    items.Clear();
 
-    // Handle json items
-    FileInfo[] jsonItems = dir.GetFiles("*.json");
-    foreach (FileInfo f in jsonItems)
+    // Resources works the same in editor and in player builds.
+    ItemDataObject[] soItems = Resources.LoadAll<ItemDataObject>(itemsDataPath);
+
+    if (soItems == null || soItems.Length == 0)
     {
-      string json = File.ReadAllText(f.FullName);
-      if (json != null)
-      {
-        ItemData itemData = ItemsUtils.ParseJsonToItemData(json);
-        AddItem(itemData);
-      }
-      else
-      {
-        Debug.LogError($"Failed to parse ItemData from {f.Name} \n path: {f.FullName}");
-      }
+      Debug.LogWarning($"No ItemDataObject assets found at Resources/{itemsDataPath}.");
+      return;
     }
 
-    // Handle scriptable object items
-    FileInfo[] soItems = dir.GetFiles("*.asset");
-    foreach (FileInfo f in soItems)
+    foreach (ItemDataObject itemDataObject in soItems)
     {
-      string itemPath = $"Assets/{itemsDataPath}/{f.Name}";
+      if (itemDataObject == null)
+      {
+        continue;
+      }
 
-      ItemDataObject itemDataObject = AssetDatabase.LoadAssetAtPath<ItemDataObject>(itemPath);
-      if (itemDataObject != null)
-      {
-        AddItem(itemDataObject);
-      }
-      else
-      {
-        Debug.LogError($"Failed to load ItemDataObject from {f.Name} \n path: {itemPath}");
-      }
+      AddItem(itemDataObject);
     }
   }
 }

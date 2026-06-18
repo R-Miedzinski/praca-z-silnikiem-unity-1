@@ -1,10 +1,19 @@
-public class ProtectFromDamageEffect : Effect, ITimedEffect, IParametrizedEffect
+using UnityEngine;
+
+public class ProtectFromDamageEffect : Effect, IPersistentEffect, IParametrizedEffect
 {
   public float Duration { get; set; }
 
-  public void SetParameters(EffectParamsData parameters)
+  public void SetParameters(string[] parameters)
   {
-    Duration = parameters.Duration;
+    if (parameters.Length > 0 && EffectsUtils.TryParseFloat(parameters[0], out float result))
+    {
+      Duration = result;
+    }
+    else
+    {
+    EffectsUtils.InvalidParameters(0, "float (Duration)");
+    }
   }
 
   public override void ApplyEffect(Unit caster, Unit target)
