@@ -1,21 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-// Spawnuje wrogów w podanych punktach i opcjonalnie respawnuje ich po śmierci.
-// Użycie: dodaj komponent do pustego GameObject w scenie, przypisz prefab wroga
-// i utwórz child GameObject-y jako punkty spawnu.
 public class EnemySpawner : MonoBehaviour
 {
-    // Prefab wroga który ma być spawnowany (musi mieć komponent dziedziczący po Enemy).
     [SerializeField] private GameObject enemyPrefab;
-
-    // Lista punktów spawnu. Każdy to Transform w scenie — pozycja tego obiektu
-    // wyznacza gdzie pojawi się wróg.
     [SerializeField] private Transform[] spawnPoints;
-
-    // Czas w sekundach po którym wróg odrodzi się po śmierci.
-    // Ustaw 0 żeby wyłączyć respawn.
     [SerializeField] private float respawnDelay = 5f;
+
+    private readonly List<(Enemy enemy, System.Action handler)> activeEnemies = new List<(Enemy, System.Action)>();
 
     private void Start()
     {
@@ -25,11 +18,19 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        foreach (var (enemy, handler) in activeEnemies)
+        {
+            if (enemy != null)
+                enemy.OnDeath -= handler;
+        }
+    }
+
     private void SpawnAt(Transform spawnPoint)
     {
         GameObject go = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
 
-        // Próbujemy pobrać komponent Enemy żeby subskrybować zdarzenie śmierci.
         Enemy enemy = go.GetComponent<Enemy>();
         if (enemy == null)
         {
@@ -39,14 +40,17 @@ public class EnemySpawner : MonoBehaviour
 
         if (respawnDelay > 0f)
         {
-            // Lambdy w C# przechwytują zmienne przez referencję —
-            // dlatego przekazujemy spawnPoint jako parametr zamiast użyć go bezpośrednio w lambdzie,
-            // żeby uniknąć potencjalnych problemów w pętlach.
-            enemy.OnDeath += () => StartCoroutine(RespawnAfterDelay(spawnPoint));
+            System.Action handler = null;
+            handler = () =>
+            {
+                activeEnemies.RemoveAll(e => e.enemy == enemy);
+                StartCoroutine(RespawnAfterDelay(spawnPoint));
+            };
+            activeEnemies.Add((enemy, handler));
+            enemy.OnDeath += handler;
         }
     }
 
-    // Czeka respawnDelay sekund, potem spawnuje nowego wroga w tym samym miejscu.
     private IEnumerator RespawnAfterDelay(Transform spawnPoint)
     {
         yield return new WaitForSeconds(respawnDelay);
