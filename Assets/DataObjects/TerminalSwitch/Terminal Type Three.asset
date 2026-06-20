@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terminalId: terminal_type_three
   terminalName: Terminal Type Three
-  description: Hides the HUD until Escape is pressed.
+  description: Hides the HuD until Escape is pressed.
   handlerId: hud_toggle

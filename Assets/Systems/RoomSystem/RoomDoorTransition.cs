@@ -23,7 +23,7 @@ public class RoomDoorTransition : MonoBehaviour, IInteractable
 
   public bool IsEntranceDoor { get { return isEntranceDoor; } }
 
-  private void Awake()
+  private void OnEnable()
   {
     if (transitionSystem == null)
     {

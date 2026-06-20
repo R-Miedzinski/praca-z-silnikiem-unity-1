@@ -15,7 +15,7 @@ public class DoorRoomTransitionSystem : MonoBehaviour
   public GameObject CurrentRoomInstance { get; private set; }
   public List<RoomDataObject> RoomOrder { get { return roomSelectionSystem != null ? roomSelectionSystem.RoomOrder : null; } }
 
-  private void Awake()
+  private void OnEnable()
   {
     // Keep one scene transition system that owns the active room instance.
     if (Instance != null && Instance != this)
