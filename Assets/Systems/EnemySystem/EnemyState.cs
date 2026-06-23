@@ -24,5 +24,7 @@ public abstract class EnemyState
         return null;
     }
 
+    public virtual void Enter(Enemy enemy) { }
+    public virtual void Exit(Enemy enemy) { }
     public abstract void Execute(Enemy enemy);
 }

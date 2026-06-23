@@ -36,7 +36,11 @@ public abstract class Enemy : Unit
     {
         var next = currentState.TryGetNextState();
         if (next != null)
+        {
+            currentState.Exit(this);
             currentState = next;
+            currentState.Enter(this);
+        }
         currentState.Execute(this);
     }
 
