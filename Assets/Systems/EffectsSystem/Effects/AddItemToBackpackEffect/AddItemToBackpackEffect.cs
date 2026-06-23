@@ -2,9 +2,16 @@ public class AddItemToBackpackEffect : Effect, IParametrizedEffect
 {
   private string itemId;
 
-  public void SetParameters(EffectParamsData paramsData)
+  public void SetParameters(string[] paramsData)
   {
-    itemId = paramsData.StringValue;
+    if (paramsData.Length > 0)
+    {
+      itemId = paramsData[0];
+    }
+    else
+    {
+      EffectsUtils.InvalidParameters(0, "string (itemId)");
+    }
   }
 
   public override void ApplyEffect(Unit caster, Unit target)

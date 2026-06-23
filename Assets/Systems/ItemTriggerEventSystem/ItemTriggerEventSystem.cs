@@ -25,7 +25,7 @@ public class ItemTriggerEventSystem : MonoBehaviour
     foreach (ETriggerType triggerType in System.Enum.GetValues(typeof(ETriggerType)))
     {
       activatedTriggers.Deactivate(triggerType);
-      triggerContexts[triggerType] = default;
+      triggerContexts[triggerType] = null;
     }
   }
 
@@ -39,7 +39,7 @@ public class ItemTriggerEventSystem : MonoBehaviour
     foreach (ETriggerType triggerType in System.Enum.GetValues(typeof(ETriggerType)))
     {
       activatedTriggers.Deactivate(triggerType);
-      triggerContexts[triggerType] = default;
+      triggerContexts[triggerType] = null;
     }
   }
 

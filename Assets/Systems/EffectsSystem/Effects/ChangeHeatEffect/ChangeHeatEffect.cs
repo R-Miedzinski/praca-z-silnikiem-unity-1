@@ -2,9 +2,16 @@ public class ChangeHeatEffect : Effect, IParametrizedEffect
 {
   private float heatChangeAmount;
 
-  public void SetParameters(EffectParamsData parameters)
+  public void SetParameters(string[] parameters)
   {
-    heatChangeAmount = parameters.Value;
+    if (parameters.Length > 0 && EffectsUtils.TryParseFloat(parameters[0], out float result))
+    {
+      heatChangeAmount = result;
+    }
+    else
+    {
+    EffectsUtils.InvalidParameters(0, "float (heatChangeAmount)");
+    }
   }
   public override void ApplyEffect(Unit caster, Unit target)
   {

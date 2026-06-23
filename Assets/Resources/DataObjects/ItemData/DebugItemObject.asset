@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af66a0e65ec7ad74c83cfec5454fc40d, type: 3}
+  m_Name: DebugItemObject
+  m_EditorClassIdentifier: 
+  Id: debug_item_object
+  ItemName: Debug Item Object
+  Description: Debug Item created as a ScriptableObject
+  EquipmentSlot: 0
+  Effects:
+  - Effects:
+    - EffectId: protect_from_damage
+      EffectParams:
+      - 0.2
+    - EffectId: debug_effect
+      EffectParams:
+      - Protect from damage effect
+    EffectTriggers: 0200000006000000
+    Cooldown: 10
+    Charges: -1
+    TargetingMode:
+      TargetingType: 0
+      Range: 0
+      TravelTime: 0
+      Angle: 0
+      AllowMultipleTargets: 0
+      TargetCaster: 1
+    IsTogglable: 0
+  - Effects:
+    - EffectId: slow
+      EffectParams:
+      - 80
+    EffectTriggers: 00000000
+    Cooldown: 0
+    Charges: -1
+    TargetingMode:
+      TargetingType: 0
+      Range: 0.1
+      TravelTime: 0
+      Angle: 0
+      AllowMultipleTargets: 0
+      TargetCaster: 1
+    IsTogglable: 1
+  - Effects:
+    - EffectId: push_away
+      EffectParams:
+      - 0.5
+    EffectTriggers: 02000000
+    Cooldown: 0.1
+    Charges: -1
+    TargetingMode:
+      TargetingType: 0
+      Range: 3
+      TravelTime: 0
+      Angle: 0
+      AllowMultipleTargets: 1
+      TargetCaster: 0
+    IsTogglable: 0

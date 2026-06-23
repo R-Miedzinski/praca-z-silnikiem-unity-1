@@ -14,20 +14,25 @@ public class EffectInstance : MonoBehaviour
     Caster = caster;
     Target = target;
     elapsedTime = 0f;
+    EffectApplicationTracker.ReportTarget(target);
   }
 
   private void Update()
   {
-    if (Effect is ITimedEffect timedEffect)
+    if (Effect is IPersistentEffect persistentEffect)
     {
       // TODO: add correction for going over duration by partial deltaTime
-      timedEffect.Tick(Target, Time.deltaTime);
-      elapsedTime += Time.deltaTime;
+      persistentEffect.Tick(Target, Time.deltaTime);
 
-      if (elapsedTime >= timedEffect.Duration)
+      if (persistentEffect.Duration > 0)
       {
-        timedEffect.Lift(Target);
-        Destroy(this);
+        elapsedTime += Time.deltaTime;
+
+        if (elapsedTime >= persistentEffect.Duration)
+        {
+          persistentEffect.Lift(Target);
+          Destroy(this);
+        }
       }
     }
     else if (Effect is not IPersistentEffect)

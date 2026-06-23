@@ -19,6 +19,12 @@ public class Pickup : MonoBehaviour, IInteractable
       Effect effect = IdToEffectMap.GetEffectById(effectPair.EffectId, effectPair.EffectParams);
       if (effect != null)
       {
+        effect.Id = string.Join("_", new string[] {
+          effectPair.EffectId,
+          pickupData.PickupName,
+          System.Guid.NewGuid().ToString()
+        }); // Ensure unique ID for each pickup instance
+
         newEffects.Add(effect);
       }
       else

@@ -37,39 +37,6 @@ public class Item
     }
   }
 
-  public Item(ItemData itemData)
-  {
-    id = itemData.Id;
-    itemName = itemData.ItemName;
-    equipmentSlot = itemData.EquipmentSlot;
-    triggerEffects = new Dictionary<TriggerVector, List<ItemEffect>>();
-    foreach (var effectData in itemData.Effects)
-    {
-      List<Effect> newEffects = new List<Effect>();
-      for (int i = 0; i < effectData.EffectIds.Length; i++)
-      {
-        Effect effect = IdToEffectMap.GetEffectById(effectData.EffectIds[i], effectData.EffectParams[i]);
-        effect.Id = effectData.EffectIds[i] + "_" + id + "_" + string.Join("_", effectData.EffectTriggers.Select(t => t.ToString())); // Ensure unique ID for each effect instance
-
-        newEffects.Add(effect);
-      }
-
-      TargetingMode targetingMode = new TargetingMode(effectData.TargetingMode);
-      ItemEffect newItemEffect = new ItemEffect(newEffects.ToArray(), effectData.EffectTriggers, targetingMode, effectData.Cooldown, effectData.Charges);
-
-      TriggerVector triggerVector = new TriggerVector();
-      foreach (ETriggerType triggerType in effectData.EffectTriggers)
-      {
-        triggerVector.Activate(triggerType);
-      }
-      if (!triggerEffects.ContainsKey(triggerVector))
-      {
-        triggerEffects[triggerVector] = new List<ItemEffect>();
-      }
-      triggerEffects[triggerVector].Add(newItemEffect);
-    }
-  }
-
   public Item(ItemDataObject itemDataObject)
   {
     id = itemDataObject.Id;
@@ -82,13 +49,18 @@ public class Item
       foreach (EffectIdParamPair effectPair in effectData.Effects)
       {
         Effect effect = IdToEffectMap.GetEffectById(effectPair.EffectId, effectPair.EffectParams);
-        effect.Id = effectPair.EffectId + "_" + id + "_" + string.Join("_", effectData.EffectTriggers.Select(t => t.ToString())); // Ensure unique ID for each effect instance
+        effect.Id = string.Join("_", new string[] {
+          effectPair.EffectId,
+          id,
+          string.Join("_", effectData.EffectTriggers.Select(t => t.ToString())),
+          Guid.NewGuid().ToString()
+        }); // Ensure unique ID for each effect instance
 
         newEffects.Add(effect);
       }
 
       TargetingMode targetingMode = new TargetingMode(effectData.TargetingMode);
-      ItemEffect newItemEffect = new ItemEffect(newEffects.ToArray(), effectData.EffectTriggers, targetingMode, effectData.Cooldown, effectData.Charges);
+      ItemEffect newItemEffect = new ItemEffect(newEffects.ToArray(), effectData.EffectTriggers, targetingMode, effectData.Cooldown, effectData.Charges, effectData.IsTogglable);
 
       TriggerVector triggerVector = new TriggerVector();
       foreach (ETriggerType triggerType in effectData.EffectTriggers)
@@ -122,11 +94,30 @@ public class Item
       {
         if (!itemEffects.CanUse())
           continue;
+
+        if (itemEffects.IsTogglable && itemEffects.IsToggled)
+        {
+          itemEffects.LiftToggle();
+          continue;
+        }
+
         itemEffects.StartCooldown(PlayerCharacter.Instance);
 
         TargetingMode targetingMode = itemEffects.TargetingMode;
         TargetingStrategy strategy = TargetingStrategyUtils.GetTargetingStrategy(targetingMode.TargetingType);
-        strategy.Target(targetingMode, targetedPosition, PlayerCharacter.Instance, itemEffects.Effects);
+
+        if (itemEffects.IsTogglable)
+        {
+          var trackedTargets = new System.Collections.Generic.List<Unit>();
+          EffectApplicationTracker.BeginTracking(trackedTargets);
+          strategy.Target(targetingMode, targetedPosition, PlayerCharacter.Instance, itemEffects.Effects);
+          EffectApplicationTracker.StopTracking();
+          itemEffects.ActivateToggle(trackedTargets);
+        }
+        else
+        {
+          strategy.Target(targetingMode, targetedPosition, PlayerCharacter.Instance, itemEffects.Effects);
+        }
       }
     }
   }
@@ -140,6 +131,13 @@ public class Item
       {
         if (!itemEffects.CanUse())
           continue;
+
+        if (itemEffects.IsTogglable && itemEffects.IsToggled)
+        {
+          itemEffects.LiftToggle();
+          continue;
+        }
+
         itemEffects.StartCooldown(PlayerCharacter.Instance);
 
         foreach (var effect in itemEffects.Effects)
@@ -148,6 +146,11 @@ public class Item
           {
             effect.ApplyEffect(PlayerCharacter.Instance, target);
           }
+        }
+
+        if (itemEffects.IsTogglable)
+        {
+          itemEffects.ActivateToggle(new System.Collections.Generic.List<Unit>(targets));
         }
       }
     }

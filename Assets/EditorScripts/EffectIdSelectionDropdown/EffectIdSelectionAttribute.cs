@@ -1,8 +1,11 @@
 using System;
 using Unity.Properties;
 using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [AttributeUsage(AttributeTargets.Field)]
 public class EffectIdSelectionAttribute : PropertyAttribute
@@ -10,7 +13,7 @@ public class EffectIdSelectionAttribute : PropertyAttribute
 
 }
 
-
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(EffectIdSelectionAttribute))]
 public class EffectIdSelectionDrawer : PropertyDrawer
 {
@@ -36,3 +39,4 @@ public class EffectIdSelectionDrawer : PropertyDrawer
     EditorGUI.EndProperty();
   }
 }
+#endif

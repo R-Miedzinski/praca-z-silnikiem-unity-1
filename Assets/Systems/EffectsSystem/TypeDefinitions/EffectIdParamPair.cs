@@ -5,5 +5,5 @@ public struct EffectIdParamPair
 {
   [EffectIdSelection]
   public string EffectId;
-  public EffectParamsData EffectParams;
+  public string[] EffectParams;
 }
