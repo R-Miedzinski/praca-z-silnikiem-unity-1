@@ -58,6 +58,7 @@ public class ItemEffect
 
   public bool CanUse()
   {
+    // TODO: fix bug when off cooldown effects can be triggered when game is paused
     // Toggled-on effects can always be toggled off regardless of cooldown or charges.
     if (isTogglable && isToggled) return true;
     return Time.time >= lastUsedTime + cooldown && remainingCharges != 0;
