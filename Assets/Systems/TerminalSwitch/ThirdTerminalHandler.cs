@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ThirdTerminalHandler : MonoBehaviour, ITerminalHandler
 {
@@ -7,12 +6,6 @@ public class ThirdTerminalHandler : MonoBehaviour, ITerminalHandler
   [SerializeField] private string hudObjectName = "HuD";
 
   private GameObject spawnedHudObject;
-  private bool hudHiddenByTerminal;
-
-  private void Update()
-  {
-    HandleRestoreHudInput();
-  }
 
   public void HandleTerminal(TerminalData terminalData, PlayerCharacter player)
   {
@@ -29,7 +22,6 @@ public class ThirdTerminalHandler : MonoBehaviour, ITerminalHandler
     }
 
     hud.SetActive(false);
-    hudHiddenByTerminal = true;
   }
 
   private void ShowHud()
@@ -42,17 +34,6 @@ public class ThirdTerminalHandler : MonoBehaviour, ITerminalHandler
     }
 
     hud.SetActive(true);
-    hudHiddenByTerminal = false;
-  }
-
-  private void HandleRestoreHudInput()
-  {
-    if (!hudHiddenByTerminal || Keyboard.current == null || !Keyboard.current.escapeKey.wasPressedThisFrame)
-    {
-      return;
-    }
-
-    ShowHud();
   }
 
   private GameObject GetHudObject()

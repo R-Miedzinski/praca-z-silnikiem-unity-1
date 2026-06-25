@@ -24,6 +24,14 @@ public abstract class Enemy : Unit
     public float PatrolWaypointTolerance => patrolWaypointTolerance;
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
+    private void Awake()
+    {
+        if (GetComponent<EnemyRoomMember>() == null)
+        {
+            gameObject.AddComponent<EnemyRoomMember>();
+        }
+    }
+
     protected virtual void Start()
     {
         CurrentHealth = maxHealth;

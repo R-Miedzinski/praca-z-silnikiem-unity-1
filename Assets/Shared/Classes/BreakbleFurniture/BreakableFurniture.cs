@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DestroyBox : Unit
+public class BreakbleFurniture : Unit
 {
     public int CurrentHitCount { get { return currentHitCount; } }
     public int RequiredHitCount { get { return requiredHitCount; } }

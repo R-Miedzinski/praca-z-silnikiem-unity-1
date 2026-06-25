@@ -1,12 +1,11 @@
 using UnityEngine;
 
-// Door component that asks DoorRoomTransitionSystem to load the next room.
-public class RoomDoorTransition : MonoBehaviour, IInteractable
+// Door component that asks RoomTransitionSystem to load the next room.
+public class TransitionDoor : MonoBehaviour, IInteractable
 {
+  public bool IsEntranceDoor { get { return isEntranceDoor; } }
   public bool InteractOnContact { get { return true; } }
 
-  [SerializeField] private DoorRoomTransitionSystem transitionSystem;
-  [SerializeField] private SceneRoomMenago sceneRoomMenago;
   [SerializeField] private SpriteRenderer highlightRenderer;
   [SerializeField] private Color highlightColor = Color.yellow;
   [SerializeField]
@@ -19,20 +18,20 @@ public class RoomDoorTransition : MonoBehaviour, IInteractable
   [Tooltip("Distance from this entrance door toward the inside of the room when Player Spawn Point is not assigned.")]
   private float insideSpawnOffset = 2f;
 
+  private RoomTransitionSystem transitionSystem;
+  private RoomSceneManager sceneRoomMenago;
   private Color defaultColor;
-
-  public bool IsEntranceDoor { get { return isEntranceDoor; } }
 
   private void OnEnable()
   {
     if (transitionSystem == null)
     {
-      transitionSystem = DoorRoomTransitionSystem.Instance;
+      transitionSystem = RoomTransitionSystem.Instance;
     }
 
     if (sceneRoomMenago == null)
     {
-      sceneRoomMenago = SceneRoomMenago.GetOrCreate();
+      sceneRoomMenago = RoomSceneManager.GetOrCreate();
     }
 
     if (highlightRenderer == null)
@@ -79,39 +78,6 @@ public class RoomDoorTransition : MonoBehaviour, IInteractable
     }
   }
 
-  private bool CanTransition()
-  {
-    if (transitionSystem == null)
-    {
-      transitionSystem = FindAnyObjectByType<DoorRoomTransitionSystem>();
-    }
-
-    if (transitionSystem == null)
-    {
-      Debug.LogWarning("RoomDoorTransition cannot change rooms because DoorRoomTransitionSystem was not found.");
-      return false;
-    }
-
-    if (isEntranceDoor)
-    {
-      Debug.Log("This door is an entrance door and does not lead to the next room.");
-      return false;
-    }
-
-    if (sceneRoomMenago == null)
-    {
-      sceneRoomMenago = SceneRoomMenago.GetOrCreate();
-    }
-
-    if (sceneRoomMenago.HasAliveEnemyInRoom())
-    {
-      Debug.Log("Door is locked. Defeat all enemies in the room first.");
-      return false;
-    }
-
-    return true;
-  }
-
   public Vector3 GetPlayerSpawnPosition(Vector3 roomCenter, float defaultSpawnOffset)
   {
     if (playerSpawnPoint != null)
@@ -130,5 +96,38 @@ public class RoomDoorTransition : MonoBehaviour, IInteractable
     }
 
     return transform.position + insideDirection.normalized * spawnOffset;
+  }
+
+  private bool CanTransition()
+  {
+    if (transitionSystem == null)
+    {
+      transitionSystem = FindAnyObjectByType<RoomTransitionSystem>();
+    }
+
+    if (transitionSystem == null)
+    {
+      Debug.LogWarning("TransitionDoor cannot change rooms because RoomTransitionSystem was not found.");
+      return false;
+    }
+
+    if (isEntranceDoor)
+    {
+      Debug.Log("This door is an entrance door and does not lead to the next room.");
+      return false;
+    }
+
+    if (sceneRoomMenago == null)
+    {
+      sceneRoomMenago = RoomSceneManager.GetOrCreate();
+    }
+
+    if (sceneRoomMenago.HasAliveEnemyInRoom())
+    {
+      Debug.Log("Door is locked. Defeat all enemies in the room first.");
+      return false;
+    }
+
+    return true;
   }
 }

@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Shared room manager that checks if enemies are still alive.
-public class SceneRoomMenago : MonoBehaviour
+public class RoomSceneManager : MonoBehaviour
 {
-  public static SceneRoomMenago Instance { get; private set; }
+  public static RoomSceneManager Instance { get; private set; }
 
   private readonly HashSet<EnemyRoomMember> aliveEnemies = new HashSet<EnemyRoomMember>();
   private bool isSubscribed;
@@ -95,7 +95,7 @@ public class SceneRoomMenago : MonoBehaviour
     aliveEnemies.Add(enemy);
   }
 
-  public static SceneRoomMenago GetOrCreate()
+  public static RoomSceneManager GetOrCreate()
   {
     if (Instance != null)
     {
@@ -103,7 +103,7 @@ public class SceneRoomMenago : MonoBehaviour
     }
 
     // Reuse a manager already placed in the scene.
-    SceneRoomMenago sceneRoomMenago = FindAnyObjectByType<SceneRoomMenago>();
+    RoomSceneManager sceneRoomMenago = FindAnyObjectByType<RoomSceneManager>();
     if (sceneRoomMenago != null)
     {
       Instance = sceneRoomMenago;
@@ -111,6 +111,6 @@ public class SceneRoomMenago : MonoBehaviour
     }
 
     GameObject gameObject = new GameObject("Scene Room Menago");
-    return gameObject.AddComponent<SceneRoomMenago>();
+    return gameObject.AddComponent<RoomSceneManager>();
   }
 }

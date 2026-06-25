@@ -2,20 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Loads rooms from RoomOrder and moves the player between them.
-public class DoorRoomTransitionSystem : MonoBehaviour
+public class RoomTransitionSystem : MonoBehaviour
 {
-  public static DoorRoomTransitionSystem Instance { get; private set; }
-
-  [SerializeField] private RoomSelectionSystem roomSelectionSystem;
-  [SerializeField] private Transform roomParent;
-  [SerializeField] private PlayerCharacter player;
-  [SerializeField] private float playerSpawnOffset = 2f;
-
+  public static RoomTransitionSystem Instance { get; private set; }
   public int CurrentRoomIndex { get; private set; } = -1;
   public GameObject CurrentRoomInstance { get; private set; }
   public List<RoomDataObject> RoomOrder { get { return roomSelectionSystem != null ? roomSelectionSystem.RoomOrder : null; } }
 
-  private void OnEnable()
+  [SerializeField] private Transform roomParent;
+  [SerializeField] private float playerSpawnOffset = 2f;
+  private RoomSelectionSystem roomSelectionSystem;
+  private PlayerCharacter player;
+
+  private void Awake()
   {
     // Keep one scene transition system that owns the active room instance.
     if (Instance != null && Instance != this)
@@ -25,7 +24,10 @@ public class DoorRoomTransitionSystem : MonoBehaviour
     }
 
     Instance = this;
+  }
 
+  private void Start()
+  {
     roomSelectionSystem = GetOrCreateRoomSelectionSystem();
     roomSelectionSystem.InitializeRoomOrder();
     LoadFirstRoom();
@@ -51,20 +53,20 @@ public class DoorRoomTransitionSystem : MonoBehaviour
   {
     if (RoomOrder == null || RoomOrder.Count == 0)
     {
-      Debug.LogWarning("DoorRoomTransitionSystem cannot load a room because RoomOrder is empty.");
+      Debug.LogWarning("RoomTransitionSystem cannot load a room because RoomOrder is empty.");
       return false;
     }
 
     if (roomIndex < 0 || roomIndex >= RoomOrder.Count)
     {
-      Debug.LogWarning("DoorRoomTransitionSystem reached the end of RoomOrder.");
+      Debug.LogWarning("RoomTransitionSystem reached the end of RoomOrder.");
       return false;
     }
 
     RoomDataObject roomData = RoomOrder[roomIndex];
     if (roomData == null || roomData.RoomPrefab == null)
     {
-      Debug.LogWarning($"DoorRoomTransitionSystem cannot load room at index {roomIndex}.");
+      Debug.LogWarning($"RoomTransitionSystem cannot load room at index {roomIndex}.");
       return false;
     }
 
@@ -93,7 +95,7 @@ public class DoorRoomTransitionSystem : MonoBehaviour
       return;
     }
 
-    RoomDoorTransition entranceDoor = FindEntranceDoor();
+    TransitionDoor entranceDoor = FindEntranceDoor();
     if (entranceDoor != null)
     {
       // Entrance doors decide the exact spawn point.
@@ -105,7 +107,7 @@ public class DoorRoomTransitionSystem : MonoBehaviour
     player.transform.position = CurrentRoomInstance.transform.TransformPoint(roomData.SpawnPoint);
   }
 
-  private RoomDoorTransition FindEntranceDoor()
+  private TransitionDoor FindEntranceDoor()
   {
     if (CurrentRoomInstance == null)
     {
@@ -113,7 +115,7 @@ public class DoorRoomTransitionSystem : MonoBehaviour
     }
 
     // Designers mark entrance doors.
-    foreach (RoomDoorTransition door in CurrentRoomInstance.GetComponentsInChildren<RoomDoorTransition>())
+    foreach (TransitionDoor door in CurrentRoomInstance.GetComponentsInChildren<TransitionDoor>())
     {
       if (door != null && door.IsEntranceDoor)
       {
@@ -124,7 +126,7 @@ public class DoorRoomTransitionSystem : MonoBehaviour
     return null;
   }
 
-  private Vector3 GetPlayerSpawnPositionNearDoor(RoomDoorTransition door)
+  private Vector3 GetPlayerSpawnPositionNearDoor(TransitionDoor door)
   {
     if (door == null)
     {

@@ -8,11 +8,6 @@ public class SecondTerminalHandler : MonoBehaviour, ITerminalHandler
 
   private GameObject spawnedPauseMenu;
 
-  private void Update()
-  {
-    HandleClosePauseMenuInput();
-  }
-
   public void HandleTerminal(TerminalData terminalData, PlayerCharacter player)
   {
     OpenPauseMenu();
@@ -33,27 +28,6 @@ public class SecondTerminalHandler : MonoBehaviour, ITerminalHandler
     {
       menu.transform.localScale = Vector3.one;
     }
-  }
-
-  private void ClosePauseMenu()
-  {
-    GameObject menu = GetPauseMenu();
-    if (menu == null || !menu.activeSelf)
-    {
-      return;
-    }
-
-    menu.SetActive(false);
-  }
-
-  private void HandleClosePauseMenuInput()
-  {
-    if (Keyboard.current == null || !Keyboard.current.escapeKey.wasPressedThisFrame)
-    {
-      return;
-    }
-
-    ClosePauseMenu();
   }
 
   private GameObject GetPauseMenu()

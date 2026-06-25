@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class EquipmentTerminalHandler : MonoBehaviour, ITerminalHandler
 {
@@ -7,11 +6,6 @@ public class EquipmentTerminalHandler : MonoBehaviour, ITerminalHandler
   [SerializeField] private string equipmentMenuObjectName = "Equipment Menu";
 
   private GameObject spawnedEquipmentMenu;
-
-  private void Update()
-  {
-    HandleCloseEquipmentMenuInput();
-  }
 
   public void HandleTerminal(TerminalData terminalData, PlayerCharacter player)
   {
@@ -33,27 +27,6 @@ public class EquipmentTerminalHandler : MonoBehaviour, ITerminalHandler
     {
       menu.transform.localScale = Vector3.one;
     }
-  }
-
-  private void CloseEquipmentMenu()
-  {
-    GameObject menu = GetEquipmentMenu();
-    if (menu == null || !menu.activeSelf)
-    {
-      return;
-    }
-
-    menu.SetActive(false);
-  }
-
-  private void HandleCloseEquipmentMenuInput()
-  {
-    if (Keyboard.current == null || !Keyboard.current.escapeKey.wasPressedThisFrame)
-    {
-      return;
-    }
-
-    CloseEquipmentMenu();
   }
 
   private GameObject GetEquipmentMenu()
