@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "PlayerCharacterInput",
+    "name": "GlobalInputActionMaps",
     "maps": [
         {
             "name": "Player",
@@ -437,6 +437,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "78809348-6ef7-4809-9580-cb0757327c6d",
+            "actions": [
+                {
+                    "name": "MenuToggle",
+                    "type": "Button",
+                    "id": "6f4c995d-49a4-45ee-b084-a6fb5a917f41",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b66e5120-f42c-4ff5-b60b-953201b2d964",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

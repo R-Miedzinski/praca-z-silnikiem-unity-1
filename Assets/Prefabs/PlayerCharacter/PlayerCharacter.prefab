@@ -114,6 +114,7 @@ MonoBehaviour:
   cooldownReduction: 0
   armor: 0
   armorModifier: 1
+  canMove: 1
   maxHeat: 0
   targetingWidget: {fileID: 0}
 --- !u!114 &1324519941461058897
