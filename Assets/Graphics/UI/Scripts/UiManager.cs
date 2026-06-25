@@ -21,7 +21,6 @@ public class UIManager : MonoBehaviour
         HuD.SetCurrentHpSliderValue(PlayerCharacter.Instance.CurrentHealth);
         HuD.SetMaxHeatSliderValue(PlayerCharacter.Instance.MaxHeat);
         HuD.SetHeatSliderValue(PlayerCharacter.Instance.Heat);
-        HuD.SetLevelName("level1");
     }
 
     private void OnEnable()
@@ -41,6 +40,8 @@ public class UIManager : MonoBehaviour
         HuD.SetCurrentHpSliderValue(PlayerCharacter.Instance.CurrentHealth);
         HuD.SetMaxHeatSliderValue(PlayerCharacter.Instance.MaxHeat);
         HuD.SetHeatSliderValue(PlayerCharacter.Instance.Heat);
+        // TODO: Create a way to set the level name that doesn't have to refresh constantly
+        HuD.SetLevelName(RoomSelectionSystem.Instance.RoomOrder[RoomTransitionSystem.Instance.CurrentRoomIndex].RoomName);
     }
 
     public void OnMenuToggleClick(UnityEngine.InputSystem.InputAction.CallbackContext context)
