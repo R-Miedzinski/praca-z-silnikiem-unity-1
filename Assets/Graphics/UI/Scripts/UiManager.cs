@@ -29,6 +29,11 @@ public class UIManager : MonoBehaviour
         InterfaceInput.FindAction("MenuToggle").performed += OnMenuToggleClick;
         InterfaceInput.FindAction("EquipmentToggle").performed += OnBackpackToggleClick;
     }
+    private void OnDisable()
+    {
+        InterfaceInput.FindAction("MenuToggle").performed -= OnMenuToggleClick;
+        InterfaceInput.FindAction("EquipmentToggle").performed -= OnBackpackToggleClick;
+    }
 
     private void Update()
     {
