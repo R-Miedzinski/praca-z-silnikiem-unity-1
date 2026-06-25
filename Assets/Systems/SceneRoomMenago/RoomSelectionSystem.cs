@@ -11,8 +11,8 @@ public class RoomSelectionSystem : MonoBehaviour
 
   // Other scripts can read the same generated room order from this instance.
   public static RoomSelectionSystem Instance { get; private set; }
-  [SerializeField] private List<RoomDataObject> availableRooms = new List<RoomDataObject>();
-  public List<RoomDataObject> RoomOrder = new List<RoomDataObject>();
+  [HideInInspector] public List<RoomDataObject> RoomOrder = new List<RoomDataObject>();
+  private List<RoomDataObject> availableRooms = new List<RoomDataObject>();
 
   private void Awake()
   {
