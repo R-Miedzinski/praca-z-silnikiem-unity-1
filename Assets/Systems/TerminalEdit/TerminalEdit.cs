@@ -7,7 +7,7 @@ public class TerminalEdit : MonoBehaviour, IInteractable
   public bool InteractOnContact { get { return false; } }
 
   [SerializeField] private TerminalData terminalData;
-  [SerializeField] private SceneRoomMenago sceneRoomMenago;
+  [SerializeField] private RoomSceneManager sceneRoomMenago;
   [SerializeField] private SpriteRenderer terminalRenderer;
   [SerializeField] private Color unlockedHighlightColor = Color.cyan;
   [SerializeField] private Color lockedHighlightColor = Color.red;
@@ -27,7 +27,7 @@ public class TerminalEdit : MonoBehaviour, IInteractable
     if (sceneRoomMenago == null)
     {
       // Enemy checks.
-      sceneRoomMenago = SceneRoomMenago.GetOrCreate();
+      sceneRoomMenago = RoomSceneManager.GetOrCreate();
     }
 
     if (terminalRenderer != null)
@@ -47,7 +47,7 @@ public class TerminalEdit : MonoBehaviour, IInteractable
   private void Reset()
   {
     terminalRenderer = GetComponentInChildren<SpriteRenderer>();
-    sceneRoomMenago = FindAnyObjectByType<SceneRoomMenago>();
+    sceneRoomMenago = FindAnyObjectByType<RoomSceneManager>();
   }
 
   public void Interact(PlayerCharacter player)

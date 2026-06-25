@@ -114,6 +114,7 @@ MonoBehaviour:
   cooldownReduction: 0
   armor: 0
   armorModifier: 1
+  canMove: 1
   maxHeat: 0
   targetingWidget: {fileID: 0}
 --- !u!114 &1324519941461058897
@@ -161,7 +162,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 72
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 55
@@ -251,10 +252,10 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 200
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 127
+    m_Bits: 55
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

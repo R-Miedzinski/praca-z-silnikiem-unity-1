@@ -2,9 +2,16 @@ public class HealEffect : Effect, IParametrizedEffect
 {
   private float healAmount;
 
-  public void SetParameters(EffectParamsData parameters)
+  public void SetParameters(string[] parameters)
   {
-    healAmount = parameters.Value;
+    if (parameters.Length > 0 && EffectsUtils.TryParseFloat(parameters[0], out float result))
+    {
+      healAmount = result;
+    }
+    else
+    {
+    EffectsUtils.InvalidParameters(0, "float (healAmount)");
+    }
   }
 
   public override void ApplyEffect(Unit caster, Unit target)

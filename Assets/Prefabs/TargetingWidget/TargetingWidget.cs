@@ -5,31 +5,18 @@ public class TargetingWidget : MonoBehaviour
 {
     [SerializeField] private Color color = Color.red;
     private SpriteRenderer spriteRenderer;
-    InputAction mouseTracker;
 
-    void Awake()
+    private void Awake()
     {
-        mouseTracker = new InputAction("MouseTracker", binding: "<Mouse>/position");
         spriteRenderer = GameObject.Find("Target").GetComponent<SpriteRenderer>();
         spriteRenderer.color = color;
     }
 
-    void OnEnable()
+    private void Update()
     {
-        mouseTracker.Enable();
-        mouseTracker.performed += UpdateWidgetPosition;
-    }
-
-    void OnDisable()
-    {
-        mouseTracker.Disable();
-        mouseTracker.performed -= UpdateWidgetPosition;
-    }
-
-    private void UpdateWidgetPosition(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        Vector3 mousePosition = context.ReadValue<Vector2>();
-        mousePosition.z = -Camera.main.transform.position.z;
+        // Update the widget's position to follow the mouse cursor
+        Vector3 mousePosition = Mouse.current.position.ReadValue();
+        mousePosition.z = -Camera.main.transform.position.z; // Set z to camera's distance
         transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
     }
 }

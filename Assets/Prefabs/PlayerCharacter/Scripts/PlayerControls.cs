@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerControls : MonoBehaviour
     public delegate void SwapLoadout();
     public event SwapLoadout OnSwapLoadout;
 
-    private PlayerCharacterInput playerInput;
+    private InputActionMap playerInput;
     private bool isUsingHoldItem1;
     private bool isUsingHoldItem2;
     private bool isUsingHoldItem3;
@@ -23,7 +24,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Awake()
     {
-        playerInput = new PlayerCharacterInput();
+        playerInput = InputSystem.actions.FindActionMap("Player");
         isUsingHoldItem1 = false;
         isUsingHoldItem2 = false;
         isUsingHoldItem3 = false;
@@ -33,98 +34,96 @@ public class PlayerControls : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput.Enable();
-
         // ******
         // Enable Item 1 actions
         // ******
-        playerInput.Player.UseHoldItem1.performed += HandleUseHoldItem1Performed;
-        playerInput.Player.UseHoldItem1.canceled += HandleUseHoldItem1Cancelled;
-        playerInput.Player.UseAltItem1.performed += HandleUseAltItem1;
-        playerInput.Player.UseItem1.performed += HandleUseItem1;
+        playerInput.FindAction("UseHoldItem1").performed += HandleUseHoldItem1Performed;
+        playerInput.FindAction("UseHoldItem1").canceled += HandleUseHoldItem1Cancelled;
+        playerInput.FindAction("UseAltItem1").performed += HandleUseAltItem1;
+        playerInput.FindAction("UseItem1").performed += HandleUseItem1;
         // ******
         // Enable Item 2 actions
         // ******
-        playerInput.Player.UseHoldItem2.performed += HandleUseHoldItem2Performed;
-        playerInput.Player.UseHoldItem2.canceled += HandleUseHoldItem2Cancelled;
-        playerInput.Player.UseAltItem2.performed += HandleUseAltItem2;
-        playerInput.Player.UseItem2.performed += HandleUseItem2;
+        playerInput.FindAction("UseHoldItem2").performed += HandleUseHoldItem2Performed;
+        playerInput.FindAction("UseHoldItem2").canceled += HandleUseHoldItem2Cancelled;
+        playerInput.FindAction("UseAltItem2").performed += HandleUseAltItem2;
+        playerInput.FindAction("UseItem2").performed += HandleUseItem2;
         // ******
         // Enable Item 3 actions
         // ******
-        playerInput.Player.UseHoldItem3.performed += HandleUseHoldItem3Performed;
-        playerInput.Player.UseHoldItem3.canceled += HandleUseHoldItem3Cancelled;
-        playerInput.Player.UseAltItem3.performed += HandleUseAltItem3;
+        playerInput.FindAction("UseHoldItem3").performed += HandleUseHoldItem3Performed;
+        playerInput.FindAction("UseHoldItem3").canceled += HandleUseHoldItem3Cancelled;
+        playerInput.FindAction("UseAltItem3").performed += HandleUseAltItem3;
         // ******
         // Enable Right Hand actions
         // ******
-        playerInput.Player.UseHoldHandRight.performed += HandleUseHoldHandRightPerformed;
-        playerInput.Player.UseHoldHandRight.canceled += HandleUseHoldHandRightCancelled;
-        playerInput.Player.UseAltHandRight.performed += HandleUseAltHandRight;
-        playerInput.Player.UseHandRight.performed += HandleUseHandRight;
+        playerInput.FindAction("UseHoldHandRight").performed += HandleUseHoldHandRightPerformed;
+        playerInput.FindAction("UseHoldHandRight").canceled += HandleUseHoldHandRightCancelled;
+        playerInput.FindAction("UseAltHandRight").performed += HandleUseAltHandRight;
+        playerInput.FindAction("UseHandRight").performed += HandleUseHandRight;
         // ******
         // Enable Left Hand actions
         // ******
-        playerInput.Player.UseHoldHandLeft.performed += HandleUseHoldHandLeftPerformed;
-        playerInput.Player.UseHoldHandLeft.canceled += HandleUseHoldHandLeftCancelled;
-        playerInput.Player.UseAltHandLeft.performed += HandleUseAltHandLeft;
-        playerInput.Player.UseHandLeft.performed += HandleUseHandLeft;
+        playerInput.FindAction("UseHoldHandLeft").performed += HandleUseHoldHandLeftPerformed;
+        playerInput.FindAction("UseHoldHandLeft").canceled += HandleUseHoldHandLeftCancelled;
+        playerInput.FindAction("UseAltHandLeft").performed += HandleUseAltHandLeft;
+        playerInput.FindAction("UseHandLeft").performed += HandleUseHandLeft;
         // ******
         // Enable Interact actions
         // ******
-        playerInput.Player.Interact.performed += HandleInteract;
+        playerInput.FindAction("Interact").performed += HandleInteract;
         // ******
         // Enable Swap Loadout actions
         // ******
-        playerInput.Player.SwapLoadout.performed += HandleSwapLoadout;
+        playerInput.FindAction("SwapLoadout").performed += HandleSwapLoadout;
     }
 
     private void OnDisable()
     {
-        playerInput.Disable();
+        // playerInput.Disable();
         // ******
         // Disable Item 1 actions
         // ******
-        playerInput.Player.UseHoldItem1.performed -= HandleUseHoldItem1Performed;
-        playerInput.Player.UseHoldItem1.canceled -= HandleUseHoldItem1Cancelled;
-        playerInput.Player.UseAltItem1.performed -= HandleUseAltItem1;
-        playerInput.Player.UseItem1.performed -= HandleUseItem1;
+        playerInput.FindAction("UseHoldItem1").performed -= HandleUseHoldItem1Performed;
+        playerInput.FindAction("UseHoldItem1").canceled -= HandleUseHoldItem1Cancelled;
+        playerInput.FindAction("UseAltItem1").performed -= HandleUseAltItem1;
+        playerInput.FindAction("UseItem1").performed -= HandleUseItem1;
         // ******
         // Disable Item 2 actions
         // ******
-        playerInput.Player.UseHoldItem2.performed -= HandleUseHoldItem2Performed;
-        playerInput.Player.UseHoldItem2.canceled -= HandleUseHoldItem2Cancelled;
-        playerInput.Player.UseAltItem2.performed -= HandleUseAltItem2;
-        playerInput.Player.UseItem2.performed -= HandleUseItem2;
+        playerInput.FindAction("UseHoldItem2").performed -= HandleUseHoldItem2Performed;
+        playerInput.FindAction("UseHoldItem2").canceled -= HandleUseHoldItem2Cancelled;
+        playerInput.FindAction("UseAltItem2").performed -= HandleUseAltItem2;
+        playerInput.FindAction("UseItem2").performed -= HandleUseItem2;
         // ******
         // Disable Item 3 actions
         // ******
-        playerInput.Player.UseHoldItem3.performed -= HandleUseHoldItem3Performed;
-        playerInput.Player.UseHoldItem3.canceled -= HandleUseHoldItem3Cancelled;
-        playerInput.Player.UseAltItem3.performed -= HandleUseAltItem3;
-        playerInput.Player.UseItem3.performed -= HandleUseItem3;
+        playerInput.FindAction("UseHoldItem3").performed -= HandleUseHoldItem3Performed;
+        playerInput.FindAction("UseHoldItem3").canceled -= HandleUseHoldItem3Cancelled;
+        playerInput.FindAction("UseAltItem3").performed -= HandleUseAltItem3;
+        playerInput.FindAction("UseItem3").performed -= HandleUseItem3;
         // ******
         // Disable Right Hand actions
         // ******
-        playerInput.Player.UseHoldHandRight.performed -= HandleUseHoldHandRightPerformed;
-        playerInput.Player.UseHoldHandRight.canceled -= HandleUseHoldHandRightCancelled;
-        playerInput.Player.UseAltHandRight.performed -= HandleUseAltHandRight;
-        playerInput.Player.UseHandRight.performed -= HandleUseHandRight;
+        playerInput.FindAction("UseHoldHandRight").performed -= HandleUseHoldHandRightPerformed;
+        playerInput.FindAction("UseHoldHandRight").canceled -= HandleUseHoldHandRightCancelled;
+        playerInput.FindAction("UseAltHandRight").performed -= HandleUseAltHandRight;
+        playerInput.FindAction("UseHandRight").performed -= HandleUseHandRight;
         // ******
         // Disable Left Hand actions
         // ******
-        playerInput.Player.UseHoldHandLeft.performed -= HandleUseHoldHandLeftPerformed;
-        playerInput.Player.UseHoldHandLeft.canceled -= HandleUseHoldHandLeftCancelled;
-        playerInput.Player.UseAltHandLeft.performed -= HandleUseAltHandLeft;
-        playerInput.Player.UseHandLeft.performed -= HandleUseHandLeft;
+        playerInput.FindAction("UseHoldHandLeft").performed -= HandleUseHoldHandLeftPerformed;
+        playerInput.FindAction("UseHoldHandLeft").canceled -= HandleUseHoldHandLeftCancelled;
+        playerInput.FindAction("UseAltHandLeft").performed -= HandleUseAltHandLeft;
+        playerInput.FindAction("UseHandLeft").performed -= HandleUseHandLeft;
         // ******
         // Disable Interact actions 
         // ******
-        playerInput.Player.Interact.performed -= HandleInteract;
+        playerInput.FindAction("Interact").performed -= HandleInteract;
         // ******
         // Disable Swap Loadout actions
         // ******
-        playerInput.Player.SwapLoadout.performed -= HandleSwapLoadout;
+        playerInput.FindAction("SwapLoadout").performed -= HandleSwapLoadout;
     }
 
     private void Update()
@@ -134,7 +133,7 @@ public class PlayerControls : MonoBehaviour
 
     private void HandleMove()
     {
-        Vector2 movementInput = playerInput.Player.Move.ReadValue<Vector2>();
+        Vector2 movementInput = playerInput.FindAction("Move").ReadValue<Vector2>();
         OnMove?.Invoke(movementInput);
     }
 

@@ -49,7 +49,7 @@ public class TerminalSwitchSystem : MonoBehaviour
       return;
     }
 
-    TerminalEdit.TerminalInteracted -= HandleTerminalInteracted;
+    // TerminalEdit.TerminalInteracted -= HandleTerminalInteracted;
     TerminalEdit.TerminalInteracted += HandleTerminalInteracted;
     isSubscribed = true;
   }

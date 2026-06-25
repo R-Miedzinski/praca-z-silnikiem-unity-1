@@ -1,22 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
 // Builds one randomized room route for the current game run.
 public class RoomSelectionSystem : MonoBehaviour
 {
-  // Room data assets are stored here and collected when the game starts.
-  private const string RoomsDataPath = "Assets/DataObjects/Rooms";
+  // Path is relative to any folder named Resources.
+  private const string RoomsResourcesPath = "DataObjects/Rooms";
   private const string FirstRoomName = "Docking Airlock";
   private const string LastRoomName = "Energy Core";
 
   // Other scripts can read the same generated room order from this instance.
   public static RoomSelectionSystem Instance { get; private set; }
-  [SerializeField] private List<RoomDataObject> availableRooms = new List<RoomDataObject>();
-  public List<RoomDataObject> RoomOrder = new List<RoomDataObject>();
+  [HideInInspector] public List<RoomDataObject> RoomOrder = new List<RoomDataObject>();
+  private List<RoomDataObject> availableRooms = new List<RoomDataObject>();
 
   private void Awake()
   {
@@ -45,9 +41,7 @@ public class RoomSelectionSystem : MonoBehaviour
 
   private RoomDataObject[] LoadRooms()
   {
-#if UNITY_EDITOR
-    RefreshAvailableRoomsFromAssetDatabase();
-#endif
+    availableRooms = new List<RoomDataObject>(Resources.LoadAll<RoomDataObject>(RoomsResourcesPath));
 
     return GetValidAvailableRooms().ToArray();
   }
@@ -76,7 +70,7 @@ public class RoomSelectionSystem : MonoBehaviour
 
     if (availableRooms == null || availableRooms.Count == 0)
     {
-      Debug.LogWarning("RoomSelectionSystem has no available rooms assigned.");
+      Debug.LogWarning($"RoomSelectionSystem did not find any rooms in Resources/{RoomsResourcesPath}.");
       return validRooms;
     }
 
@@ -203,32 +197,4 @@ public class RoomSelectionSystem : MonoBehaviour
       rooms[randomIndex] = currentRoom;
     }
   }
-
-#if UNITY_EDITOR
-  private void OnValidate()
-  {
-    RefreshAvailableRoomsFromAssetDatabase();
-  }
-
-  private void RefreshAvailableRoomsFromAssetDatabase()
-  {
-    if (availableRooms == null)
-    {
-      availableRooms = new List<RoomDataObject>();
-    }
-
-    availableRooms.Clear();
-    string[] roomGuids = AssetDatabase.FindAssets("t:RoomDataObject", new[] { RoomsDataPath });
-
-    foreach (string roomGuid in roomGuids)
-    {
-      string roomPath = AssetDatabase.GUIDToAssetPath(roomGuid);
-      RoomDataObject room = AssetDatabase.LoadAssetAtPath<RoomDataObject>(roomPath);
-      if (room != null)
-      {
-        availableRooms.Add(room);
-      }
-    }
-  }
-#endif
 }
