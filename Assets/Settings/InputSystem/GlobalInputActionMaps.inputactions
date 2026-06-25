@@ -443,13 +443,22 @@
             ]
         },
         {
-            "name": "UI",
+            "name": "Interface",
             "id": "78809348-6ef7-4809-9580-cb0757327c6d",
             "actions": [
                 {
                     "name": "MenuToggle",
                     "type": "Button",
                     "id": "6f4c995d-49a4-45ee-b084-a6fb5a917f41",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EquipmentToggle",
+                    "type": "Button",
+                    "id": "edd12eac-c920-407b-a7e2-9e3ecce4b7b8",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -465,6 +474,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MenuToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3cac330-a180-4351-9ef8-e7330549cf15",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipmentToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
