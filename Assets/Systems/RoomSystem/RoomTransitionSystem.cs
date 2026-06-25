@@ -14,7 +14,7 @@ public class RoomTransitionSystem : MonoBehaviour
   private RoomSelectionSystem roomSelectionSystem;
   private PlayerCharacter player;
 
-  private void OnEnable()
+  private void Awake()
   {
     // Keep one scene transition system that owns the active room instance.
     if (Instance != null && Instance != this)
@@ -24,7 +24,10 @@ public class RoomTransitionSystem : MonoBehaviour
     }
 
     Instance = this;
+  }
 
+  private void Start()
+  {
     roomSelectionSystem = GetOrCreateRoomSelectionSystem();
     roomSelectionSystem.InitializeRoomOrder();
     LoadFirstRoom();
