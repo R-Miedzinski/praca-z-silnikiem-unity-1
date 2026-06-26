@@ -19,6 +19,6 @@ MonoBehaviour:
     - Hello
   - EffectId: slow
     EffectParams:
-    - 100
+    - -100
     - 3
   InteractOnContact: 0

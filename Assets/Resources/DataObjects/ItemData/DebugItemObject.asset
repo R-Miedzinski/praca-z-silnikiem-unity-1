@@ -36,20 +36,20 @@ MonoBehaviour:
       TargetCaster: 1
     IsTogglable: 0
   - Effects:
-    - EffectId: slow
+    - EffectId: deal_damage
       EffectParams:
-      - 80
+      - 5.0
     EffectTriggers: 00000000
-    Cooldown: 0
+    Cooldown: 1
     Charges: -1
     TargetingMode:
-      TargetingType: 0
-      Range: 0.1
-      TravelTime: 0
+      TargetingType: 3
+      Range: 10
+      TravelTime: 1
       Angle: 0
       AllowMultipleTargets: 0
-      TargetCaster: 1
-    IsTogglable: 1
+      TargetCaster: 0
+    IsTogglable: 0
   - Effects:
     - EffectId: push_away
       EffectParams:

@@ -55,13 +55,17 @@ MonoBehaviour:
   damageModifier: 1
   cooldownReduction: 0
   armor: 0
-  armorModifier: 1
+  armorModifier: 0
+  canMove: 1
   detectionRange: 8
   attackRange: 1.5
   patrolRadius: 5
   patrolWaypointTolerance: 0.3
   attackCooldown: 1.5
-  damageMultiplier: 1
+  attackEffects:
+  - EffectId: push_away
+    EffectParams:
+    - 2
 --- !u!50 &8547876267883925538
 Rigidbody2D:
   serializedVersion: 5
@@ -123,8 +127,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
+  m_Offset: {x: 0.087340176, y: 0.10077417}
+  m_Size: {x: 1.991511, y: 5.52546}
   m_Direction: 0
 --- !u!212 &8083491919516036277
 SpriteRenderer:
