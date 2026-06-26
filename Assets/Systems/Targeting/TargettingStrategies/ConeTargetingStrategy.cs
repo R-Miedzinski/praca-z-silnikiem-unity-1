@@ -51,11 +51,11 @@ public class ConeTargetingStrategy : TargetingStrategy
       float x = center.x + Mathf.Cos(currentAngle + frontAngle) * radius;
       float y = center.y + Mathf.Sin(currentAngle + frontAngle) * radius;
       Vector3 point = new Vector3(x, y, center.z);
-      Debug.DrawLine(lastPoint, point, color, duration);
+      DrawDebugLine(lastPoint, point, color, duration);
 
       lastPoint = point;
       currentAngle += angleStep;
     }
-    Debug.DrawLine(lastPoint, center, color, duration);
+    DrawDebugLine(lastPoint, center, color, duration);
   }
 }

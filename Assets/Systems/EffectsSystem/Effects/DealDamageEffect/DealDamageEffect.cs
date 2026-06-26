@@ -13,7 +13,7 @@ public class DealDamageEffect : Effect, IParametrizedEffect
     }
     else
     {
-    EffectsUtils.InvalidParameters(0, "float (damageMultiplier)");
+      EffectsUtils.InvalidParameters(0, "float (damageMultiplier)");
     }
   }
 

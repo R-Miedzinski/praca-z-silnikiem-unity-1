@@ -12,14 +12,18 @@ public class DashEffect : Effect, IParametrizedEffect
     }
     else
     {
-    EffectsUtils.InvalidParameters(0, "float (dashDistance)");
+      EffectsUtils.InvalidParameters(0, "float (dashDistance)");
     }
   }
 
   public override void ApplyEffect(Unit caster, Unit target)
   {
     Vector2 dashDirection = target.FrontDirection;
-    Vector2 newPosition = (Vector2)target.transform.position + dashDirection * dashDistance;
+    Vector2 targetedPosition = (Vector2)target.transform.position + dashDirection * dashDistance;
+
+    // Check for obstacles in the dash direction
+    RaycastHit2D hit = Physics2D.Raycast(target.transform.position, dashDirection, dashDistance, LayerMask.GetMask("Environment"));
+    Vector2 newPosition = hit.collider != null ? hit.point : targetedPosition;
 
     target.transform.position = newPosition;
   }

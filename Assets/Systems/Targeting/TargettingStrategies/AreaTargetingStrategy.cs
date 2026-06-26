@@ -44,7 +44,7 @@ public class AreaTargetingStrategy : TargetingStrategy
       float x = center.x + Mathf.Cos(angle) * radius;
       float y = center.y + Mathf.Sin(angle) * radius;
       Vector3 point = new Vector3(x, y, center.z);
-      Debug.DrawLine(lastPoint, point, color, duration);
+      DrawDebugLine(lastPoint, point, color, duration);
 
       lastPoint = point;
       angle += 2 * Mathf.PI / segments;

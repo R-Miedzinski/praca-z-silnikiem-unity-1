@@ -25,7 +25,7 @@ public class ProjectileTargetingStrategy : TargetingStrategy
       Vector3 currentPosition = Vector3.Lerp(from, to, t);
 
       // draw debug line
-      Debug.DrawLine(previousPosition, currentPosition, Color.green, 0.2f);
+      DrawDebugLine(previousPosition, currentPosition, Color.green, 0.2f);
 
       RaycastHit2D[] hits = Physics2D.RaycastAll(previousPosition, (to - from).normalized, (currentPosition - previousPosition).magnitude);
       foreach (var hit in hits)

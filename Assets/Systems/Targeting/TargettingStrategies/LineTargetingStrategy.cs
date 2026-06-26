@@ -10,7 +10,7 @@ public class LineTargetingStrategy : TargetingStrategy
     RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, targetingMode.Range);
 
     // draw debug line
-    Debug.DrawLine(origin, origin + direction * targetingMode.Range, Color.red, 1f);
+    DrawDebugLine(origin, origin + direction * targetingMode.Range, Color.red, 1f);
 
     List<Unit> units = new List<Unit>();
     foreach (var hit in hits)
