@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class EquipmentTerminalHandler : MonoBehaviour, ITerminalHandler
 {
-  [SerializeField] private GameObject equipmentMenu;
-  [SerializeField] private string equipmentMenuObjectName = "Equipment Menu";
-
-  private GameObject spawnedEquipmentMenu;
+  [SerializeField] private UIManager uiManager;
 
   public void HandleTerminal(TerminalData terminalData, PlayerCharacter player)
   {
@@ -14,65 +11,29 @@ public class EquipmentTerminalHandler : MonoBehaviour, ITerminalHandler
 
   private void OpenEquipmentMenu()
   {
-    GameObject menu = GetEquipmentMenu();
-    if (menu == null)
+    UIManager uiManager = GetUIManager();
+    if (uiManager == null)
     {
-      Debug.LogWarning($"Equipment Menu is not assigned to EquipmentTerminalHandler and no loaded scene object named '{equipmentMenuObjectName}' was found.", this);
+      Debug.LogWarning($"{nameof(EquipmentTerminalHandler)} cannot open Equipment Menu because no UIManager is assigned or instantiated.", this);
       return;
     }
 
-    menu.SetActive(true);
-
-    if (menu.transform.localScale == Vector3.zero)
-    {
-      menu.transform.localScale = Vector3.one;
-    }
+    uiManager.OnBackpackClick();
   }
 
-  private GameObject GetEquipmentMenu()
+  private UIManager GetUIManager()
   {
-    if (spawnedEquipmentMenu != null)
+    if (uiManager != null)
     {
-      return spawnedEquipmentMenu;
+      return uiManager;
     }
 
-    if (equipmentMenu == null)
+    if (uiManager == null)
     {
-      // Allows the handler use a menu already placed in the scene.
-      equipmentMenu = FindEquipmentMenuInLoadedScenes();
+      // Allows the handler to use a UIManager instance already placed in the scene.
+      uiManager = UIManager.Instance;
     }
 
-    if (equipmentMenu == null)
-    {
-      return null;
-    }
-
-    if (equipmentMenu.scene.IsValid() && equipmentMenu.scene.isLoaded)
-    {
-      return equipmentMenu;
-    }
-
-    spawnedEquipmentMenu = Instantiate(equipmentMenu);
-    return spawnedEquipmentMenu;
-  }
-
-  private GameObject FindEquipmentMenuInLoadedScenes()
-  {
-    foreach (GameObject candidate in Resources.FindObjectsOfTypeAll<GameObject>())
-    {
-      if (candidate.name != equipmentMenuObjectName)
-      {
-        continue;
-      }
-
-      if (!candidate.scene.IsValid() || !candidate.scene.isLoaded)
-      {
-        continue;
-      }
-
-      return candidate;
-    }
-
-    return null;
+    return uiManager;
   }
 }

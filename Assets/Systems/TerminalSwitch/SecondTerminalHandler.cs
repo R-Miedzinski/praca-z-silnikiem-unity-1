@@ -3,10 +3,7 @@ using UnityEngine.InputSystem;
 
 public class SecondTerminalHandler : MonoBehaviour, ITerminalHandler
 {
-  [SerializeField] private GameObject pauseMenu;
-  [SerializeField] private string pauseMenuObjectName = "Pause Menu";
-
-  private GameObject spawnedPauseMenu;
+  [SerializeField] private UIManager uiManager;
 
   public void HandleTerminal(TerminalData terminalData, PlayerCharacter player)
   {
@@ -15,64 +12,28 @@ public class SecondTerminalHandler : MonoBehaviour, ITerminalHandler
 
   private void OpenPauseMenu()
   {
-    GameObject menu = GetPauseMenu();
-    if (menu == null)
+    UIManager uiManager = GetUIManager();
+    if (uiManager == null)
     {
-      Debug.LogWarning($"{nameof(SecondTerminalHandler)} cannot open Pause Menu because no assigned object or loaded scene object named '{pauseMenuObjectName}' was found.", this);
+      Debug.LogWarning($"{nameof(SecondTerminalHandler)} cannot open Pause Menu because no UIManager is assigned or instantiated.", this);
       return;
     }
 
-    menu.SetActive(true);
-
-    if (menu.transform.localScale == Vector3.zero)
-    {
-      menu.transform.localScale = Vector3.one;
-    }
+    uiManager.OnMenuClick();
   }
 
-  private GameObject GetPauseMenu()
+  private UIManager GetUIManager()
   {
-    if (spawnedPauseMenu != null)
+    if (uiManager != null)
     {
-      return spawnedPauseMenu;
+      return uiManager;
     }
 
-    if (pauseMenu == null)
+    if (uiManager == null)
     {
-      pauseMenu = FindPauseMenuInLoadedScenes();
+      uiManager = UIManager.Instance;
     }
 
-    if (pauseMenu == null)
-    {
-      return null;
-    }
-
-    if (pauseMenu.scene.IsValid() && pauseMenu.scene.isLoaded)
-    {
-      return pauseMenu;
-    }
-
-    spawnedPauseMenu = Instantiate(pauseMenu);
-    return spawnedPauseMenu;
-  }
-
-  private GameObject FindPauseMenuInLoadedScenes()
-  {
-    foreach (GameObject candidate in Resources.FindObjectsOfTypeAll<GameObject>())
-    {
-      if (candidate.name != pauseMenuObjectName)
-      {
-        continue;
-      }
-
-      if (!candidate.scene.IsValid() || !candidate.scene.isLoaded)
-      {
-        continue;
-      }
-
-      return candidate;
-    }
-
-    return null;
+    return uiManager;
   }
 }
