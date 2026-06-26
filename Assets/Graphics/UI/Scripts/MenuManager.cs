@@ -5,17 +5,17 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private Canvas MainMenu;
 
-    private void OnPlayClick() 
+    public void OnPlayClick()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
     }
 
-    private void OnSettingsClick()
+    public void OnSettingsClick()
     {
 
     }
 
-    private void OnQuitClick()
+    public void OnQuitClick()
     {
         Application.Quit();
     }

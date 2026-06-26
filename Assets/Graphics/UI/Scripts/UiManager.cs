@@ -1,18 +1,34 @@
-using JetBrains.Annotations;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+    [HideInInspector] public bool IsPaused { get; private set; }
     [SerializeField] private Canvas PauseMenu;
     [SerializeField] private Canvas Backpack;
     [SerializeField] private HuDManager HuD;
+
     private InputActionMap InterfaceInput;
+    private int pauseInstanceCount = 0;
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         InterfaceInput = InputSystem.actions.FindActionMap("Interface");
+
+        Unpause();
+        pauseInstanceCount = 0;
     }
 
     private void Start()
@@ -70,50 +86,85 @@ public class UIManager : MonoBehaviour
 
     public void OnMenuClick()
     {
-        PauseMenu.enabled = (true);
+        if (PauseMenu.enabled)
+        {
+            return;
+        }
+
+        PauseMenu.enabled = true;
         Pause();
     }
 
-    public void OnResumeClick() 
+    public void OnResumeClick()
     {
-        PauseMenu.enabled = (false);
+        if (!PauseMenu.enabled)
+        {
+            return;
+        }
+
+        PauseMenu.enabled = false;
         Unpause();
     }
 
     public void OnBackpackClick()
     {
-        Backpack.enabled = (true);
+        if (Backpack.enabled)
+        {
+            return;
+        }
+
+        Backpack.enabled = true;
         Pause();
     }
 
     public void OnBackpackCloseClick()
     {
-        Backpack.enabled = (false);
+        if (!Backpack.enabled)
+        {
+            return;
+        }
+
+        Backpack.enabled = false;
         Unpause();
     }
 
-    public void OnAbandonRunClick() 
+    public void OnAbandonRunClick()
     {
-
+        // TODO: Create specific abandon run flow
+        OnMainMenuClick();
     }
 
-    public void OnMainMenuClick() 
+    public void OnMainMenuClick()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
-    public void OnExitClick() 
+    public void OnExitClick()
     {
         Application.Quit();
     }
 
     private void Pause()
     {
+        pauseInstanceCount++;
+        if (pauseInstanceCount > 1)
+        {
+            return;
+        }
+
         Time.timeScale = 0f;
+        IsPaused = true;
     }
 
     private void Unpause()
     {
+        pauseInstanceCount--;
+        if (pauseInstanceCount > 0)
+        {
+            return;
+        }
+
         Time.timeScale = 1f;
+        IsPaused = false;
     }
 }
