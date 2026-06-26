@@ -1,8 +1,8 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class PlayerCharacter : Unit
 {
+    private const float MOVEMENT_CORRECTION_OFFSET = 1.1f; // slight buffer added to ensure collision is detected
     public float Heat { get { return heat; } set { heat = Mathf.Clamp(value, 0, maxHeat); } }
     public float MaxHeat { get { return maxHeat; } }
     public TargetingWidget TargetingWidget { get { return targetingWidget; } }
@@ -127,7 +127,7 @@ public class PlayerCharacter : Unit
     private Vector2 CorrectMovementInputForCollisions(Vector2 movementInput2D, float movementMagnitude)
     {
         float radius = playerCollider.bounds.extents.x;
-        float castDistance = movementMagnitude * 1.2f; // slight buffer added to ensure collision is detected
+        float castDistance = movementMagnitude * MOVEMENT_CORRECTION_OFFSET; // slight buffer added to ensure collision is detected
 
         RaycastHit2D hit = Physics2D.CircleCast(
             transform.position,
@@ -158,8 +158,10 @@ public class PlayerCharacter : Unit
 
     private void EquipDebugItem()
     {
+        Item debugItem1 = ItemsDatabase.Instance.GetItemById("dash_item");
         Item debugItem2 = ItemsDatabase.Instance.GetItemById("debug_item_object");
 
+        equipment.EquipItem(ESlotsInEquipment.Slot1, debugItem1);
         equipment.EquipItem(ESlotsInEquipment.RightHand, debugItem2);
     }
 }

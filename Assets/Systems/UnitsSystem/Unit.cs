@@ -36,7 +36,7 @@ abstract public class Unit : MonoBehaviour
   private float pendingDamage = 0f;
   private Coroutine damageCoroutine;
 
-  private void OnEnable()
+  protected virtual void OnEnable()
   {
     canMove = true;
     canTakeDamage = true;

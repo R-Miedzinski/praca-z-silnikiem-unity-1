@@ -53,20 +53,27 @@ public class RoomTransitionSystem : MonoBehaviour
   {
     if (RoomOrder == null || RoomOrder.Count == 0)
     {
-      Debug.LogWarning("RoomTransitionSystem cannot load a room because RoomOrder is empty.");
+      Debug.LogWarning("Invalid RoomOrder. RoomTransitionSystem cannot load a room because RoomOrder is empty.");
       return false;
     }
 
-    if (roomIndex < 0 || roomIndex >= RoomOrder.Count)
+    if (roomIndex < 0)
     {
-      Debug.LogWarning("RoomTransitionSystem reached the end of RoomOrder.");
+      Debug.LogWarning("Invalid RoomIndex. RoomTransitionSystem cannot load room at index " + roomIndex + ".");
+      return false;
+    }
+
+    // TODO: Decide what to do when last room was reached
+    if (roomIndex >= RoomOrder.Count)
+    {
+      UIManager.Instance.OnMainMenuClick();
       return false;
     }
 
     RoomDataObject roomData = RoomOrder[roomIndex];
     if (roomData == null || roomData.RoomPrefab == null)
     {
-      Debug.LogWarning($"RoomTransitionSystem cannot load room at index {roomIndex}.");
+      Debug.LogWarning("Invalid RoomData. RoomTransitionSystem cannot load room at index " + roomIndex + ".");
       return false;
     }
 

@@ -15,7 +15,7 @@ public abstract class Enemy : Unit
     [SerializeField] private float patrolWaypointTolerance = 0.3f;
 
     private PlayerCharacter player;
-    private Vector2 spawnPosition;
+    [SerializeField] private Vector2 spawnPosition;
 
     // ── Events ────────────────────────────────────────────────────────────────
     public event System.Action OnDeath;
@@ -35,6 +35,11 @@ public abstract class Enemy : Unit
     protected virtual void Start()
     {
         CurrentHealth = maxHealth;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         player = PlayerCharacter.Instance;
         spawnPosition = transform.position;
         currentState = BuildStateGraph();
@@ -97,6 +102,7 @@ public abstract class Enemy : Unit
         chase.AddTransition(attack, () => DistanceToPlayer() <= attackRange);
         attack.AddTransition(chase, () => DistanceToPlayer() > attackRange);
 
+        patrol.Enter(this);
         return patrol;
     }
 

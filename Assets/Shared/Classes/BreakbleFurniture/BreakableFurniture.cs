@@ -18,7 +18,7 @@ public class BreakbleFurniture : Unit
         minimumDamageToCountHit = Mathf.Max(0, minimumDamageToCountHit);
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         canTakeDamage = true;
         currentHitCount = 0;
